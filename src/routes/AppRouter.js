@@ -1,0 +1,146 @@
+import React, { Component } from "react";
+import { Switch, Route, Router } from "react-router-dom";
+import AddStudent from "./../components/pages/AddStudent";
+import UpdateStudent from "./../components/pages/UpdateStudent";
+import ViewStudent from "./../components/pages/ViewStudent";
+import AddAcademicYearAndSemester from "./../components/pages/AddAcademicYearAndSemester";
+import UpdateAcademicYearAndSemester from "./../components/pages/UpdateAcademicYearAndSemester";
+import ViewAcademicYearAndSemester from "./../components/pages/ViewAcademicYearAndSemester";
+import AddProgramme from "./../components/pages/AddProgramme";
+import UpdateProgramme from "./../components/pages/UpdateProgramme";
+import ViewProgramme from "./../components/pages/ViewProgramme";
+import AddGroup from "./../components/pages/AddGroup";
+import UpdateGroup from "../components/pages/UpdateGroup";
+import ViewGroup from "../components/pages/ViewGroup";
+import AddSubGroup from "./../components/pages/AddSubGroup";
+import UpdateSubGroup from "./../components/pages/UpdateSubGroup";
+import ViewSubGroup from "./../components/pages/ViewSubGroup";
+import AddTag from "./../components/pages/AddTag";
+import UpdateTag from "../components/pages/UpdateTag";
+import ViewTag from "./../components/pages/ViewTag";
+import LecturerTable from "./../components/lecturers/LecturerTable";
+import EditLecturer from "./../components/lecturers/EditLecturer";
+import ViewLecturers from "./../components/lecturers/ViewLecturers";
+import SubjectTable from "./../components/subjects/SubjectTable";
+import EditSubject from "./../components/subjects/EditSubject";
+import ViewSubjects from "./../components/subjects/ViewSubjects";
+import FacultyTable from "./../components/faculty/FacultyTable";
+import EditFaculty from "./../components/faculty/EditFaculty";
+import ViewFaculties from "./../components/faculty/ViewFaculties";
+import DepartmentTable from "./../components/department/DepartmentTable";
+import EditDepartment from "./../components/department/EditDepartment";
+import ViewDepartments from "./../components/department/ViewDepartments";
+import CenterTable from "./../components/center/CenterTable";
+import EditCenter from "./../components/center/EditCenter";
+import ViewCenters from "./../components/center/ViewCenters";
+import LevelTable from "./../components/levels/LevelTable";
+import EditLevel from "./../components/levels/EditLevel";
+import ViewLevels from "./../components/levels/ViewLevels";
+import BuildingTable from "./../components/building/BuildingTable";
+import EditBuilding from "./../components/building/EditBuilding";
+import ViewBuildings from "./../components/building/ViewBuildings";
+import RoomTable from "./../components/room/RoomTable";
+import EditRoom from "./../components/room/EditRoom";
+import ViewRooms from "./../components/room/ViewRooms";
+import LecturersStatistics from "./../components/statistics/LecturersStatistics";
+import StudentsStatistics from "./../components/statistics/StudentsStatistics";
+import SubjectsStatistics from "./../components/statistics/SubjectsStatistics";
+import ManagementTwo from "./../components/pages/ManagementTwo";
+import ManagementOne from "./../components/pages/ManagementOne";
+import ManagementThree from "./../components/pages/ManagementThree";
+import Home from "../components/pages/Home";
+import SHome from "../components/pages/SHome";
+import AddWorkingDays from "../components/pages/AddWorkingDays";
+import ViewWorkingDays from "../components/pages/ViewWorkingDays";
+import UpdateWorkingDays from "../components/pages/UpdateWorkingDays";
+import AddWorkingHours from "../components/pages/AddWorkingHours";
+import ViewWorkingHours from "../components/pages/ViewWorkingHours";
+import UpdateWorkingHours from "../components/pages/UpdateWorkingHours";
+import AddTimeSlots from "../components/pages/AddTimeSlot";
+import CreatePrimarySession from "../components/primarySession/CreatePrimarySession";
+import ViewPrimarySession from "../components/primarySession/ViewPrimarySession";
+
+class AppRouter extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/managementOne" component={ManagementOne} />
+          <Route path="/managementTwo" component={ManagementTwo} />
+          <Route path="/managementThree" component={ManagementThree} />
+          <Route path="/addStudent" component={AddStudent} />
+          <Route path="/updateStudent" component={UpdateStudent} />
+          <Route path="/viewStudent" component={ViewStudent} />
+          <Route
+            path="/addAcademicYearAndSemester"
+            component={AddAcademicYearAndSemester}
+          />
+          <Route
+            path="/updateAcademicYearAndSemester"
+            component={UpdateAcademicYearAndSemester}
+          />
+          <Route
+            path="/viewAcademicYearAndSemester"
+            component={ViewAcademicYearAndSemester}
+          />
+          <Route path="/addProgramme" component={AddProgramme} />
+          <Route path="/updateProgramme" component={UpdateProgramme} />
+          <Route path="/viewProgramme" component={ViewProgramme} />
+          <Route path="/addGroup" component={AddGroup} />
+          <Route path="/updateGroup" component={UpdateGroup} />
+          <Route path="/viewGroup" component={ViewGroup} />
+          <Route path="/addSubGroup" component={AddSubGroup} />
+          <Route path="/updateSubGroup" component={UpdateSubGroup} />
+          <Route path="/viewSubGroup" component={ViewSubGroup} />
+          <Route path="/addTag" component={AddTag} />
+          <Route path="/updateTag" component={UpdateTag} />
+          <Route path="/viewTag" component={ViewTag} />
+
+          <Route path="/lecturer" component={LecturerTable} />
+          <Route path="/editLecturer" component={EditLecturer} />
+          <Route path="/viewLecturers" component={ViewLecturers} />
+          <Route path="/subject" component={SubjectTable} />
+          <Route path="/editSubject" component={EditSubject} />
+          <Route path="/viewSubjects" component={ViewSubjects} />
+          <Route path="/faculty" component={FacultyTable} />
+          <Route path="/editFaculty" component={EditFaculty} />
+          <Route path="/viewFaculties" component={ViewFaculties} />
+          <Route path="/department" component={DepartmentTable} />
+          <Route path="/editDepartment" component={EditDepartment} />
+          <Route path="/viewDepartments" component={ViewDepartments} />
+          <Route path="/viewCenters" component={ViewCenters} />
+          <Route path="/center" component={CenterTable} />
+          <Route path="/editCenter" component={EditCenter} />
+          <Route path="/viewCenters" component={ViewCenters} />
+          <Route path="/level" component={LevelTable} />
+          <Route path="/editLevel" component={EditLevel} />
+          <Route path="/viewLevels" component={ViewLevels} />
+          <Route path="/session1" component={CreatePrimarySession} />
+          <Route path="/viewSession1" component={ViewPrimarySession} />
+
+          <Route path="/building" component={BuildingTable} />
+          <Route path="/editBuilding" component={EditBuilding} />
+          <Route path="/viewBuildings" component={ViewBuildings} />
+          <Route path="/room" component={RoomTable} />
+          <Route path="/editRoom" component={EditRoom} />
+          <Route path="/viewRooms" component={ViewRooms} />
+          <Route path="/lecturersStatistics" component={LecturersStatistics} />
+          <Route path="/studentsStatistics" component={StudentsStatistics} />
+          <Route path="/subjectsStatistics" component={SubjectsStatistics} />
+
+          <Route path="/sHome" component={SHome} />
+          <Route path="/addWorkingDays" component={AddWorkingDays} />
+          <Route path="/viewWorkingDays" component={ViewWorkingDays} />
+          <Route path="/updateWorkingDays" component={UpdateWorkingDays} />
+          <Route path="/addWorkingHours" component={AddWorkingHours} />
+          <Route path="/viewWorkingHours" component={ViewWorkingHours} />
+          <Route path="/updateWorkingHours" component={UpdateWorkingHours} />
+          <Route path="/addTimeSlots" component={AddTimeSlots} />
+        </Switch>
+      </React.Fragment>
+    );
+  }
+}
+
+export default AppRouter;
