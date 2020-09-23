@@ -55,6 +55,7 @@ const RoomTable = () => {
                   <thead>
                     <tr>
                       <th>Room</th>
+                      <th>Room Type</th>
                       <th>Building</th>
                       <th>Capacity</th>
                       <th>Added Date</th>

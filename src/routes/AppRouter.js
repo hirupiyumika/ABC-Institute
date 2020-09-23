@@ -59,6 +59,12 @@ import UpdateWorkingHours from "../components/pages/UpdateWorkingHours";
 import AddTimeSlots from "../components/pages/AddTimeSlot";
 import CreatePrimarySession from "../components/primarySession/CreatePrimarySession";
 import ViewPrimarySession from "../components/primarySession/ViewPrimarySession";
+import AddLecturerRooms from "../components/Location/LecturerRooms/AddLecturerRooms";
+import AddGroupsRooms from "../components/Location/GroupsRooms/AddGroupsRooms";
+import AddTagRooms from "../components/Location/TagRooms/AddTagRooms";
+import AddSubjectRooms from "../components/Location/SubjectRooms/AddSubjectRooms";
+import CreateAdvanceSession from "../components/Location/AdvanceSession/CreateAdvanceSession";
+import AddNotAvailableRooms from "../components/Location/NotAvailableRooms/AddNotAvailableRooms";
 
 class AppRouter extends Component {
   render() {
@@ -128,7 +134,13 @@ class AppRouter extends Component {
           <Route path="/lecturersStatistics" component={LecturersStatistics} />
           <Route path="/studentsStatistics" component={StudentsStatistics} />
           <Route path="/subjectsStatistics" component={SubjectsStatistics} />
-
+          <Route path="/addLecturerRooms" component={AddLecturerRooms} />
+          {/* <Route path="/editLecturerRooms" component={EditLecturerRooms} /> */}
+          <Route path="/addGroupsRooms" component={AddGroupsRooms} />
+          <Route path="/addTagsRooms" component={AddTagRooms} />
+          <Route path="/addSubjectRooms" component={AddSubjectRooms} />
+          <Route path="/session2" component={CreateAdvanceSession} />
+          <Route path="/notAvailableRooms" component={AddNotAvailableRooms} />
           <Route path="/sHome" component={SHome} />
           <Route path="/addWorkingDays" component={AddWorkingDays} />
           <Route path="/viewWorkingDays" component={ViewWorkingDays} />

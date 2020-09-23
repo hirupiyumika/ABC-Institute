@@ -5,7 +5,7 @@ import Moment from "react-moment";
 import { LogConsumer } from "../../context/context";
 
 const RoomTableBody = ({
-  room: { _id, roomName, building, capacity, created },
+  room: { _id, roomName, roomType, building, capacity, created },
 
   deleteRoom,
 }) => {
@@ -16,6 +16,7 @@ const RoomTableBody = ({
         return (
           <tr>
             <td>{roomName}</td>
+            <td>{roomType}</td>
             <td>{building}</td>
             <td>{capacity}</td>
             <td>

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PrimarySessionsSchema = new mongoose.Schema({
+const AdvanceSessionsSchema = new mongoose.Schema({
   lecturers: [
     {
       type: String,
@@ -40,9 +40,14 @@ const PrimarySessionsSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
+  room: {
+    type: String,
+    trim: true,
+    required: [true, "Room is required"],
+  },
   created: {
     type: Date,
     default: Date.now,
   },
 });
-module.exports = mongoose.model("primary_Sessions", PrimarySessionsSchema);
+module.exports = mongoose.model("advance_Sessions", AdvanceSessionsSchema);

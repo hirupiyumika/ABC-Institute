@@ -19,11 +19,12 @@ const AddLecturer = ({}) => {
   const [name, setName] = useState("");
   const [eid, setEid] = useState("");
   const [faculty, setFaculty] = useState("");
-  const [department, setDeparment] = useState("");
+  const [department, setDepartment] = useState("");
   const [center, setCenter] = useState("");
   const [building, setBuilding] = useState("");
   const [level, setLevel] = useState("");
   const [rank, setRank] = useState("");
+  // const [rooms, setRooms] = useState([]);
 
   const onSubmit = (e) => {
     console.log("submit");
@@ -37,15 +38,17 @@ const AddLecturer = ({}) => {
       building,
       level,
       rank: `${level}${"." + eid}`,
+      // rooms,
     });
     setName("");
     setEid("");
     setFaculty("");
-    setDeparment("");
+    setDepartment("");
     setCenter("");
     setBuilding("");
     setLevel("");
     setRank("");
+    // setRooms([]);
   };
   return (
     <Card className="mt-5 mb-3">
@@ -88,7 +91,7 @@ const AddLecturer = ({}) => {
               <Form.Control
                 as="select"
                 value={department}
-                onChange={(e) => setDeparment(e.target.value)}
+                onChange={(e) => setDepartment(e.target.value)}
               >
                 <option value="none">Select Department</option>
                 {departments.map((department) => (

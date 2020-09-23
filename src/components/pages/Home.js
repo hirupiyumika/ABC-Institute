@@ -88,6 +88,21 @@ class Home extends Component {
               </Link>
             </Col>
           </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/session2"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Create Advance Session
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+          </Row>
         </Container>
       </React.Fragment>
     );

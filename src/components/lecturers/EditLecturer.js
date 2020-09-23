@@ -26,11 +26,12 @@ const EditLecturer = () => {
   const [name, setName] = useState(lecturer[0].name);
   const [eid, setEid] = useState(lecturer[0].eid);
   const [faculty, setFaculty] = useState(lecturer[0].faculty);
-  const [department, setDeparment] = useState(lecturer[0].department);
+  const [department, setDepartment] = useState(lecturer[0].department);
   const [center, setCenter] = useState(lecturer[0].center);
   const [building, setBuilding] = useState(lecturer[0].building);
   const [level, setLevel] = useState(lecturer[0].level);
   const [rank, setRank] = useState(lecturer[0].rank);
+  // const [rooms, setRooms] = useState([]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -44,16 +45,18 @@ const EditLecturer = () => {
       building,
       level,
       rank,
+      // rooms,
     });
     setId("");
     setName("");
     setEid("");
     setFaculty("");
-    setDeparment("");
+    setDepartment("");
     setCenter("");
     setBuilding("");
     setLevel("");
     setRank("");
+    // setRooms([]);
   };
   return (
     <LogConsumer>
@@ -107,7 +110,7 @@ const EditLecturer = () => {
                         <Form.Control
                           as="select"
                           value={department}
-                          onChange={(e) => setDeparment(e.target.value)}
+                          onChange={(e) => setDepartment(e.target.value)}
                         >
                           <option value="none">Select Department</option>
                           {departments.map((department) => (

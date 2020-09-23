@@ -21,6 +21,12 @@ const PrimarySessions = require("./models/primarySession");
 const connectDB = require("./config/db");
 const isOnline = require("is-online");
 const Alert = require("electron-alert");
+const GroupRooms = require("./models/groupRooms");
+const LecturerRooms = require("./models/lecturerRooms");
+const SubjectRooms = require("./models/subjectRooms");
+const TagRooms = require("./models/tagRooms");
+const AdvanceSession = require("./models/advanceSession");
+const NoRooms = require("./models/notAvailavleRooms");
 
 let alert = new Alert();
 
@@ -1033,6 +1039,7 @@ ipcMain.on("rooms:update", async (e, room) => {
   try {
     await Rooms.findByIdAndUpdate(room._id, {
       roomName: room.roomName,
+      roomType: room.roomType,
       building: room.building,
       capacity: room.capacity,
     });
@@ -1150,7 +1157,7 @@ ipcMain.on("workingHours:update", async (e, workingDays) => {
 //Add Time Slot to the DataBase
 ipcMain.on("AddTimeSlot:add", async (e, AddTimeSlot) => {
   try {
-    console.log(AddTimeSlot);
+    // console.log(AddTimeSlot);
     await TimeSlotSchema.create(AddTimeSlot);
   } catch (error) {
     console.log(error);
@@ -1188,7 +1195,7 @@ async function sendPrimarySessions() {
       "primary_Sessions:get",
       JSON.stringify(primary_Sessions)
     );
-    console.log("f", primary_Sessions);
+    // console.log("f", primary_Sessions);
   } catch (error) {
     console.log(error);
   }
@@ -1196,7 +1203,7 @@ async function sendPrimarySessions() {
 
 // create primary_Session
 ipcMain.on("primary_Sessions:add", async (e, primary_Session) => {
-  console.log("primary_Sessions", primary_Session);
+  // console.log("primary_Sessions", primary_Session);
 
   try {
     await PrimarySessions.create(primary_Session);
@@ -1206,6 +1213,169 @@ ipcMain.on("primary_Sessions:add", async (e, primary_Session) => {
   }
 });
 
+// delete primary_Session
+ipcMain.on("primary_Sessions:delete", async (e, id) => {
+  // console.log("id-session", id);
+  try {
+    await PrimarySessions.findOneAndDelete({ _id: id });
+    sendPrimarySessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get Lecturer_Rooms data from database
+ipcMain.on("lecturer_Rooms:load", sendLecturerRooms);
+async function sendLecturerRooms() {
+  try {
+    const lecturer_Rooms = await LecturerRooms.find().sort({ created: 1 });
+    mainWindow.webContents.send(
+      "lecturer_Rooms:get",
+      JSON.stringify(lecturer_Rooms)
+    );
+    console.log("lecturer_Rooms", lecturer_Rooms);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create Lecturer_Rooms
+ipcMain.on("lecturer_Rooms:add", async (e, room) => {
+  // console.log("lecturer_Rooms", room);
+
+  try {
+    await LecturerRooms.create(room);
+    sendLecturerRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get group_Rooms data from database
+ipcMain.on("group_Rooms:load", sendGroupRooms);
+async function sendGroupRooms() {
+  try {
+    const group_Rooms = await GroupRooms.find().sort({ created: 1 });
+    mainWindow.webContents.send("group_Rooms:get", JSON.stringify(group_Rooms));
+    // console.log("f", group_Rooms);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create group_Rooms
+ipcMain.on("group_Rooms:add", async (e, room) => {
+  // console.log("group_Rooms", room);
+
+  try {
+    await GroupRooms.create(room);
+    sendGroupRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get subject_Rooms data from database
+ipcMain.on("subject_Rooms:load", sendSubjectRooms);
+async function sendSubjectRooms() {
+  try {
+    const subject_Rooms = await SubjectRooms.find().sort({ created: 1 });
+    mainWindow.webContents.send(
+      "subject_Rooms:get",
+      JSON.stringify(subject_Rooms)
+    );
+    // console.log("subject_Rooms", subject_Rooms);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create subject_Rooms
+ipcMain.on("subject_Rooms:add", async (e, room) => {
+  // console.log("subject_Rooms", room);
+
+  try {
+    await SubjectRooms.create(room);
+    sendSubjectRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get Tag_Rooms data from database
+ipcMain.on("tag_Rooms:load", sendTagRooms);
+async function sendTagRooms() {
+  try {
+    const tag_Rooms = await TagRooms.find().sort({ created: 1 });
+    mainWindow.webContents.send("tag_Rooms:get", JSON.stringify(tag_Rooms));
+    // console.log("tag_Rooms", tag_Rooms);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create Tag_Rooms
+ipcMain.on("tag_Rooms:add", async (e, room) => {
+  // console.log("tag_Rooms", room);
+
+  try {
+    await TagRooms.create(room);
+    sendTagRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get advance_Sessions data from database
+ipcMain.on("advance_Sessions:load", sendAdvanceSessions);
+async function sendAdvanceSessions() {
+  try {
+    const advance_Sessions = await AdvanceSession.find().sort({ created: 1 });
+    mainWindow.webContents.send(
+      "advance_Sessions:get",
+      JSON.stringify(advance_Sessions)
+    );
+    console.log("advance_Sessions", advance_Sessions);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create advance_Sessions
+ipcMain.on("advance_Sessions:add", async (e, advance_Sessions) => {
+  console.log("advance_Sessions", advance_Sessions);
+
+  try {
+    await AdvanceSession.create(advance_Sessions);
+    sendAdvanceSessions();
+  } catch (error) {
+    console.log("err", error);
+  }
+});
+
+// get Not Available_Rooms data from database
+ipcMain.on("no_Rooms:load", sendNoRooms);
+async function sendNoRooms() {
+  try {
+    const no_Rooms = await NoRooms.find().sort({ created: 1 });
+    mainWindow.webContents.send("no_Rooms:get", JSON.stringify(no_Rooms));
+    console.log("no_Rooms", no_Rooms);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create  Not Available_Rooms
+ipcMain.on("no_Rooms:add", async (e, room) => {
+  console.log("no_Rooms", room);
+
+  try {
+    await NoRooms.create(room);
+    sendNoRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
 //********************************************************************************************************* */
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
