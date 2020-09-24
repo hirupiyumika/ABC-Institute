@@ -266,7 +266,7 @@ const CreateAdvanceSession = ({}) => {
               <>
                 <Card className="mt-5 mb-3">
                   <Card.Body>
-                    <h5>Subject base Lecture Halls</h5>
+                    <h5>Group base Lecture Halls</h5>
                     <Row className="my-3 px-4">
                       <>
                         {room.lectureHalls.map((hall) => (
@@ -287,7 +287,7 @@ const CreateAdvanceSession = ({}) => {
                   </Card>
                   <Card className="mt-5 mb-3">
                     <Card.Body> */}
-                    <h5>Subject base Laboratories </h5>
+                    <h5>Group base Laboratories </h5>
                     <Row className="my-3 px-4">
                       <>
                         {room.laboratories.map((lab) => (
