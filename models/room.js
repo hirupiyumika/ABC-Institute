@@ -6,6 +6,11 @@ const RoomsSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Room is required"],
   },
+  roomType: {
+    type: String,
+    trim: true,
+    required: [true, "Room Type is required"],
+  },
   building: {
     type: String,
     trim: true,

@@ -24,11 +24,10 @@ const ViewRooms = () => {
           <>
             <Breadcrumb>
               <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-              <Breadcrumb.Item active>Add Room</Breadcrumb.Item>
+              <Breadcrumb.Item active>View Rooms</Breadcrumb.Item>
               {/* <Breadcrumb.Item active>Data</Breadcrumb.Item> */}
             </Breadcrumb>
             <Container>
-              
               <SearchBox
                 handleChange={handleRoomChange}
                 search={search}
@@ -51,6 +50,7 @@ const ViewRooms = () => {
                   <thead>
                     <tr>
                       <th>Room</th>
+                      <th>Room Type</th>
                       <th>Building</th>
                       <th>Capacity</th>
                       <th>Added Date</th>

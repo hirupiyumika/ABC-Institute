@@ -110,6 +110,81 @@ class ManagementThree extends Component {
             </Col>
             <Col className="mt-5"></Col>
           </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/addLecturerRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Add Lecturer's Rooms
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/addGroupsRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Add Group's Rooms
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/addTagsRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Add Tag's Rooms
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/addSubjectRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Add Subject's Rooms
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/notAvailableRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Add Not Available Rooms
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+          </Row>
         </Container>
       </div>
     );

@@ -776,7 +776,7 @@ class StudentProvider extends Component {
           "academicYearAndSemesters:add",
           academicYearAndSemester
         );
-        this.showAlert("year & semster added");
+        this.showAlert("year & semester added");
       } else {
         Swal.fire({
           icon: "error",

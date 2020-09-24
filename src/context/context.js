@@ -28,8 +28,15 @@ class LogProvider extends Component {
     buil: {},
     rooms: [],
     sortedRooms: [],
+    groupRooms: [],
+    lecturerRooms: [],
+    subjectRooms: [],
+    tagRooms: [],
+    notAvailableRooms: [],
     primarySessions: [],
     sortedPrimarySessions: [],
+    advanceSessions: [],
+    sortedAdvanceSessions: [],
     room: {},
     search: "",
     alert: {
@@ -349,6 +356,12 @@ class LogProvider extends Component {
     this.populateBuildings();
     this.populateRooms();
     this.populatePrimarySessions();
+    this.populateGroupsRooms();
+    this.populateLecturerRooms();
+    this.populateSubjectRooms();
+    this.populateTagRooms();
+    this.populateAdvanceSession();
+    this.populateNotAvailableRooms();
     ipcRenderer.on("lecturers:clear", () => {
       this.setState({ lecturers: [] });
       this.showAlert("Lecturers Cleared");
@@ -423,6 +436,7 @@ class LogProvider extends Component {
   };
 
   singleLecturer = (id) => {
+    console.log("ER", id);
     var lecturer = this.state.lecturers.filter((lec) => lec._id === id);
     this.setState({ lecturer });
   };
@@ -962,6 +976,8 @@ class LogProvider extends Component {
     console.log("room", room);
     if (room.roomName === "")
       this.showAlert("please enter Room Name", "danger");
+    else if (room.roomType === "")
+      this.showAlert("please select Room Type", "danger");
     else if (room.building === "")
       this.showAlert("please select Building", "danger");
     else if (room.capacity === "")
@@ -981,6 +997,8 @@ class LogProvider extends Component {
   updateRoom = (room) => {
     if (room.roomName === "")
       this.showAlert("please enter Room Name", "danger");
+    else if (room.roomType === "")
+      this.showAlert("please select Room Type", "danger");
     else if (room.building === "none")
       this.showAlert("please select Building", "danger");
     else if (room.capacity === "")
@@ -1004,25 +1022,109 @@ class LogProvider extends Component {
     } catch (ex) {}
   };
 
+  //  Add Lecturer-Rooms
+  AddLecturerRooms = (Lroom) => {
+    // console.log("Lroom", Lroom);
+    // if (Lroom.lecturer === "")
+    //   this.showAlert("please select Lecturer", "danger");
+    // else if (Lroom.rooms === "") this.showAlert("please select Room", "danger");
+    // else {
+    ipcRenderer.send("lecturer_Rooms:add", Lroom);
+    this.showAlert("Lecturer Room Added");
+    // }
+  };
+
+  // populate Lecturer-Rooms
+  populateLecturerRooms = () => {
+    try {
+      ipcRenderer.send("lecturer_Rooms:load");
+      ipcRenderer.on("lecturer_Rooms:get", (e, lecturerRooms) => {
+        this.setState({
+          lecturerRooms: JSON.parse(lecturerRooms),
+        });
+      });
+    } catch (ex) {}
+  };
+
+  // Add Groups-Rooms
+  AddGroupsRooms = (Groom) => {
+    // console.log("Groom", Groom);
+    ipcRenderer.send("group_Rooms:add", Groom);
+    this.showAlert("Group-Rooms Added");
+    // }
+  };
+
+  // populate Groups-Rooms
+  populateGroupsRooms = () => {
+    try {
+      ipcRenderer.send("group_Rooms:load");
+      ipcRenderer.on("group_Rooms:get", (e, groupRooms) => {
+        this.setState({
+          groupRooms: JSON.parse(groupRooms),
+        });
+      });
+    } catch (ex) {}
+  };
+
+  // Add Subject-Rooms
+  AddSubjectRooms = (Sroom) => {
+    // console.log("Sroom", Sroom);
+    ipcRenderer.send("subject_Rooms:add", Sroom);
+    this.showAlert("Subject-Rooms Added");
+    // }
+  };
+
+  // populate Subject-Rooms
+  populateSubjectRooms = () => {
+    try {
+      ipcRenderer.send("subject_Rooms:load");
+      ipcRenderer.on("subject_Rooms:get", (e, subjectRooms) => {
+        this.setState({
+          subjectRooms: JSON.parse(subjectRooms),
+        });
+      });
+    } catch (ex) {}
+  };
+
+  // Add Tag-Rooms
+  AddTagRooms = (Troom) => {
+    console.log("Troom", Troom);
+    ipcRenderer.send("tag_Rooms:add", Troom);
+    this.showAlert("tag-Rooms Added");
+    // }
+  };
+
+  // populate Tag-Rooms
+  populateTagRooms = () => {
+    try {
+      ipcRenderer.send("tag_Rooms:load");
+      ipcRenderer.on("tag_Rooms:get", (e, tagRooms) => {
+        this.setState({
+          tagRooms: JSON.parse(tagRooms),
+        });
+      });
+    } catch (ex) {}
+  };
+
   //create Primary Session
 
   createPrimarySession = (session) => {
-    console.log("session", session);
-    if (session.lecturers === "")
-      this.showAlert("please select Lecturer", "danger");
-    else if (session.tag === "") this.showAlert("please select Tag", "danger");
-    // else if (session.mainGroup === "" || session.subGroup === "")
-    //   this.showAlert("please select Group", "danger");
-    else if (session.subject === "")
-      this.showAlert("please select Subject", "danger");
-    else if (session.stdCount === "")
-      this.showAlert("please enter Student Count", "danger");
-    else if (session.duration === "")
-      this.showAlert("please enter Duration", "danger");
-    else {
-      ipcRenderer.send("primary_Sessions:add", session);
-      this.showAlert("Primary Session Added");
-    }
+    console.log("psession", session);
+    // if (session.lecturers === "")
+    //   this.showAlert("please select Lecturer", "danger");
+    // else if (session.tag === "") this.showAlert("please select Tag", "danger");
+    // // else if (session.mainGroup === "" || session.subGroup === "")
+    // //   this.showAlert("please select Group", "danger");
+    // else if (session.subject === "")
+    //   this.showAlert("please select Subject", "danger");
+    // else if (session.stdCount === "")
+    //   this.showAlert("please enter Student Count", "danger");
+    // else if (session.duration === "")
+    //   this.showAlert("please enter Duration", "danger");
+    // else {
+    ipcRenderer.send("primary_Sessions:add", session);
+    this.showAlert("Primary Session Added");
+    // }
   };
 
   // populate Primary Session
@@ -1038,8 +1140,104 @@ class LogProvider extends Component {
     } catch (ex) {}
   };
 
+  // delete Session
+  deleteSession = (id) => {
+    console.log("id", id);
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          ipcRenderer.send("primary_Sessions:delete", id);
+          this.showAlert("Session Removed");
+          Swal.fire({
+            timer: 2000,
+            timerProgressBar: true,
+            icon: "success",
+            title: "Deleted!",
+            text: "tag has been deleted",
+          }).then(function () {});
+        }
+      });
+    } catch (error) {}
+  };
+
+  // delete Primary Session
+  deletePrimarySession = (id) => {
+    try {
+      ipcRenderer.send("primary_Sessions:delete", id);
+      this.showAlert("Session Removed");
+    } catch (error) {}
+  };
+
+  //create Advance Session
+  createAdvanceSession = (session) => {
+    console.log("AdvanceSession1", session);
+    this.deletePrimarySession(session.id);
+    // if (session.lecturers === "")
+    //   this.showAlert("please select Lecturer", "danger");
+    // else if (session.tag === "") this.showAlert("please select Tag", "danger");
+    // else if (session.mainGroup === "" || session.subGroup === "")
+    //   this.showAlert("please select Group", "danger");
+    // else if (session.subject === "")
+    //   this.showAlert("please select Subject", "danger");
+    // else if (session.stdCount === "")
+    //   this.showAlert("please enter Student Count", "danger");
+    // else if (session.duration === "")
+    //   this.showAlert("please enter Duration", "danger");
+    // else {
+    ipcRenderer.send("advance_Sessions:add", session);
+    this.showAlert("Advance Session Added");
+    // }
+  };
+
+  // populate Advance Session
+  populateAdvanceSession = () => {
+    try {
+      ipcRenderer.send("advance_Sessions:load");
+      ipcRenderer.on("advance_Sessions:get", (e, advance_Sessions) => {
+        this.setState({
+          advanceSessions: JSON.parse(advance_Sessions),
+          sortedAdvanceSessions: JSON.parse(advance_Sessions),
+        });
+      });
+    } catch (ex) {}
+  };
+
+  // Add Not Available Rooms
+  AddNotAvailableRooms = (room) => {
+    console.log("Nroom", room);
+    ipcRenderer.send("no_Rooms:add", room);
+    this.showAlert("Not Available Rooms Added");
+    // }
+  };
+
+  // populate Not Available Rooms
+  populateNotAvailableRooms = () => {
+    try {
+      ipcRenderer.send("no_Rooms:load");
+      ipcRenderer.on("no_Rooms:get", (e, no_Rooms) => {
+        this.setState({
+          notAvailableRooms: JSON.parse(no_Rooms),
+          // sortedNotAvailableRooms: JSON.parse(no_Rooms),
+        });
+      });
+    } catch (ex) {}
+  };
+
   render() {
-    console.log("primarySessions", this.state.primarySessions);
+    // console.log("notAvailableRooms", this.state.notAvailableRooms);
+    // console.log("lecturerRooms", this.state.lecturerRooms);
+    // console.log("groupRooms", this.state.groupRooms);
+    // console.log("tagRoomsState", this.state.tagRooms);
+    // console.log("primarySessions", this.state.primarySessions);
+    // console.log("advanceSessions", this.state.advanceSessions);
     return (
       <LogContext.Provider
         value={{
@@ -1085,8 +1283,15 @@ class LogProvider extends Component {
           addRoom: this.addRoom,
           singleRoom: this.singleRoom,
           updateRoom: this.updateRoom,
+          AddLecturerRooms: this.AddLecturerRooms,
+          AddGroupsRooms: this.AddGroupsRooms,
+          AddSubjectRooms: this.AddSubjectRooms,
+          AddTagRooms: this.AddTagRooms,
+          AddNotAvailableRooms: this.AddNotAvailableRooms,
 
           createPrimarySession: this.createPrimarySession,
+          deleteSession: this.deleteSession,
+          createAdvanceSession: this.createAdvanceSession,
 
           handleLecturerChange: this.handleLecturerChange,
           handleSubjectChange: this.handleSubjectChange,

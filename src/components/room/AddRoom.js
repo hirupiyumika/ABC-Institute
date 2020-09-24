@@ -9,6 +9,7 @@ import { LogConsumer, LogContext } from "../../context/context";
 const AddRoom = () => {
   const { addRoom, buildings } = useContext(LogContext);
   const [roomName, setRoomName] = useState("");
+  const [roomType, setRoomType] = useState("");
   const [building, setBuilding] = useState("");
   const [capacity, setCapacity] = useState("");
   const onSubmit = (e) => {
@@ -17,10 +18,12 @@ const AddRoom = () => {
       roomName,
       building,
       capacity,
+      roomType,
     });
     setRoomName("");
     setBuilding("");
     setCapacity("");
+    setRoomType("");
   };
   return (
     <Card className="mt-5 mb-3">
@@ -33,6 +36,17 @@ const AddRoom = () => {
                 value={roomName}
                 onChange={(e) => setRoomName(e.target.value)}
               />
+            </Col>
+            <Col>
+              <Form.Control
+                as="select"
+                value={roomType}
+                onChange={(e) => setRoomType(e.target.value)}
+              >
+                <option value="none">Select Room Type</option>
+                <option value="Lecture Hall">Lecture Hall</option>
+                <option value="Laboratory">Laboratory </option>
+              </Form.Control>
             </Col>
           </Row>
           <Row className="my-3">

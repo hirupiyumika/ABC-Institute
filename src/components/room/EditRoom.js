@@ -15,6 +15,7 @@ const EditRoom = () => {
   const { buildings, room, updateRoom } = useContext(LogContext);
   const [_id, setId] = useState(room[0]._id);
   const [roomName, setRoomName] = useState(room[0].roomName);
+  const [roomType, setRoomType] = useState(room[0].roomType);
   const [building, setBuilding] = useState(room[0].building);
   const [capacity, setCapacity] = useState(room[0].capacity);
 
@@ -23,11 +24,13 @@ const EditRoom = () => {
     updateRoom({
       _id,
       roomName,
+      roomType,
       building,
       capacity,
     });
     setId("");
     setRoomName("");
+    setRoomType("");
     setBuilding("");
     setCapacity("");
   };
@@ -53,6 +56,17 @@ const EditRoom = () => {
                           value={roomName}
                           onChange={(e) => setRoomName(e.target.value)}
                         />
+                      </Col>
+                      <Col>
+                        <Form.Control
+                          as="select"
+                          value={roomType}
+                          onChange={(e) => setRoomType(e.target.value)}
+                        >
+                          <option value="none">Select Room Type</option>
+                          <option value="Lecture Hall">Lecture Hall</option>
+                          <option value="Laboratories">Laboratories </option>
+                        </Form.Control>
                       </Col>
                     </Row>
                     <Row className="my-3">

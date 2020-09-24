@@ -91,16 +91,28 @@ class Home extends Component {
           <Row>
             <Col className="mt-5">
               <Link
+<<<<<<< HEAD
                 to="/managementFour"
+=======
+                to="/session2"
+>>>>>>> upstream/master
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
+<<<<<<< HEAD
                   Not Available Time Management
                 </Button>
               </Link>
             </Col>
+=======
+                  Create Advance Session
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+>>>>>>> upstream/master
           </Row>
         </Container>
       </React.Fragment>
