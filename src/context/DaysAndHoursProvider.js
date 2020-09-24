@@ -36,6 +36,7 @@ class DaysAndHoursProvider extends Component {
         this.setState({
           workingDays: JSON.parse(workingDays),
         });
+        console.log("abc", this.state.workingDays);
       });
     } catch (ex) {}
   }

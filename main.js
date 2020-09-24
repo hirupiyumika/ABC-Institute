@@ -18,6 +18,11 @@ const Rooms = require("./models/room");
 const WorkingDaysSchema = require("./models/addWorkingDays");
 const TimeSlotSchema = require("./models/addTimeSlot");
 const PrimarySessions = require("./models/primarySession");
+const LecturerNotAvailableTime = require("./models/LecturerNotAvailableTime");
+const GroupNotAvailableTime = require("./models/GroupNotAvailableTime");
+const SubGroupNotAvailableTime = require("./models/SubGroupNotAvailableTime");
+const SessionNotAvailableTime = require("./models/SessionNotAvailableTime");
+const ConsecutiveSession = require("./models/ConsecutiveSession");
 const connectDB = require("./config/db");
 const isOnline = require("is-online");
 const Alert = require("electron-alert");
@@ -461,6 +466,82 @@ ipcMain.on("students:update", async (e, studentItem) => {
     console.log(error);
   }
 });
+
+// create  lecturer not available time
+ipcMain.on(
+  "lecturerNotAvailableTime:add",
+  async (e, lecturerNotAvailableTime) => {
+    try {
+      await LecturerNotAvailableTime.create(lecturerNotAvailableTime);
+      // sendProgrammes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// create group not available time
+ipcMain.on("groupNotAvailableTime:add", async (e, groupNotAvailableTime) => {
+  console.log(groupNotAvailableTime);
+  try {
+    await GroupNotAvailableTime.create(groupNotAvailableTime);
+    // sendProgrammes();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// create sub group not available time
+ipcMain.on(
+  "subGroupNotAvailableTime:add",
+  async (e, subGroupNotAvailableTime) => {
+    try {
+      await SubGroupNotAvailableTime.create(subGroupNotAvailableTime);
+      // sendProgrammes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// create session not available time
+ipcMain.on(
+  "sessionNotAvailableTime:add",
+  async (e, sessionNotAvailableTime) => {
+    try {
+      await SessionNotAvailableTime.create(sessionNotAvailableTime);
+      // sendProgrammes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// create consecutive session
+ipcMain.on("consecutiveSession:add", async (e, consecutiveSession) => {
+  try {
+    await ConsecutiveSession.create(consecutiveSession);
+    sendConsecutiveSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get consecutive session
+ipcMain.on("consecutiveSession:load", sendConsecutiveSessions);
+async function sendConsecutiveSessions() {
+  try {
+    const consecutiveSessions = await ConsecutiveSession.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "consecutiveSession:get",
+      JSON.stringify(consecutiveSessions)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // create academic year and semester
 ipcMain.on(
@@ -1086,6 +1167,7 @@ ipcMain.on("workingDays:load", sendWorkingDays);
 async function sendWorkingDays() {
   try {
     const workingDays = await WorkingDaysSchema.find();
+
     mainWindow.webContents.send("workingDays:get", JSON.stringify(workingDays));
   } catch (error) {
     console.log(error);

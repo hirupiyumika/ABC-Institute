@@ -91,17 +91,43 @@ class Home extends Component {
           <Row>
             <Col className="mt-5">
               <Link
+                to="/managementFour"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Not Available Time Management
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5"></Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
                 to="/session2"
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
-                  Create Advance Session
+                  Create Advance Sessions
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewSession2"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Advance Sessions ( stage-ii )
+                </Button>
+              </Link>
+            </Col>
           </Row>
         </Container>
       </React.Fragment>
