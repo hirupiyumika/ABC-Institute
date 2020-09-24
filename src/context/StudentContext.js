@@ -27,7 +27,241 @@ class StudentProvider extends Component {
     message: "",
     variant: "success",
     search: "",
+    lecturersNotAvailableTime: [],
+    groupsNotAvailableTime: [],
+    subGroupsNotAvailableTime: [],
+    sessionsNotAvailableTime: [],
+    consecutiveSessions: [],
+    sortedConsecutiveSessions: [],
   };
+
+  // filtering lecturer not available time
+  filteringLecturerNotAvailableTime = (lecturerNotAvailableTime) => {
+    const { lecturersNotAvailableTime } = this.state;
+
+    let tempLecturersNotAvailableTime = [...lecturersNotAvailableTime];
+
+    const selectedLecturersNotAvailableTime = tempLecturersNotAvailableTime.filter(
+      (item) =>
+        item.lecturer === lecturerNotAvailableTime.lecturer &&
+        item.day === lecturerNotAvailableTime.day &&
+        item.from === lecturerNotAvailableTime.from &&
+        item.to === lecturerNotAvailableTime.to
+    );
+
+    if (selectedLecturersNotAvailableTime.length !== 0) return true;
+    else return false;
+  };
+
+  // add lecturer not available time
+  addLecturerNotAvailableTime = (lecturerNotAvailableTime) => {
+    if (
+      lecturerNotAvailableTime.lecturer === "" ||
+      lecturerNotAvailableTime.day === "" ||
+      lecturerNotAvailableTime.from === "" ||
+      lecturerNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringLecturerNotAvailableTime(lecturerNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send(
+          "lecturerNotAvailableTime:add",
+          lecturerNotAvailableTime
+        );
+        this.showAlert("lecturer not available time added");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+  // filtering group not available time
+  filteringGroupNotAvailableTime = (groupNotAvailableTime) => {
+    const { groupsNotAvailableTime } = this.state;
+
+    let tempGroupsNotAvailableTime = [...groupsNotAvailableTime];
+
+    const selectedGroupsNotAvailableTime = tempGroupsNotAvailableTime.filter(
+      (item) =>
+        item.group === groupNotAvailableTime.group &&
+        item.day === groupNotAvailableTime.day &&
+        item.from === groupNotAvailableTime.from &&
+        item.to === groupNotAvailableTime.to
+    );
+
+    if (selectedGroupsNotAvailableTime.length !== 0) return true;
+    else return false;
+  };
+
+  // add group not available time
+  addGroupNotAvailableTime = (groupNotAvailableTime) => {
+    if (
+      groupNotAvailableTime.group === "" ||
+      groupNotAvailableTime.day === "" ||
+      groupNotAvailableTime.from === "" ||
+      groupNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringGroupNotAvailableTime(groupNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send("groupNotAvailableTime:add", groupNotAvailableTime);
+        this.showAlert("group not available time added");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+
+  // filtering sub group not available time
+  filteringSubGroupNotAvailableTime = (subGroupNotAvailableTime) => {
+    const { subGroupsNotAvailableTime } = this.state;
+
+    let tempSubGroupsNotAvailableTime = [...subGroupsNotAvailableTime];
+
+    const selectedSubGroupsNotAvailableTime = tempSubGroupsNotAvailableTime.filter(
+      (item) =>
+        item.subGroup === subGroupNotAvailableTime.subGroup &&
+        item.day === subGroupNotAvailableTime.day &&
+        item.from === subGroupNotAvailableTime.from &&
+        item.to === subGroupNotAvailableTime.to
+    );
+
+    if (selectedSubGroupsNotAvailableTime.length !== 0) return true;
+    else return false;
+  };
+
+  // add sub group not available time
+  addSubGroupNotAvailableTime = (subGroupNotAvailableTime) => {
+    if (
+      subGroupNotAvailableTime.subGroup === "" ||
+      subGroupNotAvailableTime.day === "" ||
+      subGroupNotAvailableTime.from === "" ||
+      subGroupNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringSubGroupNotAvailableTime(subGroupNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send(
+          "subGroupNotAvailableTime:add",
+          subGroupNotAvailableTime
+        );
+        this.showAlert("sub group not available time added");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+
+  // filtering session not available time
+  filteringSessionNotAvailableTime = (sessionNotAvailableTime) => {
+    const { sessionsNotAvailableTime } = this.state;
+    let tempSessionsNotAvailableTime = [...sessionsNotAvailableTime];
+    const selectedSessionsNotAvailableTime = tempSessionsNotAvailableTime.filter(
+      (item) =>
+        item.primarySession === sessionNotAvailableTime.primarySession &&
+        item.day === sessionNotAvailableTime.day &&
+        item.from === sessionNotAvailableTime.from &&
+        item.to === sessionNotAvailableTime.to
+    );
+    if (selectedSessionsNotAvailableTime.length !== 0) return true;
+    else return false;
+  };
+
+  // add session not available time
+  addSessionNotAvailableTime = (sessionNotAvailableTime) => {
+    if (
+      sessionNotAvailableTime.primarySession === "" ||
+      sessionNotAvailableTime.day === "" ||
+      sessionNotAvailableTime.from === "" ||
+      sessionNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringSessionNotAvailableTime(sessionNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send(
+          "sessionNotAvailableTime:add",
+          sessionNotAvailableTime
+        );
+        this.showAlert("session not available time added");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+
+  // add consecutive session
+  addConsecutiveSession = (consecutiveSession) => {
+    ipcRenderer.send("consecutiveSession:add", consecutiveSession);
+    this.showAlert("consecutive session added");
+  };
+
+  // populate consecutive session
+  populateConsecutiveSession() {
+    try {
+      ipcRenderer.send("consecutiveSession:load");
+      ipcRenderer.on("consecutiveSession:get", (e, consecutiveSessions) => {
+        this.setState({
+          consecutiveSessions: JSON.parse(consecutiveSessions),
+          sortedConsecutiveSessions: JSON.parse(consecutiveSessions),
+        });
+      });
+    } catch (ex) {}
+  }
 
   // update academic year and semester
   updateAcademicYearAndSemester = (academicYearAndSemester) => {
@@ -1115,6 +1349,7 @@ class StudentProvider extends Component {
     this.populateSubGroups();
     this.populateTags();
     this.populateStudents();
+    this.populateConsecutiveSession();
     ipcRenderer.on("students:clear", () => {
       this.setState({ students: [], sortedStudents: [] });
       this.showAlert("students cleared");
@@ -1185,6 +1420,11 @@ class StudentProvider extends Component {
           handleSubGroupChange: this.handleSubGroupChange,
           handleTagChange: this.handleTagChange,
           handleStudentChange: this.handleStudentChange,
+          addLecturerNotAvailableTime: this.addLecturerNotAvailableTime,
+          addGroupNotAvailableTime: this.addGroupNotAvailableTime,
+          addSubGroupNotAvailableTime: this.addSubGroupNotAvailableTime,
+          addSessionNotAvailableTime: this.addSessionNotAvailableTime,
+          addConsecutiveSession: this.addConsecutiveSession,
         }}
       >
         {this.props.children}
@@ -1192,6 +1432,5 @@ class StudentProvider extends Component {
     );
   }
 }
-
 const StudentConsumer = StudentContext.Consumer;
 export { StudentProvider, StudentConsumer, StudentContext };

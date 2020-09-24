@@ -18,6 +18,10 @@ import ViewSubGroup from "./../components/pages/ViewSubGroup";
 import AddTag from "./../components/pages/AddTag";
 import UpdateTag from "../components/pages/UpdateTag";
 import ViewTag from "./../components/pages/ViewTag";
+import AddLecturerNotAvailableTime from "./../components/pages/AddLecturerNotAvailableTime";
+import AddSessionNotAvailableTime from "./../components/pages/AddSessionNotAvailableTime";
+import AddGroupNotAvailableTime from "./../components/pages/AddGroupNotAvailableTime";
+import AddSubGroupNotAvailableTime from "./../components/pages/AddSubGroupNotAvailableTime";
 import LecturerTable from "./../components/lecturers/LecturerTable";
 import EditLecturer from "./../components/lecturers/EditLecturer";
 import ViewLecturers from "./../components/lecturers/ViewLecturers";
@@ -48,6 +52,7 @@ import SubjectsStatistics from "./../components/statistics/SubjectsStatistics";
 import ManagementTwo from "./../components/pages/ManagementTwo";
 import ManagementOne from "./../components/pages/ManagementOne";
 import ManagementThree from "./../components/pages/ManagementThree";
+import ManagementFour from "./../components/pages/ManagementFour";
 import Home from "../components/pages/Home";
 import SHome from "../components/pages/SHome";
 import AddWorkingDays from "../components/pages/AddWorkingDays";
@@ -59,6 +64,7 @@ import UpdateWorkingHours from "../components/pages/UpdateWorkingHours";
 import AddTimeSlots from "../components/pages/AddTimeSlot";
 import CreatePrimarySession from "../components/primarySession/CreatePrimarySession";
 import ViewPrimarySession from "../components/primarySession/ViewPrimarySession";
+import AddConsecutiveSession from "./../components/pages/AddConsecutiveSession";
 
 class AppRouter extends Component {
   render() {
@@ -69,6 +75,7 @@ class AppRouter extends Component {
           <Route path="/managementOne" component={ManagementOne} />
           <Route path="/managementTwo" component={ManagementTwo} />
           <Route path="/managementThree" component={ManagementThree} />
+          <Route path="/managementFour" component={ManagementFour} />
           <Route path="/addStudent" component={AddStudent} />
           <Route path="/updateStudent" component={UpdateStudent} />
           <Route path="/viewStudent" component={ViewStudent} />
@@ -96,7 +103,26 @@ class AppRouter extends Component {
           <Route path="/addTag" component={AddTag} />
           <Route path="/updateTag" component={UpdateTag} />
           <Route path="/viewTag" component={ViewTag} />
-
+          <Route
+            path="/addLecturerNotAvailableTime"
+            component={AddLecturerNotAvailableTime}
+          />
+          <Route
+            path="/addGroupNotAvailableTime"
+            component={AddGroupNotAvailableTime}
+          />
+          <Route
+            path="/addSubGroupNotAvailableTime"
+            component={AddSubGroupNotAvailableTime}
+          />
+          <Route
+            path="/addSessionNotAvailableTime"
+            component={AddSessionNotAvailableTime}
+          />
+          <Route
+            path="/addConsecutiveSession"
+            component={AddConsecutiveSession}
+          />
           <Route path="/lecturer" component={LecturerTable} />
           <Route path="/editLecturer" component={EditLecturer} />
           <Route path="/viewLecturers" component={ViewLecturers} />
