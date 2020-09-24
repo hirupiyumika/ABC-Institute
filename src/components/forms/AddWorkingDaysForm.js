@@ -124,5 +124,4 @@ const AddWorkingDaysForm = ({ AddWorkingDays }) => {
     </Card>
   );
 };
-
 export default AddWorkingDaysForm;

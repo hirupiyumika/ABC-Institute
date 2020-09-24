@@ -1,37 +1,45 @@
+// IT18233704 -  N.R Yamasinghe
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Button, Container, Breadcrumb } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
-class Home extends Component {
+class ManagementFour extends Component {
   render() {
     return (
       <React.Fragment>
         <Breadcrumb>
-          <Breadcrumb.Item active>Home</Breadcrumb.Item>
+          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            Not Available Time Management
+          </Breadcrumb.Item>
         </Breadcrumb>
         <Container className="mt-5">
           <Row>
             <Col className="mt-5">
               <Link
-                to="/managementOne"
+                to="/addLecturerNotAvailableTime"
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
-                  Student & Tag Management
+                  Add Lecturer Not Available Time
                 </Button>
               </Link>
             </Col>
             <Col className="mt-5">
               <Link
-                to="/managementTwo"
+                to="/addConsecutiveSession"
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
-                  Lecturer & Subject Management
+                  Add Consecutive Session
                 </Button>
               </Link>
             </Col>
@@ -39,25 +47,25 @@ class Home extends Component {
           <Row>
             <Col className="mt-5">
               <Link
-                to="/managementThree"
+                to="/addGroupNotAvailableTime"
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
-                  Location & Statistic Management
+                  Add Group Not Available Time
                 </Button>
               </Link>
             </Col>
             <Col className="mt-5">
               <Link
-                to="/sHome"
+                to="/addSubGroupNotAvailableTime"
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
-                  Working Days & Hours Management
+                  Add Sub Group Not Available Time
                 </Button>
               </Link>
             </Col>
@@ -65,54 +73,16 @@ class Home extends Component {
           <Row>
             <Col className="mt-5">
               <Link
-                to="/session1"
+                to="/addSessionNotAvailableTime"
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
-                  Create Primary Sessions
+                  Add Session Not Available Time
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5">
-              <Link
-                to="/viewSession1"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <Button variant="secondary" block>
-                  View Primary Sessions ( stage-i )
-                </Button>
-              </Link>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="mt-5">
-              <Link
-<<<<<<< HEAD
-                to="/managementFour"
-=======
-                to="/session2"
->>>>>>> upstream/master
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <Button variant="secondary" block>
-<<<<<<< HEAD
-                  Not Available Time Management
-                </Button>
-              </Link>
-            </Col>
-=======
-                  Create Advance Session
-                </Button>
-              </Link>
-            </Col>
-            <Col className="mt-5"></Col>
->>>>>>> upstream/master
           </Row>
         </Container>
       </React.Fragment>
@@ -120,4 +90,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default ManagementFour;
