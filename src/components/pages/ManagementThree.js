@@ -123,7 +123,18 @@ class ManagementThree extends Component {
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewLecturerRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Lecturer's Rooms
+                </Button>
+              </Link>
+            </Col>
           </Row>
           <Row>
             <Col className="mt-5">
@@ -138,7 +149,18 @@ class ManagementThree extends Component {
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewGroupsRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Group's Rooms
+                </Button>
+              </Link>
+            </Col>
           </Row>
           <Row>
             <Col className="mt-5">
@@ -153,7 +175,18 @@ class ManagementThree extends Component {
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewTagsRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Tag's Rooms
+                </Button>
+              </Link>
+            </Col>
           </Row>
           <Row>
             <Col className="mt-5">
@@ -168,7 +201,18 @@ class ManagementThree extends Component {
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewSubjectRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Subject's Rooms
+                </Button>
+              </Link>
+            </Col>
           </Row>
           <Row>
             <Col className="mt-5">
@@ -183,7 +227,18 @@ class ManagementThree extends Component {
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewNotAvailableRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Not Available Rooms
+                </Button>
+              </Link>
+            </Col>
           </Row>
         </Container>
       </div>

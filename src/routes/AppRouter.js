@@ -65,6 +65,11 @@ import AddTagRooms from "../components/Location/TagRooms/AddTagRooms";
 import AddSubjectRooms from "../components/Location/SubjectRooms/AddSubjectRooms";
 import CreateAdvanceSession from "../components/Location/AdvanceSession/CreateAdvanceSession";
 import AddNotAvailableRooms from "../components/Location/NotAvailableRooms/AddNotAvailableRooms";
+import ViewLecturerRooms from "../components/Location/LecturerRooms/ViewLecturerRooms";
+import ViewGroupsRooms from "../components/Location/GroupsRooms/ViewGroupRooms";
+import ViewNotAvailableRooms from "../components/Location/NotAvailableRooms/ViewNotAvailableRooms";
+import ViewSubjectRooms from "../components/Location/SubjectRooms/ViewSubjectRooms";
+import ViewTagRooms from "../components/Location/TagRooms/ViewTagRooms";
 
 class AppRouter extends Component {
   render() {
@@ -135,12 +140,20 @@ class AppRouter extends Component {
           <Route path="/studentsStatistics" component={StudentsStatistics} />
           <Route path="/subjectsStatistics" component={SubjectsStatistics} />
           <Route path="/addLecturerRooms" component={AddLecturerRooms} />
+          <Route path="/viewLecturerRooms" component={ViewLecturerRooms} />
           {/* <Route path="/editLecturerRooms" component={EditLecturerRooms} /> */}
           <Route path="/addGroupsRooms" component={AddGroupsRooms} />
+          <Route path="/viewGroupsRooms" component={ViewGroupsRooms} />
           <Route path="/addTagsRooms" component={AddTagRooms} />
+          <Route path="/viewTagsRooms" component={ViewTagRooms} />
           <Route path="/addSubjectRooms" component={AddSubjectRooms} />
+          <Route path="/viewSubjectRooms" component={ViewSubjectRooms} />
           <Route path="/session2" component={CreateAdvanceSession} />
           <Route path="/notAvailableRooms" component={AddNotAvailableRooms} />
+          <Route
+            path="/viewNotAvailableRooms"
+            component={ViewNotAvailableRooms}
+          />
           <Route path="/sHome" component={SHome} />
           <Route path="/addWorkingDays" component={AddWorkingDays} />
           <Route path="/viewWorkingDays" component={ViewWorkingDays} />

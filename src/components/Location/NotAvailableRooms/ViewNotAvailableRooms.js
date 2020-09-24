@@ -8,113 +8,20 @@ import {
   Breadcrumb,
   Container,
   Table,
-  Alert,
 } from "react-bootstrap";
-import { LogConsumer, LogContext } from "../../../context/context";
-import { DaysAndHoursContext } from "../../../context/DaysAndHoursProvider";
+import { LogContext } from "../../../context/context";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
-const AddNotAvailableRooms = () => {
-  const {
-    sortedRooms,
-    AddNotAvailableRooms,
-    notAvailableRooms,
-    deleteNotAvailableRoom,
-    alert,
-  } = useContext(LogContext);
-  const { workingDays } = useContext(DaysAndHoursContext);
-
-  const [room, setRoom] = useState("");
-  const [day, setDay] = useState("");
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
-  const onSubmit = (e) => {
-    e.preventDefault();
-    AddNotAvailableRooms({
-      room,
-      day,
-      start,
-      end,
-    });
-    setRoom("");
-    setDay("");
-    setStart("");
-    setEnd("");
-  };
+const ViewNotAvailableRooms = () => {
+  const { notAvailableRooms, deleteNotAvailableRoom } = useContext(LogContext);
   return (
     <>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Add Not Available-Rooms</Breadcrumb.Item>
+        <Breadcrumb.Item active>View Not Available-Rooms</Breadcrumb.Item>
       </Breadcrumb>
       <Container>
-        <Card className="mt-5 mb-3">
-          <Card.Body>
-            <Form onSubmit={onSubmit}>
-              <Row className="my-3">
-                <Col>
-                  <Form.Control
-                    as="select"
-                    value={room}
-                    onChange={(e) => setRoom(e.target.value)}
-                  >
-                    <option value="none">Select Room</option>
-                    {sortedRooms.map((room) => (
-                      <option key={room._id} value={room.roomName}>
-                        {room.roomName}
-                      </option>
-                    ))}
-                  </Form.Control>
-                </Col>
-                <Col>
-                  <Form.Control
-                    as="select"
-                    value={day}
-                    onChange={(e) => setDay(e.target.value)}
-                  >
-                    <option value="none">Select Day</option>
-                    {workingDays.map((day) => (
-                      <option key={day._id} value={day.day}>
-                        {day.day}
-                      </option>
-                    ))}
-                  </Form.Control>
-                </Col>
-              </Row>
-              <Row className="my-3">
-                <Col>
-                  <Form.Control
-                    type="time"
-                    // name={item._id}
-                    // key={i}
-                    onChange={(e) => setStart(e.target.value)}
-                    value={start}
-                    // disabled={item.endingHours ? true : false}
-                  />
-                </Col>
-                <Col>
-                  <Form.Control
-                    type="time"
-                    // name={item._id}
-                    // key={i}
-                    onChange={(e) => setEnd(e.target.value)}
-                    value={end}
-                    // disabled={item.endingHours ? true : false}
-                  />
-                </Col>
-              </Row>
-              <Row className="my-3">
-                <Col>
-                  <Button type="submit" variant="secondary" block>
-                    Add Not Available Rooms
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
-          </Card.Body>
-        </Card>
-        {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
         <Table>
           <thead>
             <tr>
@@ -197,4 +104,4 @@ const AddNotAvailableRooms = () => {
   );
 };
 
-export default AddNotAvailableRooms;
+export default ViewNotAvailableRooms;

@@ -1025,13 +1025,14 @@ class LogProvider extends Component {
   //  Add Lecturer-Rooms
   AddLecturerRooms = (Lroom) => {
     // console.log("Lroom", Lroom);
-    // if (Lroom.lecturer === "")
-    //   this.showAlert("please select Lecturer", "danger");
-    // else if (Lroom.rooms === "") this.showAlert("please select Room", "danger");
-    // else {
-    ipcRenderer.send("lecturer_Rooms:add", Lroom);
-    this.showAlert("Lecturer Room Added");
-    // }
+    if (Lroom.lecturer === "")
+      this.showAlert("please select Lecturer", "danger");
+    else if (Lroom.laboratories === "" && Lroom.lectureHalls === "")
+      this.showAlert("please select Room", "danger");
+    else {
+      ipcRenderer.send("lecturer_Rooms:add", Lroom);
+      this.showAlert("Lecturer Room Added");
+    }
   };
 
   // populate Lecturer-Rooms
@@ -1046,14 +1047,72 @@ class LogProvider extends Component {
     } catch (ex) {}
   };
 
+  //   delete Lecturer Room
+  deleteLecturerRoom = (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          ipcRenderer.send("lecturer_Rooms:delete", id);
+          this.showAlert("Room Removed");
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "tag has been deleted",
+            showConfirmButton: true,
+            timer: 1500,
+          }).then(function () {});
+        }
+      });
+    } catch (error) {}
+  };
+
   // Add Groups-Rooms
   AddGroupsRooms = (Groom) => {
     // console.log("Groom", Groom);
-    ipcRenderer.send("group_Rooms:add", Groom);
-    this.showAlert("Group-Rooms Added");
+    if (Groom.group === "") this.showAlert("please select Group", "danger");
+    else if (Groom.laboratories === "" && Groom.lectureHalls === "")
+      this.showAlert("please select Room", "danger");
+    else {
+      ipcRenderer.send("group_Rooms:add", Groom);
+      this.showAlert("Group-Rooms Added");
+    }
     // }
   };
 
+  // delete Group Room
+  deleteGroupRoom = (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          ipcRenderer.send("group_Rooms:delete", id);
+          this.showAlert("Room Removed");
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "tag has been deleted",
+            showConfirmButton: true,
+            timer: 1500,
+          }).then(function () {});
+        }
+      });
+    } catch (error) {}
+  };
   // populate Groups-Rooms
   populateGroupsRooms = () => {
     try {
@@ -1069,9 +1128,42 @@ class LogProvider extends Component {
   // Add Subject-Rooms
   AddSubjectRooms = (Sroom) => {
     // console.log("Sroom", Sroom);
-    ipcRenderer.send("subject_Rooms:add", Sroom);
-    this.showAlert("Subject-Rooms Added");
+    if (Sroom.subject === "") this.showAlert("please select Subject", "danger");
+    else if (Sroom.tag === "") this.showAlert("please select Tag", "danger");
+    else if (Sroom.laboratories === "" && Sroom.lectureHalls === "")
+      this.showAlert("please select Room", "danger");
+    else {
+      ipcRenderer.send("subject_Rooms:add", Sroom);
+      this.showAlert("Subject-Rooms Added");
+    }
     // }
+  };
+
+  // delete Subject Room
+  deleteSubjectRoom = (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          ipcRenderer.send("subject_Rooms:delete", id);
+          this.showAlert("Room Removed");
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "tag has been deleted",
+            showConfirmButton: true,
+            timer: 1500,
+          }).then(function () {});
+        }
+      });
+    } catch (error) {}
   };
 
   // populate Subject-Rooms
@@ -1088,9 +1180,14 @@ class LogProvider extends Component {
 
   // Add Tag-Rooms
   AddTagRooms = (Troom) => {
-    console.log("Troom", Troom);
-    ipcRenderer.send("tag_Rooms:add", Troom);
-    this.showAlert("tag-Rooms Added");
+    // console.log("Troom", Troom);
+    if (Troom.tagName === "") this.showAlert("please select Tag", "danger");
+    else if (Troom.laboratories === "" && Troom.lectureHalls == "")
+      this.showAlert("please select Room", "danger");
+    else {
+      ipcRenderer.send("tag_Rooms:add", Troom);
+      this.showAlert("tag-Rooms Added");
+    }
     // }
   };
 
@@ -1104,6 +1201,33 @@ class LogProvider extends Component {
         });
       });
     } catch (ex) {}
+  };
+
+  // delete Tag Room
+  deleteTagRoom = (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          ipcRenderer.send("tag_Rooms:delete", id);
+          this.showAlert("Room Removed");
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "tag has been deleted",
+            showConfirmButton: true,
+            timer: 1500,
+          }).then(function () {});
+        }
+      });
+    } catch (error) {}
   };
 
   //create Primary Session
@@ -1178,23 +1302,13 @@ class LogProvider extends Component {
 
   //create Advance Session
   createAdvanceSession = (session) => {
-    console.log("AdvanceSession1", session);
+    // console.log("AdvanceSession1", session);
     this.deletePrimarySession(session.id);
-    // if (session.lecturers === "")
-    //   this.showAlert("please select Lecturer", "danger");
-    // else if (session.tag === "") this.showAlert("please select Tag", "danger");
-    // else if (session.mainGroup === "" || session.subGroup === "")
-    //   this.showAlert("please select Group", "danger");
-    // else if (session.subject === "")
-    //   this.showAlert("please select Subject", "danger");
-    // else if (session.stdCount === "")
-    //   this.showAlert("please enter Student Count", "danger");
-    // else if (session.duration === "")
-    //   this.showAlert("please enter Duration", "danger");
-    // else {
-    ipcRenderer.send("advance_Sessions:add", session);
-    this.showAlert("Advance Session Added");
-    // }
+    if (session.room === "") this.showAlert("please select Room", "danger");
+    else {
+      ipcRenderer.send("advance_Sessions:add", session);
+      this.showAlert("Advance Session Added");
+    }
   };
 
   // populate Advance Session
@@ -1212,9 +1326,17 @@ class LogProvider extends Component {
 
   // Add Not Available Rooms
   AddNotAvailableRooms = (room) => {
-    console.log("Nroom", room);
-    ipcRenderer.send("no_Rooms:add", room);
-    this.showAlert("Not Available Rooms Added");
+    // console.log("Nroom", room);
+    if (room.room === "") this.showAlert("please select Room", "danger");
+    else if (room.day === "") this.showAlert("please select Day", "danger");
+    else if (room.start === "")
+      this.showAlert("please select Start Time", "danger");
+    else if (room.end === "")
+      this.showAlert("please select End Time", "danger");
+    else {
+      ipcRenderer.send("no_Rooms:add", room);
+      this.showAlert("Not Available Rooms Added");
+    }
     // }
   };
 
@@ -1229,6 +1351,33 @@ class LogProvider extends Component {
         });
       });
     } catch (ex) {}
+  };
+
+  // delete Not Available Room
+  deleteNotAvailableRoom = (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          ipcRenderer.send("no_Rooms:delete", id);
+          this.showAlert("Room Removed");
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "tag has been deleted",
+            showConfirmButton: true,
+            timer: 1500,
+          }).then(function () {});
+        }
+      });
+    } catch (error) {}
   };
 
   render() {
@@ -1279,18 +1428,29 @@ class LogProvider extends Component {
           singleBuilding: this.singleBuilding,
           updateBuilding: this.updateBuilding,
 
-          deleteRoom: this.deleteRoom,
           addRoom: this.addRoom,
+          deleteRoom: this.deleteRoom,
           singleRoom: this.singleRoom,
           updateRoom: this.updateRoom,
+
           AddLecturerRooms: this.AddLecturerRooms,
+          deleteLecturerRoom: this.deleteLecturerRoom,
+
           AddGroupsRooms: this.AddGroupsRooms,
+          deleteGroupRoom: this.deleteGroupRoom,
+
           AddSubjectRooms: this.AddSubjectRooms,
+          deleteSubjectRoom: this.deleteSubjectRoom,
+
           AddTagRooms: this.AddTagRooms,
+          deleteTagRoom: this.deleteTagRoom,
+
           AddNotAvailableRooms: this.AddNotAvailableRooms,
+          deleteNotAvailableRoom: this.deleteNotAvailableRoom,
 
           createPrimarySession: this.createPrimarySession,
           deleteSession: this.deleteSession,
+
           createAdvanceSession: this.createAdvanceSession,
 
           handleLecturerChange: this.handleLecturerChange,

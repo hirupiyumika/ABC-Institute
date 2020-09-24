@@ -1251,6 +1251,16 @@ ipcMain.on("lecturer_Rooms:add", async (e, room) => {
   }
 });
 
+// delete Lecturer_Rooms
+ipcMain.on("lecturer_Rooms:delete", async (e, id) => {
+  try {
+    await LecturerRooms.findOneAndDelete({ _id: id });
+    sendLecturerRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // get group_Rooms data from database
 ipcMain.on("group_Rooms:load", sendGroupRooms);
 async function sendGroupRooms() {
@@ -1262,6 +1272,16 @@ async function sendGroupRooms() {
     console.log(error);
   }
 }
+
+// delete group_Rooms
+ipcMain.on("group_Rooms:delete", async (e, id) => {
+  try {
+    await GroupRooms.findOneAndDelete({ _id: id });
+    sendGroupRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // create group_Rooms
 ipcMain.on("group_Rooms:add", async (e, room) => {
@@ -1302,6 +1322,16 @@ ipcMain.on("subject_Rooms:add", async (e, room) => {
   }
 });
 
+// delete subject_Room
+ipcMain.on("subject_Rooms:delete", async (e, id) => {
+  try {
+    await SubjectRooms.findOneAndDelete({ _id: id });
+    sendSubjectRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // get Tag_Rooms data from database
 ipcMain.on("tag_Rooms:load", sendTagRooms);
 async function sendTagRooms() {
@@ -1320,6 +1350,16 @@ ipcMain.on("tag_Rooms:add", async (e, room) => {
 
   try {
     await TagRooms.create(room);
+    sendTagRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// delete Tag_Room
+ipcMain.on("tag_Rooms:delete", async (e, id) => {
+  try {
+    await TagRooms.findOneAndDelete({ _id: id });
     sendTagRooms();
   } catch (error) {
     console.log(error);
@@ -1376,6 +1416,17 @@ ipcMain.on("no_Rooms:add", async (e, room) => {
     console.log(error);
   }
 });
+
+// delete Not Available_Rooms
+ipcMain.on("no_Rooms:delete", async (e, id) => {
+  try {
+    await NoRooms.findOneAndDelete({ _id: id });
+    sendNoRooms();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 //********************************************************************************************************* */
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
