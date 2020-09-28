@@ -33,6 +33,10 @@ class StudentProvider extends Component {
     sessionsNotAvailableTime: [],
     consecutiveSessions: [],
     sortedConsecutiveSessions: [],
+    parallelSessions: [],
+    sortedParallelSessions: [],
+    notOverlappingSessions: [],
+    sortedNotOverlappingSessions: [],
   };
 
   // filtering lecturer not available time
@@ -260,6 +264,47 @@ class StudentProvider extends Component {
           sortedConsecutiveSessions: JSON.parse(consecutiveSessions),
         });
       });
+    } catch (ex) {}
+  }
+
+  // add parallel session
+  addParallelSession = (parallelSession) => {
+    ipcRenderer.send("parallelSession:add", parallelSession);
+    this.showAlert("parallel session added");
+  };
+
+  // populate parallel session
+  populateParallelSession() {
+    try {
+      ipcRenderer.send("parallelSession:load");
+      ipcRenderer.on("parallelSession:get", (e, parallelSessions) => {
+        this.setState({
+          parallelSessions: JSON.parse(parallelSessions),
+          sortedParallelSessions: JSON.parse(parallelSessions),
+        });
+      });
+    } catch (ex) {}
+  }
+
+  // add not overlapping session
+  addNotOverlappingSession = (notOverlappingSession) => {
+    ipcRenderer.send("notOverlappingSession:add", notOverlappingSession);
+    this.showAlert("not overlapping session session added");
+  };
+
+  // populate not overlapping session
+  populateNotOverlappingSession() {
+    try {
+      ipcRenderer.send("notOverlappingSession:load");
+      ipcRenderer.on(
+        "notOverlappingSession:get",
+        (e, notOverlappingSessions) => {
+          this.setState({
+            notOverlappingSessions: JSON.parse(notOverlappingSessions),
+            sortedNotOverlappingSessions: JSON.parse(notOverlappingSessions),
+          });
+        }
+      );
     } catch (ex) {}
   }
 
@@ -1350,6 +1395,8 @@ class StudentProvider extends Component {
     this.populateTags();
     this.populateStudents();
     this.populateConsecutiveSession();
+    this.populateParallelSession();
+    this.populateNotOverlappingSession();
     ipcRenderer.on("students:clear", () => {
       this.setState({ students: [], sortedStudents: [] });
       this.showAlert("students cleared");
@@ -1425,6 +1472,8 @@ class StudentProvider extends Component {
           addSubGroupNotAvailableTime: this.addSubGroupNotAvailableTime,
           addSessionNotAvailableTime: this.addSessionNotAvailableTime,
           addConsecutiveSession: this.addConsecutiveSession,
+          addParallelSession: this.addParallelSession,
+          addNotOverlappingSession: this.addNotOverlappingSession,
         }}
       >
         {this.props.children}

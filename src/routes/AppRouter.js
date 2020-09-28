@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Router } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import AddStudent from "./../components/pages/AddStudent";
 import UpdateStudent from "./../components/pages/UpdateStudent";
 import ViewStudent from "./../components/pages/ViewStudent";
@@ -64,15 +64,14 @@ import UpdateWorkingHours from "../components/pages/UpdateWorkingHours";
 import AddTimeSlots from "../components/pages/AddTimeSlot";
 import CreatePrimarySession from "../components/primarySession/CreatePrimarySession";
 import ViewPrimarySession from "../components/primarySession/ViewPrimarySession";
-
 import AddConsecutiveSession from "./../components/pages/AddConsecutiveSession";
-
+import AddParallelSession from "./../components/pages/AddParallelSession";
+import AddNotOverlappingSession from "./../components/pages/AddNotOverlappingSession";
 import AddLecturerRooms from "../components/Location/LecturerRooms/AddLecturerRooms";
 import AddGroupsRooms from "../components/Location/GroupsRooms/AddGroupsRooms";
 import AddTagRooms from "../components/Location/TagRooms/AddTagRooms";
 import AddSubjectRooms from "../components/Location/SubjectRooms/AddSubjectRooms";
 import AddNotAvailableRooms from "../components/Location/NotAvailableRooms/AddNotAvailableRooms";
-
 import ViewLecturerRooms from "../components/Location/LecturerRooms/ViewLecturerRooms";
 import ViewGroupsRooms from "../components/Location/GroupsRooms/ViewGroupRooms";
 import ViewNotAvailableRooms from "../components/Location/NotAvailableRooms/ViewNotAvailableRooms";
@@ -138,6 +137,11 @@ class AppRouter extends Component {
             path="/addConsecutiveSession"
             component={AddConsecutiveSession}
           />
+          <Route
+            path="/addNotOverlappingSession"
+            component={AddNotOverlappingSession}
+          />
+          <Route path="/addParallelSession" component={AddParallelSession} />
           <Route path="/lecturer" component={LecturerTable} />
           <Route path="/editLecturer" component={EditLecturer} />
           <Route path="/viewLecturers" component={ViewLecturers} />
