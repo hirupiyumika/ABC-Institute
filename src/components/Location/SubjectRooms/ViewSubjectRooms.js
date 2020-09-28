@@ -60,7 +60,7 @@ const ViewSubjectRooms = ({}) => {
                   <td>
                     <Moment format="h:mm:ss a">{new Date(sub.created)}</Moment>
                   </td>
-                  <td>
+                  {/* <td>
                     <Link to="/editLecturer">
                       <Button
                         variant="primary"
@@ -83,7 +83,7 @@ const ViewSubjectRooms = ({}) => {
                         </svg>
                       </Button>
                     </Link>
-                  </td>
+                  </td> */}
                   <td>
                     <Button
                       variant="danger"

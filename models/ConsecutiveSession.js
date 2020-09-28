@@ -110,6 +110,10 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
+  room: {
+    type: String,
+    trim: true,
+  },
   created: {
     type: Date,
     default: Date.now,

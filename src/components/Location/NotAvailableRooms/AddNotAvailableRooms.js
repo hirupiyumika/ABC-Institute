@@ -142,7 +142,7 @@ const AddNotAvailableRooms = () => {
                   <Moment format="h:mm:ss a">{new Date(room.created)}</Moment>
                 </td>
 
-                <td>
+                {/* <td>
                   <Link to="/editLecturer">
                     <Button
                       variant="primary"
@@ -165,7 +165,7 @@ const AddNotAvailableRooms = () => {
                       </svg>
                     </Button>
                   </Link>
-                </td>
+                </td> */}
                 <td>
                   <Button
                     variant="danger"

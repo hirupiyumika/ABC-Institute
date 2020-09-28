@@ -53,7 +53,7 @@ const ViewLecturerRooms = ({}) => {
                         {new Date(lec.created)}
                       </Moment>
                     </td>
-                    <td>
+                    {/* <td>
                       <Link to="/editLecturer">
                         <Button
                           variant="primary"
@@ -76,7 +76,7 @@ const ViewLecturerRooms = ({}) => {
                           </svg>
                         </Button>
                       </Link>
-                    </td>
+                    </td> */}
                     <td>
                       <Button
                         variant="danger"

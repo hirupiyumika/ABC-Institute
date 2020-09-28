@@ -1122,6 +1122,21 @@ class LogProvider extends Component {
     } catch (ex) {}
   };
 
+  singleGroupRoom = (id) => {
+    var singleGroupRoom = this.state.groupRooms.filter((gr) => gr._id === id);
+    this.setState({ singleGroupRoom });
+  };
+
+  // //update Groups-Rooms
+  // updateBuilding = (gr) => {
+  //   if (gr.building === "" || building.building === "") {
+  //     this.showAlert("please enter Building Name", "danger");
+  //     return false;
+  //   }
+  //   ipcRenderer.send("buildings:update", building);
+  //   this.showAlert("Building Updated");
+  // };
+
   // Add Subject-Rooms
   AddSubjectRooms = (Sroom) => {
     // console.log("Sroom", Sroom);
@@ -1308,6 +1323,17 @@ class LogProvider extends Component {
     }
   };
 
+  //Add ConsecutiveSession Room
+  AddConsecutiveSessionRoom = (session) => {
+    // console.log("AddConsecutiveSessionRoom", session);
+    // this.deletePrimarySession(session.id);
+    if (session.room === "") this.showAlert("please select Room", "danger");
+    else {
+      ipcRenderer.send("consecutiveSession:update", session);
+      this.showAlert("Add Consecutive Session-Room");
+    }
+  };
+
   // Add Not Available Rooms
   AddNotAvailableRooms = (room) => {
     // console.log("Nroom", room);
@@ -1365,6 +1391,7 @@ class LogProvider extends Component {
   };
 
   render() {
+    console.log("singleGroupRoom", this.state.singleGroupRoom);
     return (
       <LogContext.Provider
         value={{
@@ -1416,6 +1443,7 @@ class LogProvider extends Component {
 
           AddGroupsRooms: this.AddGroupsRooms,
           deleteGroupRoom: this.deleteGroupRoom,
+          singleGroupRoom: this.singleGroupRoom,
 
           AddSubjectRooms: this.AddSubjectRooms,
           deleteSubjectRoom: this.deleteSubjectRoom,
@@ -1430,6 +1458,7 @@ class LogProvider extends Component {
           deleteSession: this.deleteSession,
 
           AddSessionRooms: this.AddSessionRooms,
+          AddConsecutiveSessionRoom: this.AddConsecutiveSessionRoom,
 
           handleLecturerChange: this.handleLecturerChange,
           handleSubjectChange: this.handleSubjectChange,

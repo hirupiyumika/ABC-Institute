@@ -250,6 +250,7 @@ class StudentProvider extends Component {
 
   // add consecutive session
   addConsecutiveSession = (consecutiveSession) => {
+    console.log("consecutiveSession", consecutiveSession);
     ipcRenderer.send("consecutiveSession:add", consecutiveSession);
     this.showAlert("consecutive session added");
   };
@@ -1432,6 +1433,10 @@ class StudentProvider extends Component {
   };
 
   render() {
+    console.log(
+      "sortedConsecutiveSessions",
+      this.state.sortedConsecutiveSessions
+    );
     return (
       <StudentContext.Provider
         value={{

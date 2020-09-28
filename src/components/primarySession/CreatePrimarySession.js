@@ -158,7 +158,7 @@ const CreatePrimarySession = ({}) => {
                                     class="form-check-input"
                                     type="radio"
                                     name="inlineRadioOptions1"
-                                    value={std.subGroupID}
+                                    value={std.mainGroupID}
                                     onChange={(e) => setGroup(e.target.value)}
                                   />
                                   <label

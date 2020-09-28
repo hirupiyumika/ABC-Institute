@@ -79,6 +79,7 @@ import ViewSubjectRooms from "../components/Location/SubjectRooms/ViewSubjectRoo
 import ViewTagRooms from "../components/Location/TagRooms/ViewTagRooms";
 import AddSessionRooms from "../components/Location/SessionRooms/AddSessionRooms";
 import ViewSessionRooms from "../components/Location/SessionRooms/ViewSessionRooms";
+import AddConsecutiveSessionRoom from "../components/Location/ConscutiveSessionRoom/AddConsecutiveSessionRoom";
 
 class AppRouter extends Component {
   render() {
@@ -182,6 +183,10 @@ class AppRouter extends Component {
           <Route path="/addSubjectRooms" component={AddSubjectRooms} />
           <Route path="/viewSubjectRooms" component={ViewSubjectRooms} />
           <Route path="/addSessionRooms" component={AddSessionRooms} />
+          <Route
+            path="/consecutiveSessionRoom"
+            component={AddConsecutiveSessionRoom}
+          />
           <Route path="/viewSessionRooms" component={ViewSessionRooms} />
           <Route path="/notAvailableRooms" component={AddNotAvailableRooms} />
           <Route

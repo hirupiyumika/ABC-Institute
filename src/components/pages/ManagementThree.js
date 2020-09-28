@@ -266,6 +266,32 @@ class ManagementThree extends Component {
               </Link>
             </Col>
           </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/consecutiveSessionRoom"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Add Consecutive-Session Rooms
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewConsecutiveSessionRoom"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Consecutive-Session Rooms
+                </Button>
+              </Link>
+            </Col>
+          </Row>
         </Container>
       </div>
     );

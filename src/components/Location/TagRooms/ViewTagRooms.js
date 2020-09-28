@@ -62,7 +62,7 @@ const ViewTagRooms = ({}) => {
                       {new Date(tag.createdDate)}
                     </Moment>
                   </td>
-                  <td>
+                  {/* <td>
                     <Link to="/editLecturer">
                       <Button
                         variant="primary"
@@ -85,7 +85,7 @@ const ViewTagRooms = ({}) => {
                         </svg>
                       </Button>
                     </Link>
-                  </td>
+                  </td> */}
                   <td>
                     <Button
                       variant="danger"

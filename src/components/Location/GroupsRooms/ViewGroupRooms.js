@@ -46,7 +46,7 @@ const ViewGroupsRooms = ({}) => {
                   <td>
                     <Moment format="h:mm:ss a">{new Date(grp.created)}</Moment>
                   </td>
-                  <td>
+                  {/* <td>
                     <Link to="/editLecturer">
                       <Button
                         variant="primary"
@@ -69,7 +69,7 @@ const ViewGroupsRooms = ({}) => {
                         </svg>
                       </Button>
                     </Link>
-                  </td>
+                  </td> */}
                   <td>
                     <Button
                       variant="danger"

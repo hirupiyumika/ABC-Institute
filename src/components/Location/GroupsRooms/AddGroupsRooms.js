@@ -19,6 +19,7 @@ const AddGroupsRooms = ({}) => {
   const {
     sortedRooms,
     AddGroupsRooms,
+    singleGroupRoom,
     alert,
     groupRooms,
     deleteGroupRoom,
@@ -27,11 +28,7 @@ const AddGroupsRooms = ({}) => {
   const [_id, setId] = useState("");
   const [type, setType] = useState("");
   const [group, setGroup] = useState("");
-  //   const [academicYearAndSemester, setAcademicYearAndSemester] = useState("");
-  //   const [programme, setProgramme] = useState("");
-  //   const [mainGroup, setMainGroup] = useState("");
   const [mainGroupID, setMainGroupID] = useState("");
-  //   const [subGroup, setSubGroup] = useState("");
   const [subGroupID, setSubGroupID] = useState("");
   const [lectureHalls, setLectureHalls] = useState("");
   const [laboratories, setLaboratories] = useState("");
@@ -234,12 +231,12 @@ const AddGroupsRooms = ({}) => {
                   <td>
                     <Moment format="h:mm:ss a">{new Date(grp.created)}</Moment>
                   </td>
-                  <td>
+                  {/* <td>
                     <Link to="/editLecturer">
                       <Button
                         variant="primary"
                         size="sm"
-                        // onClick={() => singleLecturer(_id)}
+                        onClick={() => singleGroupRoom(grp._id)}
                       >
                         <svg
                           width="1em"
@@ -257,7 +254,7 @@ const AddGroupsRooms = ({}) => {
                         </svg>
                       </Button>
                     </Link>
-                  </td>
+                  </td> */}
                   <td>
                     <Button
                       variant="danger"
