@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import UpdateSubGroupForm from "./../forms/UpdateSubGroupForm";
-import SubGroupTable from "./../tables/SubGroupTable";
+import UpdateSubGroupForm from "./../subGroup/UpdateSubGroupForm";
+import SubGroupTable from "./../subGroup/SubGroupTable";
 import { StudentContext } from "./../../context/StudentContext";
 
 class UpdateSubGroup extends Component {

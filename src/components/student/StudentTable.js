@@ -2,12 +2,12 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
-import { StudentConsumer } from "./../../context/StudentContext";
-import ProgrammeItem from "./../tables/ProgrammeItem";
-import SearchBox from "./../common/SearchBox";
+import { StudentConsumer } from "../../context/StudentContext";
+import StudentItem from "./../student/StudentItem";
+import SearchBox from "../common/SearchBox";
 import Swal from "sweetalert2";
 
-const ProgrammeTable = () => {
+const StudentTable = () => {
   const condition = navigator.onLine;
 
   if (!condition) {
@@ -17,26 +17,24 @@ const ProgrammeTable = () => {
       text: "No internet connection!",
     });
   }
-
   return (
     <StudentConsumer>
       {(value) => {
         const {
-          filterProgramme,
-          deleteProgramme,
-          sortedProgrammes,
-          handleProgrammeChange,
+          sortedStudents,
+          filterStudent,
+          deleteStudent,
           search,
+          handleStudentChange,
         } = value;
         return (
           <Container>
             <SearchBox
-              handleChange={handleProgrammeChange}
+              handleChange={handleStudentChange}
               search={search}
               placeholder="Search"
             />
-
-            {sortedProgrammes.length === 0 ? (
+            {sortedStudents.length === 0 ? (
               <div
                 className="col  text-color-ash text-center "
                 style={{
@@ -51,20 +49,23 @@ const ProgrammeTable = () => {
               <Table className="mt-3">
                 <thead>
                   <tr>
-                    <th>Programme</th>
-                    <th>Added Date</th>
-                    <th>Added Time</th>
+                    <th>Year</th>
+                    <th>Program</th>
+                    <th>Group</th>
+                    <th>SGroup</th>
+                    <th>Group ID</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedProgrammes.map((programme) => (
-                    <ProgrammeItem
-                      key={programme._id}
-                      programme={programme}
-                      deleteProgramme={deleteProgramme}
-                      filterProgramme={filterProgramme}
+                  {sortedStudents.map((student) => (
+                    <StudentItem
+                      key={student._id}
+                      student={student}
+                      deleteStudent={deleteStudent}
+                      filterStudent={filterStudent}
                     />
                   ))}
                 </tbody>
@@ -77,4 +78,4 @@ const ProgrammeTable = () => {
   );
 };
 
-export default ProgrammeTable;
+export default StudentTable;

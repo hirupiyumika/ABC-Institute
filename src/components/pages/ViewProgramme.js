@@ -1,7 +1,7 @@
 // IT18233704 -  N.R Yamasinghe
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import ProgrammeTable from "./../tables/ProgrammeTable";
+import ProgrammeTable from "./../programme/ProgrammeTable";
 
 class ViewProgramme extends Component {
   render() {

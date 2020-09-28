@@ -4,8 +4,8 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { StudentContext } from "./../../context/StudentContext";
-import AddStudentForm from "./../forms/AddStudentForm";
-import StudentTable from "./../tables/StudentTable";
+import AddStudentForm from "./../student/AddStudentForm";
+import StudentTable from "./../student/StudentTable";
 
 class AddStudent extends Component {
   static contextType = StudentContext;

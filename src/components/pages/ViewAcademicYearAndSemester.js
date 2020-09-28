@@ -1,7 +1,7 @@
 // IT18233704 -  N.R Yamasinghe
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import AcademicYearAndSemesterTable from "./../tables/AcademicYearAndSemesterTable";
+import AcademicYearAndSemesterTable from "./../academicYearAndSemester/AcademicYearAndSemesterTable";
 
 class ViewAcademicYearAndSemester extends Component {
   render() {

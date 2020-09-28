@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { StudentContext } from "../../context/StudentContext";
-import GroupTable from "../tables/GroupTable";
+import GroupTable from "../mainGroup/GroupTable";
 import AddGroupNotAvailableTimeForm from "../groupNotAvailableTime/AddGroupNotAvailableTimeForm";
 
 class AddGroupNotAvailableTime extends Component {

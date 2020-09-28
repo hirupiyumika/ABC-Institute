@@ -1,7 +1,7 @@
 // IT18233704 -  N.R Yamasinghe
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import StudentTable from "./../tables/StudentTable";
+import StudentTable from "./../student/StudentTable";
 
 class ViewStudent extends Component {
   render() {

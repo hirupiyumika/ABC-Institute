@@ -26,10 +26,8 @@ const AddParallelSessionForm = ({ primarySessions }) => {
     const duration2 = sessions[1].duration;
     const stdCount1 = sessions[0].stdCount;
     const stdCount2 = sessions[1].stdCount;
-    const mainGroup1 = sessions[0].mainGroup;
-    const mainGroup2 = sessions[1].mainGroup;
-    const subGroup1 = sessions[0].subGroup;
-    const subGroup2 = sessions[1].subGroup;
+    const group2 = sessions[1].group;
+    const group1 = sessions[0].group;
     const subject1 = sessions[0].subject;
     const subject2 = sessions[1].subject;
     const tag1 = sessions[0].tag;
@@ -38,58 +36,50 @@ const AddParallelSessionForm = ({ primarySessions }) => {
     const lecturers3 = sessions.length === 2 ? " " : sessions[2].lecturers;
     const duration3 = sessions.length === 2 ? " " : sessions[2].duration;
     const stdCount3 = sessions.length === 2 ? " " : sessions[2].stdCount;
-    const mainGroup3 = sessions.length === 2 ? " " : sessions[2].mainGroup;
-    const subGroup3 = sessions.length === 2 ? " " : sessions[2].subGroup;
+    const group3 = sessions.length === 2 ? " " : sessions[2].group;
     const subject3 = sessions.length === 2 ? " " : sessions[2].subject;
     const tag4 = sessions.length === 2 ? " " : sessions[3].tag;
     const lecturers4 = sessions.length === 2 ? " " : sessions[3].lecturers;
     const duration4 = sessions.length === 2 ? " " : sessions[3].duration;
     const stdCount4 = sessions.length === 2 ? " " : sessions[3].stdCount;
-    const mainGroup4 = sessions.length === 2 ? " " : sessions[3].mainGroup;
-    const subGroup4 = sessions.length === 2 ? " " : sessions[3].subGroup;
+    const group4 = sessions.length === 2 ? " " : sessions[3].group;
     const subject4 = sessions.length === 2 ? " " : sessions[3].subject;
     const tag5 = sessions.length === 2 ? " " : sessions[4].tag;
     const lecturers5 = sessions.length === 2 ? " " : sessions[4].lecturers;
     const duration5 = sessions.length === 2 ? " " : sessions[4].duration;
     const stdCount5 = sessions.length === 2 ? " " : sessions[4].stdCount;
-    const mainGroup5 = sessions.length === 2 ? " " : sessions[4].mainGroup;
-    const subGroup5 = sessions.length === 2 ? " " : sessions[4].subGroup;
+    const group5 = sessions.length === 2 ? " " : sessions[4].group;
     const subject5 = sessions.length === 2 ? " " : sessions[4].subject;
 
     addParallelSession({
       lecturers1,
       duration1,
       subject1,
-      mainGroup1,
-      subGroup1,
+      group1,
       stdCount1,
       tag1,
       lecturers2,
       duration2,
       subject2,
-      mainGroup2,
-      subGroup2,
+      group2,
       stdCount2,
       tag2,
       lecturers3,
       duration3,
       subject3,
-      mainGroup3,
-      subGroup3,
+      group3,
       stdCount3,
       tag3,
       lecturers4,
       duration4,
       subject4,
-      mainGroup4,
-      subGroup4,
+      group4,
       stdCount4,
       tag4,
       lecturers5,
       duration5,
       subject5,
-      mainGroup5,
-      subGroup5,
+      group5,
       stdCount5,
       tag5,
     });
@@ -102,10 +92,7 @@ const AddParallelSessionForm = ({ primarySessions }) => {
 
     if (sessions.length === 0) {
       setSessions([...sessions, selected[0]]);
-    } else if (
-      selected[0].mainGroup !== sessions[0].mainGroup ||
-      selected[0].subGroup !== sessions[0].subGroup
-    ) {
+    } else if (selected[0].group !== sessions[0].group) {
       setError(true);
     } else {
       setSessions([...sessions, selected[0]]);
@@ -141,8 +128,7 @@ const AddParallelSessionForm = ({ primarySessions }) => {
                       {primarySessions.map((session) => (
                         <option key={session._id} value={session._id}>
                           {`${session.lecturers} ${session.tag}
-                      ${session.mainGroup}
-                      ${session.subGroup}
+                      ${session.group}
                       ${session.subject}
                       ${session.stdCount}
                       ${session.duration}`}

@@ -1,7 +1,7 @@
 // IT18233704 -  N.R Yamasinghe
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import TagTable from "./../tables/TagTable";
+import TagTable from "./../tag/TagTable";
 
 class ViewTag extends Component {
   render() {

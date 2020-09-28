@@ -13,11 +13,8 @@ const NotOverlappingSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup1: {
-    type: String,
-    trim: true,
-  },
-  subGroup1: {
+
+  group1: {
     type: String,
     trim: true,
   },
@@ -50,11 +47,8 @@ const NotOverlappingSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup2: {
-    type: String,
-    trim: true,
-  },
-  subGroup2: {
+
+  group2: {
     type: String,
     trim: true,
   },
@@ -87,11 +81,8 @@ const NotOverlappingSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup3: {
-    type: String,
-    trim: true,
-  },
-  subGroup3: {
+
+  group3: {
     type: String,
     trim: true,
   },
@@ -123,11 +114,8 @@ const NotOverlappingSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup4: {
-    type: String,
-    trim: true,
-  },
-  subGroup4: {
+
+  group4: {
     type: String,
     trim: true,
   },
@@ -159,11 +147,8 @@ const NotOverlappingSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup5: {
-    type: String,
-    trim: true,
-  },
-  subGroup5: {
+
+  group5: {
     type: String,
     trim: true,
   },

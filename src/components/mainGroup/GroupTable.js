@@ -2,9 +2,9 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
-import { StudentConsumer } from "./../../context/StudentContext";
-import GroupItem from "./../tables/GroupItem";
-import SearchBox from "./../common/SearchBox";
+import { StudentConsumer } from "../../context/StudentContext";
+import GroupItem from "./GroupItem";
+import SearchBox from "../common/SearchBox";
 import Swal from "sweetalert2";
 
 const GroupTable = () => {

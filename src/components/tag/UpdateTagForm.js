@@ -5,19 +5,19 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { StudentConsumer } from "./../../context/StudentContext";
+import { StudentConsumer } from "../../context/StudentContext";
 
-const UpdateGroupForm = ({ updateGroup, filteredGroup }) => {
-  const [group, setGroup] = useState(filteredGroup[0].group);
-  const [_id, set_id] = useState(filteredGroup[0]._id);
+const UpdateTagForm = ({ updateTag, filteredTag }) => {
+  const [tag, setTag] = useState(filteredTag[0].tag);
+  const [_id, set_id] = useState(filteredTag[0]._id);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateGroup({
+    updateTag({
       _id,
-      group,
+      tag,
     });
-    setGroup("");
+    setTag("");
   };
   return (
     <StudentConsumer>
@@ -31,9 +31,9 @@ const UpdateGroupForm = ({ updateGroup, filteredGroup }) => {
                 <Row className="my-3">
                   <Col>
                     <Form.Control
-                      placeholder="Group"
-                      value={group}
-                      onChange={(e) => setGroup(e.target.value)}
+                      placeholder="Tag"
+                      value={tag}
+                      onChange={(e) => setTag(e.target.value)}
                     />
                   </Col>
                 </Row>
@@ -41,7 +41,7 @@ const UpdateGroupForm = ({ updateGroup, filteredGroup }) => {
                   <Col>
                     <Form.Control
                       hidden
-                      value={filteredGroup[0]._id}
+                      value={filteredTag[0]._id}
                       onChange={(e) => set_id(e.target.value)}
                     />
                   </Col>
@@ -49,7 +49,7 @@ const UpdateGroupForm = ({ updateGroup, filteredGroup }) => {
                 <Row className="my-3">
                   <Col>
                     <Button type="submit" variant="secondary" block>
-                      Update Group
+                      Update Tag
                     </Button>
                   </Col>
                 </Row>
@@ -62,4 +62,4 @@ const UpdateGroupForm = ({ updateGroup, filteredGroup }) => {
   );
 };
 
-export default UpdateGroupForm;
+export default UpdateTagForm;

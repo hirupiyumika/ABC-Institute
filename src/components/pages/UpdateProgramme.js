@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import UpdateProgrammeForm from "./../forms/UpdateProgrammeForm";
-import ProgrammeTable from "./../tables/ProgrammeTable";
+import UpdateProgrammeForm from "./../programme/UpdateProgrammeForm";
+import ProgrammeTable from "./../programme/ProgrammeTable";
 import { StudentContext } from "./../../context/StudentContext";
 
 class UpdateProgramme extends Component {

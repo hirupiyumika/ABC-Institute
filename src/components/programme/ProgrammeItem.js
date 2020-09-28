@@ -3,17 +3,17 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
-import EditButton from "./../common/EditButton";
-import DeleteButton from "./../common/DeleteButton";
+import EditButton from "../common/EditButton";
+import DeleteButton from "../common/DeleteButton";
 
-const SubGroupItem = ({
-  subGroup: { _id, subGroup, createdDate },
-  deleteSubGroup,
-  filterSubGroup,
+const ProgrammeItem = ({
+  programme: { _id, programme, createdDate },
+  deleteProgramme,
+  filterProgramme,
 }) => {
   return (
     <tr>
-      <td>{subGroup}</td>
+      <td>{programme}</td>
       <td>
         <Moment format="MMMM Do YYYY">{new Date(createdDate)}</Moment>
       </td>
@@ -21,18 +21,18 @@ const SubGroupItem = ({
         <Moment format="h:mm:ss a">{new Date(createdDate)}</Moment>
       </td>
       <td>
-        <Link to="/updateSubGroup">
+        <Link to="/updateProgramme">
           <Button
             variant="primary"
             size="sm"
-            onClick={() => filterSubGroup(_id)}
+            onClick={() => filterProgramme(_id)}
           >
             <EditButton />
           </Button>
         </Link>
       </td>
       <td>
-        <Button variant="danger" size="sm" onClick={() => deleteSubGroup(_id)}>
+        <Button variant="danger" size="sm" onClick={() => deleteProgramme(_id)}>
           <DeleteButton />
         </Button>
       </td>
@@ -40,4 +40,4 @@ const SubGroupItem = ({
   );
 };
 
-export default SubGroupItem;
+export default ProgrammeItem;

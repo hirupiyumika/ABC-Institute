@@ -2,8 +2,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import EditButton from "./../common/EditButton";
-import DeleteButton from "./../common/DeleteButton";
+import EditButton from "../common/EditButton";
+import DeleteButton from "../common/DeleteButton";
 
 const StudentItem = ({
   student: {
