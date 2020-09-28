@@ -101,7 +101,44 @@ class Home extends Component {
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/addConsecutiveSession"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Consecutive Session Management
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/addParallelSession"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Parallel Session management
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5">
+              <Link
+                to="/addNotOverlappingSession"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Not Overlapping Session Management
+                </Button>
+              </Link>
+            </Col>
           </Row>
           <Row>
             <Col className="mt-5">

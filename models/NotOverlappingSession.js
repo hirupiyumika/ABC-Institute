@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ConsecutiveSessionSchema = new mongoose.Schema({
+const NotOverlappingSessionSchema = new mongoose.Schema({
   lecturers1: [
     {
       type: String,
@@ -36,10 +36,6 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
     trim: true,
     min: 0,
     max: 5,
-  },
-  created: {
-    type: Date,
-    default: Date.now,
   },
 
   lecturers2: [
@@ -78,10 +74,6 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
 
   lecturers3: [
     {
@@ -119,6 +111,78 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
+  lecturers4: [
+    {
+      type: String,
+
+      trim: true,
+    },
+  ],
+
+  tag4: {
+    type: String,
+    trim: true,
+  },
+  mainGroup4: {
+    type: String,
+    trim: true,
+  },
+  subGroup4: {
+    type: String,
+    trim: true,
+  },
+  subject4: {
+    type: String,
+    trim: true,
+  },
+  stdCount4: {
+    type: Number,
+    trim: true,
+    min: 0,
+    max: 5000,
+  },
+  duration4: {
+    type: Number,
+    trim: true,
+    min: 0,
+    max: 5,
+  },
+  lecturers5: [
+    {
+      type: String,
+
+      trim: true,
+    },
+  ],
+
+  tag5: {
+    type: String,
+    trim: true,
+  },
+  mainGroup5: {
+    type: String,
+    trim: true,
+  },
+  subGroup5: {
+    type: String,
+    trim: true,
+  },
+  subject5: {
+    type: String,
+    trim: true,
+  },
+  stdCount5: {
+    type: Number,
+    trim: true,
+    min: 0,
+    max: 5000,
+  },
+  duration5: {
+    type: Number,
+    trim: true,
+    min: 0,
+    max: 5,
+  },
   created: {
     type: Date,
     default: Date.now,
@@ -126,6 +190,6 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model(
-  "Consecutive Session",
-  ConsecutiveSessionSchema
+  "Not Overlapping Session",
+  NotOverlappingSessionSchema
 );

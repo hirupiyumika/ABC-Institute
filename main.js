@@ -23,6 +23,8 @@ const GroupNotAvailableTime = require("./models/GroupNotAvailableTime");
 const SubGroupNotAvailableTime = require("./models/SubGroupNotAvailableTime");
 const SessionNotAvailableTime = require("./models/SessionNotAvailableTime");
 const ConsecutiveSession = require("./models/ConsecutiveSession");
+const NotOverlappingSession = require("./models/NotOverlappingSession");
+const ParallelSession = require("./models/ParallelSession");
 const connectDB = require("./config/db");
 const isOnline = require("is-online");
 const Alert = require("electron-alert");
@@ -537,6 +539,58 @@ async function sendConsecutiveSessions() {
     mainWindow.webContents.send(
       "consecutiveSession:get",
       JSON.stringify(consecutiveSessions)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create parallel session
+ipcMain.on("parallelSession:add", async (e, parallelSession) => {
+  try {
+    await ParallelSession.create(parallelSession);
+    sendParallelSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get parallel session
+ipcMain.on("parallelSession:load", sendParallelSessions);
+async function sendParallelSessions() {
+  try {
+    const parallelSessions = await ParallelSession.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "parallelSession:get",
+      JSON.stringify(parallelSessions)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create not overlapping session
+ipcMain.on("notOverlappingSession:add", async (e, notOverlappingSession) => {
+  try {
+    await NotOverlappingSession.create(notOverlappingSession);
+    sendNotOverlappingSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get parallel session
+ipcMain.on("notOverlappingSession:load", sendNotOverlappingSessions);
+async function sendNotOverlappingSessions() {
+  try {
+    const notOverlappingSessions = await NotOverlappingSession.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "notOverlappingSession:get",
+      JSON.stringify(notOverlappingSessions)
     );
   } catch (error) {
     console.log(error);

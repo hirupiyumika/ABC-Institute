@@ -7,8 +7,8 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { StudentContext } from "./../../context/StudentContext";
 
-const AddConsecutiveSessionForm = ({ primarySessions }) => {
-  const { addConsecutiveSession } = useContext(StudentContext);
+const AddNotOverlappingSessionForm = ({ primarySessions }) => {
+  const { addNotOverlappingSession } = useContext(StudentContext);
   const [sessions, setSessions] = useState([]);
   const [number, setNumber] = useState("");
   const [error, setError] = useState(false);
@@ -41,8 +41,22 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
     const mainGroup3 = sessions.length === 2 ? " " : sessions[2].mainGroup;
     const subGroup3 = sessions.length === 2 ? " " : sessions[2].subGroup;
     const subject3 = sessions.length === 2 ? " " : sessions[2].subject;
+    const tag4 = sessions.length === 2 ? " " : sessions[3].tag;
+    const lecturers4 = sessions.length === 2 ? " " : sessions[3].lecturers;
+    const duration4 = sessions.length === 2 ? " " : sessions[3].duration;
+    const stdCount4 = sessions.length === 2 ? " " : sessions[3].stdCount;
+    const mainGroup4 = sessions.length === 2 ? " " : sessions[3].mainGroup;
+    const subGroup4 = sessions.length === 2 ? " " : sessions[3].subGroup;
+    const subject4 = sessions.length === 2 ? " " : sessions[3].subject;
+    const tag5 = sessions.length === 2 ? " " : sessions[4].tag;
+    const lecturers5 = sessions.length === 2 ? " " : sessions[4].lecturers;
+    const duration5 = sessions.length === 2 ? " " : sessions[4].duration;
+    const stdCount5 = sessions.length === 2 ? " " : sessions[4].stdCount;
+    const mainGroup5 = sessions.length === 2 ? " " : sessions[4].mainGroup;
+    const subGroup5 = sessions.length === 2 ? " " : sessions[4].subGroup;
+    const subject5 = sessions.length === 2 ? " " : sessions[4].subject;
 
-    addConsecutiveSession({
+    addNotOverlappingSession({
       lecturers1,
       duration1,
       subject1,
@@ -64,6 +78,20 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
       subGroup3,
       stdCount3,
       tag3,
+      lecturers4,
+      duration4,
+      subject4,
+      mainGroup4,
+      subGroup4,
+      stdCount4,
+      tag4,
+      lecturers5,
+      duration5,
+      subject5,
+      mainGroup5,
+      subGroup5,
+      stdCount5,
+      tag5,
     });
   };
 
@@ -94,7 +122,7 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
                 <Form.Control
                   type="number"
                   min="0"
-                  max="3"
+                  max="5"
                   value={number}
                   placeholder="No of sessions"
                   onChange={(e) => setNumber(e.target.value)}
@@ -141,4 +169,4 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
     </React.Fragment>
   );
 };
-export default AddConsecutiveSessionForm;
+export default AddNotOverlappingSessionForm;

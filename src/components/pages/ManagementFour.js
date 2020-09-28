@@ -33,13 +33,13 @@ class ManagementFour extends Component {
             </Col>
             <Col className="mt-5">
               <Link
-                to="/addConsecutiveSession"
+                to="/addSessionNotAvailableTime"
                 style={{
                   textDecoration: "none",
                 }}
               >
                 <Button variant="secondary" block>
-                  Add Consecutive Session
+                  Add Session Not Available Time
                 </Button>
               </Link>
             </Col>
@@ -66,20 +66,6 @@ class ManagementFour extends Component {
               >
                 <Button variant="secondary" block>
                   Add Sub Group Not Available Time
-                </Button>
-              </Link>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="mt-5">
-              <Link
-                to="/addSessionNotAvailableTime"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <Button variant="secondary" block>
-                  Add Session Not Available Time
                 </Button>
               </Link>
             </Col>
