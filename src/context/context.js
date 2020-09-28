@@ -35,8 +35,6 @@ class LogProvider extends Component {
     notAvailableRooms: [],
     primarySessions: [],
     sortedPrimarySessions: [],
-    advanceSessions: [],
-    sortedAdvanceSessions: [],
     room: {},
     search: "",
     alert: {
@@ -360,7 +358,6 @@ class LogProvider extends Component {
     this.populateLecturerRooms();
     this.populateSubjectRooms();
     this.populateTagRooms();
-    this.populateAdvanceSession();
     this.populateNotAvailableRooms();
     ipcRenderer.on("lecturers:clear", () => {
       this.setState({ lecturers: [] });
@@ -1300,28 +1297,15 @@ class LogProvider extends Component {
     } catch (error) {}
   };
 
-  //create Advance Session
-  createAdvanceSession = (session) => {
-    // console.log("AdvanceSession1", session);
-    this.deletePrimarySession(session.id);
+  //Add Session Rooms
+  AddSessionRooms = (session) => {
+    console.log("AddSessionRooms", session);
+    // this.deletePrimarySession(session.id);
     if (session.room === "") this.showAlert("please select Room", "danger");
     else {
-      ipcRenderer.send("advance_Sessions:add", session);
-      this.showAlert("Advance Session Added");
+      ipcRenderer.send("primary_Sessions:update", session);
+      this.showAlert("Add Session-Room");
     }
-  };
-
-  // populate Advance Session
-  populateAdvanceSession = () => {
-    try {
-      ipcRenderer.send("advance_Sessions:load");
-      ipcRenderer.on("advance_Sessions:get", (e, advance_Sessions) => {
-        this.setState({
-          advanceSessions: JSON.parse(advance_Sessions),
-          sortedAdvanceSessions: JSON.parse(advance_Sessions),
-        });
-      });
-    } catch (ex) {}
   };
 
   // Add Not Available Rooms
@@ -1381,12 +1365,6 @@ class LogProvider extends Component {
   };
 
   render() {
-    // console.log("notAvailableRooms", this.state.notAvailableRooms);
-    // console.log("lecturerRooms", this.state.lecturerRooms);
-    // console.log("groupRooms", this.state.groupRooms);
-    // console.log("tagRoomsState", this.state.tagRooms);
-    // console.log("primarySessions", this.state.primarySessions);
-    // console.log("advanceSessions", this.state.advanceSessions);
     return (
       <LogContext.Provider
         value={{
@@ -1451,7 +1429,7 @@ class LogProvider extends Component {
           createPrimarySession: this.createPrimarySession,
           deleteSession: this.deleteSession,
 
-          createAdvanceSession: this.createAdvanceSession,
+          AddSessionRooms: this.AddSessionRooms,
 
           handleLecturerChange: this.handleLecturerChange,
           handleSubjectChange: this.handleSubjectChange,

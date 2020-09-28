@@ -30,7 +30,6 @@ const GroupRooms = require("./models/groupRooms");
 const LecturerRooms = require("./models/lecturerRooms");
 const SubjectRooms = require("./models/subjectRooms");
 const TagRooms = require("./models/tagRooms");
-const AdvanceSession = require("./models/advanceSession");
 const NoRooms = require("./models/notAvailavleRooms");
 
 let alert = new Alert();
@@ -1306,6 +1305,27 @@ ipcMain.on("primary_Sessions:delete", async (e, id) => {
   }
 });
 
+//update primary_Session
+ipcMain.on("primary_Sessions:update", async (e, session) => {
+  // console.log("AddSessionRooms", session);
+
+  try {
+    await PrimarySessions.findByIdAndUpdate(session.id, {
+      lecturers: session.lecturers,
+      tag: session.tag,
+      group: session.group,
+      subject: session.subject,
+      code: session.code,
+      stdCount: session.stdCount,
+      duration: session.duration,
+      room: session.room,
+    });
+    sendPrimarySessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // get Lecturer_Rooms data from database
 ipcMain.on("lecturer_Rooms:load", sendLecturerRooms);
 async function sendLecturerRooms() {
@@ -1315,7 +1335,7 @@ async function sendLecturerRooms() {
       "lecturer_Rooms:get",
       JSON.stringify(lecturer_Rooms)
     );
-    console.log("lecturer_Rooms", lecturer_Rooms);
+    // console.log("lecturer_Rooms", lecturer_Rooms);
   } catch (error) {
     console.log(error);
   }
@@ -1448,40 +1468,13 @@ ipcMain.on("tag_Rooms:delete", async (e, id) => {
   }
 });
 
-// get advance_Sessions data from database
-ipcMain.on("advance_Sessions:load", sendAdvanceSessions);
-async function sendAdvanceSessions() {
-  try {
-    const advance_Sessions = await AdvanceSession.find().sort({ created: 1 });
-    mainWindow.webContents.send(
-      "advance_Sessions:get",
-      JSON.stringify(advance_Sessions)
-    );
-    console.log("advance_Sessions", advance_Sessions);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-// create advance_Sessions
-ipcMain.on("advance_Sessions:add", async (e, advance_Sessions) => {
-  console.log("advance_Sessions", advance_Sessions);
-
-  try {
-    await AdvanceSession.create(advance_Sessions);
-    sendAdvanceSessions();
-  } catch (error) {
-    console.log("err", error);
-  }
-});
-
 // get Not Available_Rooms data from database
 ipcMain.on("no_Rooms:load", sendNoRooms);
 async function sendNoRooms() {
   try {
     const no_Rooms = await NoRooms.find().sort({ created: 1 });
     mainWindow.webContents.send("no_Rooms:get", JSON.stringify(no_Rooms));
-    console.log("no_Rooms", no_Rooms);
+    // console.log("no_Rooms", no_Rooms);
   } catch (error) {
     console.log(error);
   }
@@ -1489,7 +1482,7 @@ async function sendNoRooms() {
 
 // create  Not Available_Rooms
 ipcMain.on("no_Rooms:add", async (e, room) => {
-  console.log("no_Rooms", room);
+  // console.log("no_Rooms", room);
 
   try {
     await NoRooms.create(room);

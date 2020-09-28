@@ -10,17 +10,20 @@ const AddRoom = () => {
   const { addRoom, buildings } = useContext(LogContext);
   const [roomName, setRoomName] = useState("");
   const [roomType, setRoomType] = useState("");
+  const [buildingId, setBuildingId] = useState("");
   const [building, setBuilding] = useState("");
   const [capacity, setCapacity] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
     addRoom({
       roomName,
+      buildingId,
       building,
       capacity,
       roomType,
     });
     setRoomName("");
+    setBuildingId("");
     setBuilding("");
     setCapacity("");
     setRoomType("");

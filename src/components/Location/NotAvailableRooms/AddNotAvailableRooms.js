@@ -46,7 +46,7 @@ const AddNotAvailableRooms = () => {
     <>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Add Not Available-Rooms</Breadcrumb.Item>
+        <Breadcrumb.Item active>Add Not-Rooms</Breadcrumb.Item>
       </Breadcrumb>
       <Container>
         <Card className="mt-5 mb-3">

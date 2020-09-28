@@ -11,13 +11,13 @@ import {
 } from "react-bootstrap";
 import { LogContext } from "../../../context/context";
 
-const CreateAdvanceSession = ({}) => {
+const AddSessionRooms = ({}) => {
   const {
     alert,
     primarySessions,
     sortedRooms,
-    createAdvanceSession,
-    sortedAdvanceSessions,
+    AddSessionRooms,
+    sortedPrimarySessions,
     groupRooms,
     lecturerRooms,
     subjectRooms,
@@ -42,7 +42,7 @@ const CreateAdvanceSession = ({}) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createAdvanceSession({
+    AddSessionRooms({
       lecturers,
       id,
       tag,
@@ -103,7 +103,7 @@ const CreateAdvanceSession = ({}) => {
     <>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Create Advance Sessions</Breadcrumb.Item>
+        <Breadcrumb.Item active>Add Session Rooms</Breadcrumb.Item>
       </Breadcrumb>
       <Container>
         <Form onSubmit={onSubmit}>
@@ -113,50 +113,52 @@ const CreateAdvanceSession = ({}) => {
               <Row className="my-3 px-4">
                 {primarySessions.map((session, index) => (
                   <>
-                    <Col column sm="4" key={index}>
-                      <Card
-                        style={{ background: "green" }}
-                        className="mt-5 mb-3 "
-                        style={{ border: "solid black" }}
-                      >
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions1"
-                          value={session.tag}
-                          //   onChange={(e) => setLecturer(e.target.value)}
-                          onChange={(e) => handleSession(e, session)}
-                        />
-                        <Card.Body>
-                          <h5>Primary Session {index + 1} </h5>
-                          <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.lecturers + ""}
-                            </label>
-                          </Col>
-                          <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.tag}
-                            </label>
-                          </Col>
-                          <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.group}
-                            </label>
-                          </Col>
-                          <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.subject}({session.code})
-                            </label>
-                          </Col>
-                          <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.stdCount} ({session.duration})
-                            </label>
-                          </Col>
-                        </Card.Body>
-                      </Card>
-                    </Col>
+                    {session.room == "" && (
+                      <Col column sm="4" key={index}>
+                        <Card
+                          style={{ background: "green" }}
+                          className="mt-5 mb-3 "
+                          style={{ border: "solid black" }}
+                        >
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions1"
+                            value={session.tag}
+                            //   onChange={(e) => setLecturer(e.target.value)}
+                            onChange={(e) => handleSession(e, session)}
+                          />
+                          <Card.Body>
+                            <h5>Primary Session {index + 1} </h5>
+                            <Col column sm="12">
+                              <label className="form-check-label">
+                                {session.lecturers + ""}
+                              </label>
+                            </Col>
+                            <Col column sm="12">
+                              <label className="form-check-label">
+                                {session.tag}
+                              </label>
+                            </Col>
+                            <Col column sm="12">
+                              <label className="form-check-label">
+                                {session.group}
+                              </label>
+                            </Col>
+                            <Col column sm="12">
+                              <label className="form-check-label">
+                                {session.subject}({session.code})
+                              </label>
+                            </Col>
+                            <Col column sm="12">
+                              <label className="form-check-label">
+                                {session.stdCount} ({session.duration})
+                              </label>
+                            </Col>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    )}
                   </>
                 ))}
               </Row>
@@ -411,49 +413,59 @@ const CreateAdvanceSession = ({}) => {
           <Row className="my-3">
             <Col>
               <Button type="submit" variant="secondary" block>
-                Create Advance Session
+                Add Session Rooms
               </Button>
             </Col>
           </Row>
         </Form>
         {alert.show && <Alert variant={alert.variant}>{alert.message}</Alert>}
         <Row className="my-3 px-4">
-          {sortedAdvanceSessions.map((session, index) => (
-            <Col column sm="4 p-2">
-              <Card
-                className="mt-5 mb-3"
-                key={index}
-                style={{ border: "solid black" }}
-              >
-                <Card.Body>
-                  <h5>Advance Session {index + 1} </h5>
-                  <Col column sm="12">
-                    <label className="form-check-label">
-                      {session.lecturers + ""}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label">{session.tag}</label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label">{session.group}</label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label">
-                      {session.subject}({session.code})
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label">
-                      {session.stdCount} ({session.duration})
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label">{session.room}</label>
-                  </Col>
-                </Card.Body>
-              </Card>
-            </Col>
+          {sortedPrimarySessions.map((session, index) => (
+            <>
+              {session.room !== "" && (
+                <Col column sm="4 p-2">
+                  <Card
+                    className="mt-5 mb-3"
+                    key={index}
+                    style={{ border: "solid black" }}
+                  >
+                    <Card.Body>
+                      <h5> Session {index + 1} </h5>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.lecturers + ""}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.tag}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.group}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.subject}({session.code})
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.stdCount} ({session.duration})
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.room}
+                        </label>
+                      </Col>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              )}
+            </>
           ))}
         </Row>
       </Container>
@@ -461,4 +473,4 @@ const CreateAdvanceSession = ({}) => {
   );
 };
 
-export default CreateAdvanceSession;
+export default AddSessionRooms;

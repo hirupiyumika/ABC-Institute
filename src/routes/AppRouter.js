@@ -71,7 +71,6 @@ import AddLecturerRooms from "../components/Location/LecturerRooms/AddLecturerRo
 import AddGroupsRooms from "../components/Location/GroupsRooms/AddGroupsRooms";
 import AddTagRooms from "../components/Location/TagRooms/AddTagRooms";
 import AddSubjectRooms from "../components/Location/SubjectRooms/AddSubjectRooms";
-import CreateAdvanceSession from "../components/Location/AdvanceSession/CreateAdvanceSession";
 import AddNotAvailableRooms from "../components/Location/NotAvailableRooms/AddNotAvailableRooms";
 
 import ViewLecturerRooms from "../components/Location/LecturerRooms/ViewLecturerRooms";
@@ -79,7 +78,8 @@ import ViewGroupsRooms from "../components/Location/GroupsRooms/ViewGroupRooms";
 import ViewNotAvailableRooms from "../components/Location/NotAvailableRooms/ViewNotAvailableRooms";
 import ViewSubjectRooms from "../components/Location/SubjectRooms/ViewSubjectRooms";
 import ViewTagRooms from "../components/Location/TagRooms/ViewTagRooms";
-import ViewAdvanceSession from "../components/Location/AdvanceSession/ViewAdvanceSession";
+import AddSessionRooms from "../components/Location/SessionRooms/AddSessionRooms";
+import ViewSessionRooms from "../components/Location/SessionRooms/ViewSessionRooms";
 
 class AppRouter extends Component {
   render() {
@@ -177,8 +177,8 @@ class AppRouter extends Component {
           <Route path="/viewTagsRooms" component={ViewTagRooms} />
           <Route path="/addSubjectRooms" component={AddSubjectRooms} />
           <Route path="/viewSubjectRooms" component={ViewSubjectRooms} />
-          <Route path="/session2" component={CreateAdvanceSession} />
-          <Route path="/viewSession2" component={ViewAdvanceSession} />
+          <Route path="/addSessionRooms" component={AddSessionRooms} />
+          <Route path="/viewSessionRooms" component={ViewSessionRooms} />
           <Route path="/notAvailableRooms" component={AddNotAvailableRooms} />
           <Route
             path="/viewNotAvailableRooms"

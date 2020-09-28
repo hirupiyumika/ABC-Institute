@@ -27,6 +27,7 @@ const CreatePrimarySession = ({}) => {
   const [code, setCode] = useState("");
   const [stdCount, setStdCount] = useState("");
   const [duration, setDuration] = useState("");
+  const [room, setRoom] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +39,7 @@ const CreatePrimarySession = ({}) => {
       code,
       stdCount,
       duration,
+      room,
     });
     setLecturers("");
     setTag("");
@@ -46,6 +48,7 @@ const CreatePrimarySession = ({}) => {
     setCode("");
     setStdCount("");
     setDuration("");
+    setRoom("");
   };
 
   const handleLecturers = (e) => {
@@ -232,82 +235,86 @@ const CreatePrimarySession = ({}) => {
                   )}
                   <Row className="my-3 px-4">
                     {primarySessions.map((session, index) => (
-                      <Col column sm="4 p-2">
-                        <Card
-                          className="mt-5 mb-3"
-                          style={{ border: "solid black" }}
-                        >
-                          <div>
-                            <Button
-                              variant="btn btn-outline-danger"
-                              size="sm"
-                              style={{
-                                float: "right",
-                                border: "none",
-                                color: "black",
-                              }}
-                              onClick={() => deleteSession(session._id)}
+                      <>
+                        {session.room == "" && (
+                          <Col column sm="4 p-2">
+                            <Card
+                              className="mt-5 mb-3"
+                              style={{ border: "solid black" }}
                             >
-                              <svg
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 16 16"
-                                class="bi bi-x"
-                                fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  fill-rule="evenodd"
-                                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                                />
-                              </svg>
-                            </Button>
-                          </div>
-                          <Card.Body>
-                            <h5>Primary Session {index + 1} </h5>
-                            <Col column sm="12">
-                              <label
-                                className="form-check-label"
-                                for="gridCheck1"
-                              >
-                                {session.lecturers + ""}
-                              </label>
-                            </Col>
-                            <Col column sm="12">
-                              <label
-                                className="form-check-label"
-                                for="gridCheck1"
-                              >
-                                {session.tag}
-                              </label>
-                            </Col>
-                            <Col column sm="12">
-                              <label
-                                className="form-check-label"
-                                for="gridCheck1"
-                              >
-                                {session.group}
-                              </label>
-                            </Col>
-                            <Col column sm="12">
-                              <label
-                                className="form-check-label"
-                                for="gridCheck1"
-                              >
-                                {session.subject}( {session.code})
-                              </label>
-                            </Col>
-                            <Col column sm="12">
-                              <label
-                                className="form-check-label"
-                                for="gridCheck1"
-                              >
-                                {session.stdCount} ({session.duration})
-                              </label>
-                            </Col>
-                          </Card.Body>
-                        </Card>
-                      </Col>
+                              <div>
+                                <Button
+                                  variant="btn btn-outline-danger"
+                                  size="sm"
+                                  style={{
+                                    float: "right",
+                                    border: "none",
+                                    color: "black",
+                                  }}
+                                  onClick={() => deleteSession(session._id)}
+                                >
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 16 16"
+                                    class="bi bi-x"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                    />
+                                  </svg>
+                                </Button>
+                              </div>
+                              <Card.Body>
+                                <h5>Primary Session {index + 1} </h5>
+                                <Col column sm="12">
+                                  <label
+                                    className="form-check-label"
+                                    for="gridCheck1"
+                                  >
+                                    {session.lecturers + ""}
+                                  </label>
+                                </Col>
+                                <Col column sm="12">
+                                  <label
+                                    className="form-check-label"
+                                    for="gridCheck1"
+                                  >
+                                    {session.tag}
+                                  </label>
+                                </Col>
+                                <Col column sm="12">
+                                  <label
+                                    className="form-check-label"
+                                    for="gridCheck1"
+                                  >
+                                    {session.group}
+                                  </label>
+                                </Col>
+                                <Col column sm="12">
+                                  <label
+                                    className="form-check-label"
+                                    for="gridCheck1"
+                                  >
+                                    {session.subject}( {session.code})
+                                  </label>
+                                </Col>
+                                <Col column sm="12">
+                                  <label
+                                    className="form-check-label"
+                                    for="gridCheck1"
+                                  >
+                                    {session.stdCount} ({session.duration})
+                                  </label>
+                                </Col>
+                              </Card.Body>
+                            </Card>
+                          </Col>
+                        )}
+                      </>
                     ))}
                   </Row>
                 </Container>

@@ -217,6 +217,32 @@ class ManagementThree extends Component {
           <Row>
             <Col className="mt-5">
               <Link
+                to="/addSessionRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Add Session's Rooms
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewSessionRooms"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Session's Rooms
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
                 to="/notAvailableRooms"
                 style={{
                   textDecoration: "none",
