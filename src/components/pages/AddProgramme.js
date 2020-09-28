@@ -4,8 +4,8 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { StudentContext } from "./../../context/StudentContext";
-import AddProgrammeForm from "./../forms/AddProgrammeForm";
-import ProgrammeTable from "./../tables/ProgrammeTable";
+import AddProgrammeForm from "./../programme/AddProgrammeForm";
+import ProgrammeTable from "./../programme/ProgrammeTable";
 
 class AddProgramme extends Component {
   static contextType = StudentContext;

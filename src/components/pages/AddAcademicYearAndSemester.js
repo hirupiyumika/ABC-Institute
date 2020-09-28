@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Alert from "react-bootstrap/Alert";
-import AcademicYearAndSemesterTable from "./../tables/AcademicYearAndSemesterTable";
-import AddAcademicYearAndSemesterForm from "./../forms/AddAcademicYearAndSemesterForm";
+import AcademicYearAndSemesterTable from "./../academicYearAndSemester/AcademicYearAndSemesterTable";
+import AddAcademicYearAndSemesterForm from "./../academicYearAndSemester/AddAcademicYearAndSemesterForm";
 import { StudentContext } from "./../../context/StudentContext";
 
 class AddAcademicYearAndSemester extends Component {

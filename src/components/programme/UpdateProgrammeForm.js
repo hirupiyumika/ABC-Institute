@@ -5,19 +5,19 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { StudentConsumer } from "./../../context/StudentContext";
+import { StudentConsumer } from "../../context/StudentContext";
 
-const UpdateSubGroupForm = ({ updateSubGroup, filteredSubGroup }) => {
-  const [subGroup, setSubGroup] = useState(filteredSubGroup[0].subGroup);
-  const [_id, set_id] = useState(filteredSubGroup[0]._id);
+const UpdateProgrammeForm = ({ updateProgramme, filteredProgramme }) => {
+  const [programme, setProgramme] = useState(filteredProgramme[0].programme);
+  const [_id, set_id] = useState(filteredProgramme[0]._id);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateSubGroup({
+    updateProgramme({
       _id,
-      subGroup,
+      programme,
     });
-    setSubGroup("");
+    setProgramme("");
   };
   return (
     <StudentConsumer>
@@ -31,9 +31,9 @@ const UpdateSubGroupForm = ({ updateSubGroup, filteredSubGroup }) => {
                 <Row className="my-3">
                   <Col>
                     <Form.Control
-                      placeholder="Sub Group"
-                      value={subGroup}
-                      onChange={(e) => setSubGroup(e.target.value)}
+                      placeholder="Programme"
+                      value={programme}
+                      onChange={(e) => setProgramme(e.target.value)}
                     />
                   </Col>
                 </Row>
@@ -41,7 +41,7 @@ const UpdateSubGroupForm = ({ updateSubGroup, filteredSubGroup }) => {
                   <Col>
                     <Form.Control
                       hidden
-                      value={filteredSubGroup[0]._id}
+                      value={filteredProgramme[0]._id}
                       onChange={(e) => set_id(e.target.value)}
                     />
                   </Col>
@@ -49,7 +49,7 @@ const UpdateSubGroupForm = ({ updateSubGroup, filteredSubGroup }) => {
                 <Row className="my-3">
                   <Col>
                     <Button type="submit" variant="secondary" block>
-                      Update Sub Group
+                      Update Programme
                     </Button>
                   </Col>
                 </Row>
@@ -62,4 +62,4 @@ const UpdateSubGroupForm = ({ updateSubGroup, filteredSubGroup }) => {
   );
 };
 
-export default UpdateSubGroupForm;
+export default UpdateProgrammeForm;

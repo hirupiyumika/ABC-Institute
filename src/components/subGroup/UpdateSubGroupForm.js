@@ -5,19 +5,19 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { StudentConsumer } from "./../../context/StudentContext";
+import { StudentConsumer } from "../../context/StudentContext";
 
-const UpdateTagForm = ({ updateTag, filteredTag }) => {
-  const [tag, setTag] = useState(filteredTag[0].tag);
-  const [_id, set_id] = useState(filteredTag[0]._id);
+const UpdateSubGroupForm = ({ updateSubGroup, filteredSubGroup }) => {
+  const [subGroup, setSubGroup] = useState(filteredSubGroup[0].subGroup);
+  const [_id, set_id] = useState(filteredSubGroup[0]._id);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateTag({
+    updateSubGroup({
       _id,
-      tag,
+      subGroup,
     });
-    setTag("");
+    setSubGroup("");
   };
   return (
     <StudentConsumer>
@@ -31,9 +31,9 @@ const UpdateTagForm = ({ updateTag, filteredTag }) => {
                 <Row className="my-3">
                   <Col>
                     <Form.Control
-                      placeholder="Tag"
-                      value={tag}
-                      onChange={(e) => setTag(e.target.value)}
+                      placeholder="Sub Group"
+                      value={subGroup}
+                      onChange={(e) => setSubGroup(e.target.value)}
                     />
                   </Col>
                 </Row>
@@ -41,7 +41,7 @@ const UpdateTagForm = ({ updateTag, filteredTag }) => {
                   <Col>
                     <Form.Control
                       hidden
-                      value={filteredTag[0]._id}
+                      value={filteredSubGroup[0]._id}
                       onChange={(e) => set_id(e.target.value)}
                     />
                   </Col>
@@ -49,7 +49,7 @@ const UpdateTagForm = ({ updateTag, filteredTag }) => {
                 <Row className="my-3">
                   <Col>
                     <Button type="submit" variant="secondary" block>
-                      Update Tag
+                      Update Sub Group
                     </Button>
                   </Col>
                 </Row>
@@ -62,4 +62,4 @@ const UpdateTagForm = ({ updateTag, filteredTag }) => {
   );
 };
 
-export default UpdateTagForm;
+export default UpdateSubGroupForm;

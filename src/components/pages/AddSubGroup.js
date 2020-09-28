@@ -4,8 +4,8 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { StudentContext } from "./../../context/StudentContext";
-import AddSubGroupForm from "./../forms/AddSubGroupForm";
-import SubGroupTable from "./../tables/SubGroupTable";
+import AddSubGroupForm from "./../subGroup/AddSubGroupForm";
+import SubGroupTable from "./../subGroup/SubGroupTable";
 
 class AddSubGroup extends Component {
   static contextType = StudentContext;

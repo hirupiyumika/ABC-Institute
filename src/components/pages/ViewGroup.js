@@ -1,7 +1,7 @@
 // IT18233704 -  N.R Yamasinghe
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import GroupTable from "./../tables/GroupTable";
+import GroupTable from "./../mainGroup/GroupTable";
 
 class ViewGroup extends Component {
   render() {

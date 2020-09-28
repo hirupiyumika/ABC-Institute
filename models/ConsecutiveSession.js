@@ -13,11 +13,8 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup1: {
-    type: String,
-    trim: true,
-  },
-  subGroup1: {
+
+  group1: {
     type: String,
     trim: true,
   },
@@ -54,11 +51,8 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup2: {
-    type: String,
-    trim: true,
-  },
-  subGroup2: {
+
+  group2: {
     type: String,
     trim: true,
   },
@@ -95,11 +89,8 @@ const ConsecutiveSessionSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  mainGroup3: {
-    type: String,
-    trim: true,
-  },
-  subGroup3: {
+
+  group3: {
     type: String,
     trim: true,
   },
