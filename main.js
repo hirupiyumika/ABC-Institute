@@ -900,6 +900,7 @@ async function sendNotOverlappingSessions() {
     const notOverlappingSessions = await NotOverlappingSession.find().sort({
       createdDate: 1,
     });
+
     mainWindow.webContents.send(
       "notOverlappingSession:get",
       JSON.stringify(notOverlappingSessions)

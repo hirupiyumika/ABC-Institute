@@ -33,7 +33,9 @@ import UpdateSubGroupNotAvailableTime from "./../components/pages/UpdateSubGroup
 import ViewConsecutiveSession from "./../components/pages/ViewConsecutiveSession";
 import AddConsecutiveSession from "./../components/pages/AddConsecutiveSession";
 import AddParallelSession from "./../components/pages/AddParallelSession";
+import ViewParallelSession from "./../components/pages/ViewParallelSession";
 import AddNotOverlappingSession from "./../components/pages/AddNotOverlappingSession";
+import ViewNotOverlappingSession from "./../components/pages/ViewNotOverlappingSession";
 import ManagementOne from "./../components/pages/ManagementOne";
 import ManagementTwo from "./../components/pages/ManagementTwo";
 import ManagementThree from "./../components/pages/ManagementThree";
@@ -191,9 +193,14 @@ class AppRouter extends Component {
             component={ViewConsecutiveSession}
           />
           <Route path="/addParallelSession" component={AddParallelSession} />
+          <Route path="/viewParallelSession" component={ViewParallelSession} />
           <Route
             path="/addNotOverlappingSession"
             component={AddNotOverlappingSession}
+          />
+          <Route
+            path="/viewNotOverlappingSession"
+            component={ViewNotOverlappingSession}
           />
           <Route path="/lecturer" component={LecturerTable} />
           <Route path="/editLecturer" component={EditLecturer} />
