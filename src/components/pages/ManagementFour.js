@@ -33,6 +33,20 @@ class ManagementFour extends Component {
             </Col>
             <Col className="mt-5">
               <Link
+                to="/ViewLecturerNotAvailableTime"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Lecturer Not Available Time
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
                 to="/addSessionNotAvailableTime"
                 style={{
                   textDecoration: "none",
@@ -43,7 +57,20 @@ class ManagementFour extends Component {
                 </Button>
               </Link>
             </Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewSessionNotAvailableTime"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Session Not Available Time
+                </Button>
+              </Link>
+            </Col>
           </Row>
+
           <Row>
             <Col className="mt-5">
               <Link
@@ -59,6 +86,20 @@ class ManagementFour extends Component {
             </Col>
             <Col className="mt-5">
               <Link
+                to="/viewGroupNotAvailableTime"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Group Not Available Time
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
                 to="/addSubGroupNotAvailableTime"
                 style={{
                   textDecoration: "none",
@@ -66,6 +107,18 @@ class ManagementFour extends Component {
               >
                 <Button variant="secondary" block>
                   Add Sub Group Not Available Time
+                </Button>
+              </Link>
+            </Col>
+            <Col className="mt-5">
+              <Link
+                to="/viewSubGroupNotAvailableTime"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  View Sub Group Not Available Time
                 </Button>
               </Link>
             </Col>

@@ -24,6 +24,10 @@ const LecturerNotAvailableTimeSchema = new mongoose.Schema({
     trim: true,
     required: [true, "to text is required"],
   },
+  createdDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model(

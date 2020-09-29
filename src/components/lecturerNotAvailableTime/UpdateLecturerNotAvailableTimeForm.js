@@ -13,26 +13,33 @@ import {
   DaysAndHoursContext,
 } from "./../../context/DaysAndHoursProvider";
 
-const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
+const UpdateLecturerNotAvailableTimeForm = ({
+  updateLecturerNotAvailableTime,
+  filteredLecturersNotAvailableTime,
+}) => {
   const { workingDays } = useContext(DaysAndHoursContext);
-  const [primarySession, setPrimarySession] = useState("");
-  const [day, setDay] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  const [lecturer, setLecturer] = useState(
+    filteredLecturersNotAvailableTime[0].lecturer
+  );
+  const [day, setDay] = useState(filteredLecturersNotAvailableTime[0].day);
+  const [from, setFrom] = useState(filteredLecturersNotAvailableTime[0].from);
+  const [to, setTo] = useState(filteredLecturersNotAvailableTime[0].to);
+  const [_id, set_id] = useState(filteredLecturersNotAvailableTime[0]._id);
   const [selectedDay, setSelectedDay] = useState([]);
   const [sError, setSError] = useState(false);
   const [eError, setEError] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addSessionNotAvailableTime({
-      primarySession,
+    updateLecturerNotAvailableTime({
+      _id,
+      lecturer,
       day,
       from,
       to,
     });
 
-    setPrimarySession("");
+    setLecturer("");
     setDay("");
     setFrom("");
     setTo("");
@@ -79,7 +86,7 @@ const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
       {(value1) => (
         <DaysAndHoursConsumer>
           {(value2) => {
-            value1.primarySessions, value2.workingDays;
+            value1.lecturers, value2.workingDays;
             return (
               <React.Fragment>
                 <Card className="mt-5 mb-3">
@@ -89,18 +96,13 @@ const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
                         <Col>
                           <Form.Control
                             as="select"
-                            value={primarySession}
-                            onChange={(e) => setPrimarySession(e.target.value)}
+                            value={lecturer}
+                            onChange={(e) => setLecturer(e.target.value)}
                           >
-                            <option value="0">Select Session</option>
-                            {value1.primarySessions.map((session) => (
-                              <option key={session._id} value={session._id}>
-                                {`${session.lecturers} ${session.tag}
-                     
-                      ${session.group}
-                      ${session.subject}
-                      ${session.stdCount}
-                      ${session.duration}`}
+                            <option value="0">Select Lecturer</option>
+                            {value1.lecturers.map((lecturer) => (
+                              <option key={lecturer._id} value={lecturer.name}>
+                                {lecturer.name}
                               </option>
                             ))}
                           </Form.Control>
@@ -196,4 +198,4 @@ const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
   );
 };
 
-export default AddSessionNotAvailableTimeForm;
+export default UpdateLecturerNotAvailableTimeForm;

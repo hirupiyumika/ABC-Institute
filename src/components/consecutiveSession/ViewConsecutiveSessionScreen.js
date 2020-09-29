@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Container, Breadcrumb, Card, Row, Col } from "react-bootstrap";
+import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
 import { StudentContext } from "../../context/StudentContext";
 
 const ViewConsecutiveSessionScreen = ({}) => {
@@ -15,6 +15,32 @@ const ViewConsecutiveSessionScreen = ({}) => {
           {consecutiveSessions.map((session, index) => (
             <Col column sm="4 p-2">
               <Card className="mt-5 mb-3" style={{ border: "solid black" }}>
+                <div>
+                  <Button
+                    variant="btn btn-outline-danger"
+                    size="sm"
+                    style={{
+                      float: "right",
+                      border: "none",
+                      color: "black",
+                    }}
+                    // onClick={() => deleteSession(session._id)}
+                  >
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-x"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                      />
+                    </svg>
+                  </Button>
+                </div>
                 <Card.Body>
                   <h5>Consecutive Session {index + 1} </h5>
                   <Col column sm="12">
@@ -29,9 +55,7 @@ const ViewConsecutiveSessionScreen = ({}) => {
                   </Col>
                   <Col column sm="12">
                     <label className="form-check-label" for="gridCheck1">
-                      {session.mainGroup1
-                        ? session.mainGroup1
-                        : session.subGroup1}
+                      {session.group1}
                     </label>
                   </Col>
                   <Col column sm="12">
@@ -56,9 +80,7 @@ const ViewConsecutiveSessionScreen = ({}) => {
                   </Col>
                   <Col column sm="12">
                     <label className="form-check-label" for="gridCheck1">
-                      {session.mainGroup2
-                        ? session.mainGroup2
-                        : session.subGroup2}
+                      {session.group2}
                     </label>
                   </Col>
                   <Col column sm="12">
@@ -83,9 +105,7 @@ const ViewConsecutiveSessionScreen = ({}) => {
                   </Col>
                   <Col column sm="12">
                     <label className="form-check-label" for="gridCheck1">
-                      {session.mainGroup3
-                        ? session.mainGroup3
-                        : session.subGroup3}
+                      {session.group3}
                     </label>
                   </Col>
                   <Col column sm="12">
@@ -95,7 +115,8 @@ const ViewConsecutiveSessionScreen = ({}) => {
                   </Col>
                   <Col column sm="12">
                     <label className="form-check-label" for="gridCheck1">
-                      {session.stdCount3} ({session.duration3})
+                      {session.stdCount3 === 0 ? " " : session.stdCount3}
+                      {session.duration3 === 0 ? "" : `(${session.duration3})`}
                     </label>
                   </Col>
                 </Card.Body>

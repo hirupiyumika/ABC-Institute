@@ -103,7 +103,7 @@ class Home extends Component {
             </Col>
             <Col className="mt-5">
               <Link
-                to="/addConsecutiveSession"
+                to="/managementFive"
                 style={{
                   textDecoration: "none",
                 }}
@@ -117,7 +117,7 @@ class Home extends Component {
           <Row>
             <Col className="mt-5">
               <Link
-                to="/addParallelSession"
+                to="/managementSix"
                 style={{
                   textDecoration: "none",
                 }}
@@ -129,7 +129,7 @@ class Home extends Component {
             </Col>
             <Col className="mt-5">
               <Link
-                to="/addNotOverlappingSession"
+                to="/managementSeven"
                 style={{
                   textDecoration: "none",
                 }}
