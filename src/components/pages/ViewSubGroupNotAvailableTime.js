@@ -1,22 +1,22 @@
 // IT18233704 -  N.R Yamasinghe
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import LecturerNotAvailableTimeTable from "./../lecturerNotAvailableTime/LecturerNotAvailableTimeTable";
+import SubGroupNotAvailableTimeTable from "./../subGroupNotAvailableTime/SubGroupNotAvailableTimeTable";
 
-class ViewLecturerNotAvailableTime extends Component {
+class ViewSubGroupNotAvailableTime extends Component {
   render() {
     return (
       <React.Fragment>
         <Breadcrumb>
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item active>
-            View Lecturer Not Available Time
+            View Sub Group Not Available Time
           </Breadcrumb.Item>
         </Breadcrumb>
-        <LecturerNotAvailableTimeTable />
+        <SubGroupNotAvailableTimeTable />
       </React.Fragment>
     );
   }
 }
 
-export default ViewLecturerNotAvailableTime;
+export default ViewSubGroupNotAvailableTime;

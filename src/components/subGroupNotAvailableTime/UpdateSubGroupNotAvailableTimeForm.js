@@ -7,32 +7,39 @@ import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import moment from "moment";
-import { LogConsumer } from "./../../context/context";
+import { StudentConsumer } from "./../../context/StudentContext";
 import {
   DaysAndHoursConsumer,
   DaysAndHoursContext,
 } from "./../../context/DaysAndHoursProvider";
 
-const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
+const UpdateSubGroupNotAvailableTimeForm = ({
+  updateSubGroupNotAvailableTime,
+  filteredSubGroupsNotAvailableTime,
+}) => {
   const { workingDays } = useContext(DaysAndHoursContext);
-  const [primarySession, setPrimarySession] = useState("");
-  const [day, setDay] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  const [subGroup, setSubGroup] = useState(
+    filteredSubGroupsNotAvailableTime[0].subGroup
+  );
+  const [day, setDay] = useState(filteredSubGroupsNotAvailableTime[0].day);
+  const [from, setFrom] = useState(filteredSubGroupsNotAvailableTime[0].from);
+  const [to, setTo] = useState(filteredSubGroupsNotAvailableTime[0].to);
+  const [_id, set_id] = useState(filteredSubGroupsNotAvailableTime[0]._id);
   const [selectedDay, setSelectedDay] = useState([]);
   const [sError, setSError] = useState(false);
   const [eError, setEError] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addSessionNotAvailableTime({
-      primarySession,
+    updateSubGroupNotAvailableTime({
+      _id,
+      subGroup,
       day,
       from,
       to,
     });
 
-    setPrimarySession("");
+    setSubGroup("");
     setDay("");
     setFrom("");
     setTo("");
@@ -75,11 +82,11 @@ const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
   };
 
   return (
-    <LogConsumer>
+    <StudentConsumer>
       {(value1) => (
         <DaysAndHoursConsumer>
           {(value2) => {
-            value1.primarySessions, value2.workingDays;
+            value1.subGroups, value2.workingDays;
             return (
               <React.Fragment>
                 <Card className="mt-5 mb-3">
@@ -89,18 +96,13 @@ const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
                         <Col>
                           <Form.Control
                             as="select"
-                            value={primarySession}
-                            onChange={(e) => setPrimarySession(e.target.value)}
+                            value={subGroup}
+                            onChange={(e) => setSubGroup(e.target.value)}
                           >
-                            <option value="0">Select Session</option>
-                            {value1.primarySessions.map((session) => (
-                              <option key={session._id} value={session._id}>
-                                {`${session.lecturers} ${session.tag}
-                     
-                      ${session.group}
-                      ${session.subject}
-                      ${session.stdCount}
-                      ${session.duration}`}
+                            <option value="0">Select Group</option>
+                            {value1.subGroups.map((group) => (
+                              <option key={group._id} value={group.subGroup}>
+                                {group.subGroup}
                               </option>
                             ))}
                           </Form.Control>
@@ -192,8 +194,8 @@ const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
           }}
         </DaysAndHoursConsumer>
       )}
-    </LogConsumer>
+    </StudentConsumer>
   );
 };
 
-export default AddSessionNotAvailableTimeForm;
+export default UpdateSubGroupNotAvailableTimeForm;

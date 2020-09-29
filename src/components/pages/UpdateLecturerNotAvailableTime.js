@@ -5,14 +5,15 @@ import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { StudentContext } from "./../../context/StudentContext";
 import LecturerNotAvailableTimeTable from "./../lecturerNotAvailableTime/LecturerNotAvailableTimeTable";
-import AddLecturerNotAvailableTimeForm from "../lecturerNotAvailableTime/AddLecturerNotAvailableTimeForm";
+import UpdateLecturerNotAvailableTimeForm from "./../lecturerNotAvailableTime/UpdateLecturerNotAvailableTimeForm";
 
-class AddLecturerNotAvailableTime extends Component {
+class UpdateLecturerNotAvailableTime extends Component {
   static contextType = StudentContext;
 
   render() {
     const {
-      addLecturerNotAvailableTime,
+      updateLecturerNotAvailableTime,
+      filteredLecturersNotAvailableTime,
       show,
       variant,
       message,
@@ -23,12 +24,15 @@ class AddLecturerNotAvailableTime extends Component {
         <Breadcrumb>
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item active>
-            Add Lecturer Not Available Time
+            Update Lecturer Not Available Time
           </Breadcrumb.Item>
         </Breadcrumb>
         <Container>
-          <AddLecturerNotAvailableTimeForm
-            addLecturerNotAvailableTime={addLecturerNotAvailableTime}
+          <UpdateLecturerNotAvailableTimeForm
+            updateLecturerNotAvailableTime={updateLecturerNotAvailableTime}
+            filteredLecturersNotAvailableTime={
+              filteredLecturersNotAvailableTime
+            }
           />
           {show && <Alert variant={variant}>{message}</Alert>}
           <LecturerNotAvailableTimeTable />
@@ -38,4 +42,4 @@ class AddLecturerNotAvailableTime extends Component {
   }
 }
 
-export default AddLecturerNotAvailableTime;
+export default UpdateLecturerNotAvailableTime;

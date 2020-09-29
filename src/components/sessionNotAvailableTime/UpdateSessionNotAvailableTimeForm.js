@@ -13,19 +13,26 @@ import {
   DaysAndHoursContext,
 } from "./../../context/DaysAndHoursProvider";
 
-const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
+const UpdateSessionNotAvailableTimeForm = ({
+  updateSessionNotAvailableTime,
+  filteredSessionsNotAvailableTime,
+}) => {
   const { workingDays } = useContext(DaysAndHoursContext);
-  const [primarySession, setPrimarySession] = useState("");
-  const [day, setDay] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  const [primarySession, setPrimarySession] = useState(
+    filteredSessionsNotAvailableTime[0].primarySession
+  );
+  const [day, setDay] = useState(filteredSessionsNotAvailableTime[0].day);
+  const [from, setFrom] = useState(filteredSessionsNotAvailableTime[0].from);
+  const [to, setTo] = useState(filteredSessionsNotAvailableTime[0].to);
+  const [_id, set_id] = useState(filteredSessionsNotAvailableTime[0]._id);
   const [selectedDay, setSelectedDay] = useState([]);
   const [sError, setSError] = useState(false);
   const [eError, setEError] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addSessionNotAvailableTime({
+    updateSessionNotAvailableTime({
+      _id,
       primarySession,
       day,
       from,
@@ -196,4 +203,4 @@ const AddSessionNotAvailableTimeForm = ({ addSessionNotAvailableTime }) => {
   );
 };
 
-export default AddSessionNotAvailableTimeForm;
+export default UpdateSessionNotAvailableTimeForm;

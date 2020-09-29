@@ -242,6 +242,7 @@ const menu = [
     : []),
 ];
 
+/* sprint 01 */
 // clear all students
 async function clearStudents() {
   try {
@@ -251,6 +252,7 @@ async function clearStudents() {
     console.log(error);
   }
 }
+
 // clear all programmes
 async function clearProgrammes() {
   try {
@@ -468,134 +470,6 @@ ipcMain.on("students:update", async (e, studentItem) => {
   }
 });
 
-// create  lecturer not available time
-ipcMain.on(
-  "lecturerNotAvailableTime:add",
-  async (e, lecturerNotAvailableTime) => {
-    try {
-      await LecturerNotAvailableTime.create(lecturerNotAvailableTime);
-      // sendProgrammes();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-// create group not available time
-ipcMain.on("groupNotAvailableTime:add", async (e, groupNotAvailableTime) => {
-  console.log(groupNotAvailableTime);
-  try {
-    await GroupNotAvailableTime.create(groupNotAvailableTime);
-    // sendProgrammes();
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// create sub group not available time
-ipcMain.on(
-  "subGroupNotAvailableTime:add",
-  async (e, subGroupNotAvailableTime) => {
-    try {
-      await SubGroupNotAvailableTime.create(subGroupNotAvailableTime);
-      // sendProgrammes();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-// create session not available time
-ipcMain.on(
-  "sessionNotAvailableTime:add",
-  async (e, sessionNotAvailableTime) => {
-    try {
-      await SessionNotAvailableTime.create(sessionNotAvailableTime);
-      // sendProgrammes();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-// create consecutive session
-ipcMain.on("consecutiveSession:add", async (e, consecutiveSession) => {
-  try {
-    await ConsecutiveSession.create(consecutiveSession);
-    sendConsecutiveSessions();
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// get consecutive session
-ipcMain.on("consecutiveSession:load", sendConsecutiveSessions);
-async function sendConsecutiveSessions() {
-  try {
-    const consecutiveSessions = await ConsecutiveSession.find().sort({
-      createdDate: 1,
-    });
-    mainWindow.webContents.send(
-      "consecutiveSession:get",
-      JSON.stringify(consecutiveSessions)
-    );
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-// create parallel session
-ipcMain.on("parallelSession:add", async (e, parallelSession) => {
-  try {
-    await ParallelSession.create(parallelSession);
-    sendParallelSessions();
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// get parallel session
-ipcMain.on("parallelSession:load", sendParallelSessions);
-async function sendParallelSessions() {
-  try {
-    const parallelSessions = await ParallelSession.find().sort({
-      createdDate: 1,
-    });
-    mainWindow.webContents.send(
-      "parallelSession:get",
-      JSON.stringify(parallelSessions)
-    );
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-// create not overlapping session
-ipcMain.on("notOverlappingSession:add", async (e, notOverlappingSession) => {
-  try {
-    await NotOverlappingSession.create(notOverlappingSession);
-    sendNotOverlappingSessions();
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// get parallel session
-ipcMain.on("notOverlappingSession:load", sendNotOverlappingSessions);
-async function sendNotOverlappingSessions() {
-  try {
-    const notOverlappingSessions = await NotOverlappingSession.find().sort({
-      createdDate: 1,
-    });
-    mainWindow.webContents.send(
-      "notOverlappingSession:get",
-      JSON.stringify(notOverlappingSessions)
-    );
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 // create academic year and semester
 ipcMain.on(
   "academicYearAndSemesters:add",
@@ -717,9 +591,326 @@ ipcMain.on("students:delete", async (e, id) => {
     console.log(error);
   }
 });
+/* sprint 01 */
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* sprint 02 */
+// create  lecturer not available time
 
+ipcMain.on(
+  "lecturerNotAvailableTime:add",
+  async (e, lecturerNotAvailableTime) => {
+    try {
+      await LecturerNotAvailableTime.create(lecturerNotAvailableTime);
+      sendLecturerNotAvailableTimes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// get lecturer not available time
+ipcMain.on("lecturerNotAvailableTime:load", sendLecturerNotAvailableTimes);
+async function sendLecturerNotAvailableTimes() {
+  try {
+    const lecturerNotAvailableTimes = await LecturerNotAvailableTime.find().sort(
+      {
+        createdDate: 1,
+      }
+    );
+    mainWindow.webContents.send(
+      "lecturerNotAvailableTime:get",
+      JSON.stringify(lecturerNotAvailableTimes)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// delete lecturer not available time
+ipcMain.on("lecturerNotAvailableTime:delete", async (e, id) => {
+  try {
+    await LecturerNotAvailableTime.findOneAndDelete({ _id: id });
+    sendLecturerNotAvailableTimes();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// update lecturer not available time
+ipcMain.on(
+  "lecturerNotAvailableTime:update",
+  async (e, lecturerNotAvailableTime) => {
+    try {
+      await LecturerNotAvailableTime.findByIdAndUpdate(
+        lecturerNotAvailableTime._id,
+        {
+          lecturer: lecturerNotAvailableTime.lecturer,
+          day: lecturerNotAvailableTime.day,
+          from: lecturerNotAvailableTime.from,
+          to: lecturerNotAvailableTime.to,
+        }
+      );
+      sendLecturerNotAvailableTimes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// create group not available time
+ipcMain.on("groupNotAvailableTime:add", async (e, groupNotAvailableTime) => {
+  console.log(groupNotAvailableTime);
+  try {
+    await GroupNotAvailableTime.create(groupNotAvailableTime);
+    sendGroupNotAvailableTimes();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get group not available time
+ipcMain.on("groupNotAvailableTime:load", sendGroupNotAvailableTimes);
+async function sendGroupNotAvailableTimes() {
+  try {
+    const groupNotAvailableTimes = await GroupNotAvailableTime.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "groupNotAvailableTime:get",
+      JSON.stringify(groupNotAvailableTimes)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// delete group not available time
+ipcMain.on("groupNotAvailableTime:delete", async (e, id) => {
+  try {
+    await GroupNotAvailableTime.findOneAndDelete({ _id: id });
+    sendGroupNotAvailableTimes();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// update group not available time
+ipcMain.on("groupNotAvailableTime:update", async (e, groupNotAvailableTime) => {
+  try {
+    await GroupNotAvailableTime.findByIdAndUpdate(groupNotAvailableTime._id, {
+      group: groupNotAvailableTime.group,
+      day: groupNotAvailableTime.day,
+      from: groupNotAvailableTime.from,
+      to: groupNotAvailableTime.to,
+    });
+    sendGroupNotAvailableTimes();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// create sub group not available time
+ipcMain.on(
+  "subGroupNotAvailableTime:add",
+  async (e, subGroupNotAvailableTime) => {
+    try {
+      await SubGroupNotAvailableTime.create(subGroupNotAvailableTime);
+      sendSubGroupNotAvailableTimes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// get sub group not available time
+ipcMain.on("subGroupNotAvailableTime:load", sendSubGroupNotAvailableTimes);
+async function sendSubGroupNotAvailableTimes() {
+  try {
+    const subGroupNotAvailableTimes = await SubGroupNotAvailableTime.find().sort(
+      {
+        createdDate: 1,
+      }
+    );
+    mainWindow.webContents.send(
+      "subGroupNotAvailableTime:get",
+      JSON.stringify(subGroupNotAvailableTimes)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// delete sub group not available time
+ipcMain.on("subGroupNotAvailableTime:delete", async (e, id) => {
+  try {
+    await SubGroupNotAvailableTime.findOneAndDelete({ _id: id });
+    sendSubGroupNotAvailableTimes();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// update sub group not available time
+ipcMain.on(
+  "subGroupNotAvailableTime:update",
+  async (e, subGroupNotAvailableTime) => {
+    try {
+      await SubGroupNotAvailableTime.findByIdAndUpdate(
+        subGroupNotAvailableTime._id,
+        {
+          subGroup: subGroupNotAvailableTime.subGroup,
+          day: subGroupNotAvailableTime.day,
+          from: subGroupNotAvailableTime.from,
+          to: subGroupNotAvailableTime.to,
+        }
+      );
+      sendSubGroupNotAvailableTimes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// create session not available time
+ipcMain.on(
+  "sessionNotAvailableTime:add",
+  async (e, sessionNotAvailableTime) => {
+    try {
+      await SessionNotAvailableTime.create(sessionNotAvailableTime);
+      sendSessionNotAvailableTimes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// get session not available time
+ipcMain.on("sessionNotAvailableTime:load", sendSessionNotAvailableTimes);
+async function sendSessionNotAvailableTimes() {
+  try {
+    const sessionNotAvailableTimes = await SessionNotAvailableTime.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "sessionNotAvailableTime:get",
+      JSON.stringify(sessionNotAvailableTimes)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// delete session not available time
+ipcMain.on("sessionNotAvailableTime:delete", async (e, id) => {
+  try {
+    await SessionNotAvailableTime.findOneAndDelete({ _id: id });
+    sendSessionNotAvailableTimes();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// update session not available time
+ipcMain.on(
+  "sessionNotAvailableTime:update",
+  async (e, sessionNotAvailableTime) => {
+    try {
+      await SessionNotAvailableTime.findByIdAndUpdate(
+        sessionNotAvailableTime._id,
+        {
+          primarySession: sessionNotAvailableTime.primarySession,
+          day: sessionNotAvailableTime.day,
+          from: sessionNotAvailableTime.from,
+          to: sessionNotAvailableTime.to,
+        }
+      );
+      sendSessionNotAvailableTimes();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// create consecutive session
+ipcMain.on("consecutiveSession:add", async (e, consecutiveSession) => {
+  try {
+    await ConsecutiveSession.create(consecutiveSession);
+    sendConsecutiveSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get consecutive session
+ipcMain.on("consecutiveSession:load", sendConsecutiveSessions);
+async function sendConsecutiveSessions() {
+  try {
+    const consecutiveSessions = await ConsecutiveSession.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "consecutiveSession:get",
+      JSON.stringify(consecutiveSessions)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create parallel session
+ipcMain.on("parallelSession:add", async (e, parallelSession) => {
+  try {
+    await ParallelSession.create(parallelSession);
+    sendParallelSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get parallel session
+ipcMain.on("parallelSession:load", sendParallelSessions);
+async function sendParallelSessions() {
+  try {
+    const parallelSessions = await ParallelSession.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "parallelSession:get",
+      JSON.stringify(parallelSessions)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// create not overlapping session
+ipcMain.on("notOverlappingSession:add", async (e, notOverlappingSession) => {
+  try {
+    await NotOverlappingSession.create(notOverlappingSession);
+    sendNotOverlappingSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get parallel session
+ipcMain.on("notOverlappingSession:load", sendNotOverlappingSessions);
+async function sendNotOverlappingSessions() {
+  try {
+    const notOverlappingSessions = await NotOverlappingSession.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send(
+      "notOverlappingSession:get",
+      JSON.stringify(notOverlappingSessions)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+/* sprint 02 */
+
+// hiruni main
 // get lecturers data from database
 ipcMain.on("lecturers:load", sendLecturers);
 async function sendLecturers() {
