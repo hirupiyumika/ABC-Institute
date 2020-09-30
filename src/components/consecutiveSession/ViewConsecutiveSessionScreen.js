@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
+import DeleteCrossButton from "./../common/DeleteCrossButton";
 import { StudentContext } from "../../context/StudentContext";
 
 const ViewConsecutiveSessionScreen = ({}) => {
-  const { consecutiveSessions } = useContext(StudentContext);
+  const { consecutiveSessions, deleteConsecutiveSession } = useContext(
+    StudentContext
+  );
   return (
     <>
       <Breadcrumb>
@@ -13,7 +16,7 @@ const ViewConsecutiveSessionScreen = ({}) => {
       <Container>
         <Row className="my-3 px-4">
           {consecutiveSessions.map((session, index) => (
-            <Col column sm="4 p-2">
+            <Col column sm="4 p-2" key={session._id}>
               <Card className="mt-5 mb-3" style={{ border: "solid black" }}>
                 <div>
                   <Button
@@ -24,21 +27,9 @@ const ViewConsecutiveSessionScreen = ({}) => {
                       border: "none",
                       color: "black",
                     }}
-                    // onClick={() => deleteSession(session._id)}
+                    onClick={() => deleteConsecutiveSession(session._id)}
                   >
-                    <svg
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 16 16"
-                      class="bi bi-x"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                      />
-                    </svg>
+                    <DeleteCrossButton />
                   </Button>
                 </div>
                 <Card.Body>
