@@ -113,7 +113,9 @@ const AddSessionRooms = ({}) => {
               <Row className="my-3 px-4">
                 {primarySessions.map((session, index) => (
                   <>
-                    {session.room == "" && (
+                    {session.status == false && session.room == "" && (
+                      // <>
+                      //   {!session.status && (
                       <Col column sm="4" key={index}>
                         <Card
                           style={{ background: "green" }}
@@ -158,6 +160,8 @@ const AddSessionRooms = ({}) => {
                           </Card.Body>
                         </Card>
                       </Col>
+                      //   )}
+                      // </>
                     )}
                   </>
                 ))}

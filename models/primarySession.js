@@ -44,6 +44,10 @@ const PrimarySessionsSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  status: {
+    type: Boolean,
+    default: false,
+  },
   created: {
     type: Date,
     default: Date.now,
