@@ -10,7 +10,7 @@ const AddRoom = () => {
   const { addRoom, buildings } = useContext(LogContext);
   const [roomName, setRoomName] = useState("");
   const [roomType, setRoomType] = useState("");
-  const [buildingId, setBuildingId] = useState("");
+  const [buildingId, setBuildingId] = useState(buildings[0]._id);
   const [building, setBuilding] = useState("");
   const [capacity, setCapacity] = useState("");
   const onSubmit = (e) => {

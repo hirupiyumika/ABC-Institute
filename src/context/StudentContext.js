@@ -1433,10 +1433,6 @@ class StudentProvider extends Component {
   };
 
   render() {
-    console.log(
-      "sortedConsecutiveSessions",
-      this.state.sortedConsecutiveSessions
-    );
     return (
       <StudentContext.Provider
         value={{

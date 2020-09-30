@@ -68,19 +68,26 @@ const AddLecturerRooms = ({}) => {
               <h5>Current Lecturers</h5>
               <Row className="my-3 px-4">
                 {sortedLecturers.map((lec) => (
-                  <Col column sm="3 p-2">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="inlineRadioOptions2"
-                      value={lec.name}
-                      //   onChange={(e) => setLecturer(e.target.value)}
-                      onChange={(e) => handleLecturer(e, lec)}
-                    />
-                    <label class="form-check-label" for="gridCheck1">
-                      {lec.name}
-                    </label>
-                  </Col>
+                  <>
+                    {lecturerRooms.filter((l) => l.lecturer == lec.name) ==
+                      "" && (
+                      <>
+                        <Col column sm="3 p-2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions2"
+                            value={lec.name}
+                            //   onChange={(e) => setLecturer(e.target.value)}
+                            onChange={(e) => handleLecturer(e, lec)}
+                          />
+                          <label class="form-check-label" for="gridCheck1">
+                            {lec.name}
+                          </label>
+                        </Col>
+                      </>
+                    )}
+                  </>
                 ))}
               </Row>
             </Card.Body>

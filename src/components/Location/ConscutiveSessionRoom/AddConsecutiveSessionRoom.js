@@ -16,6 +16,7 @@ import { StudentContext } from "../../../context/StudentContext";
 const AddConsecutiveSessionRoom = ({}) => {
   const {
     AddConsecutiveSessionRoom,
+    deleteConsecutiveSessionRoom,
     alert,
     groupRooms,
     lecturerRooms,
@@ -44,12 +45,12 @@ const AddConsecutiveSessionRoom = ({}) => {
   const [duration2, setDuration2] = useState("");
   const [duration3, setDuration3] = useState("");
   const [room, setRoom] = useState("");
-  const [sr, setSr] = useState([]);
-  const [lr, setLr] = useState([]);
-  const [gr, setGr] = useState([]);
-  const [tr, setTr] = useState([]);
-  const [mr, setMr] = useState([]);
-  const [ml, setMl] = useState([]);
+  // const [sr, setSr] = useState([]);
+  // const [lr, setLr] = useState([]);
+  // const [gr, setGr] = useState([]);
+  // const [tr, setTr] = useState([]);
+  // const [mr, setMr] = useState([]);
+  // const [ml, setMl] = useState([]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -99,7 +100,7 @@ const AddConsecutiveSessionRoom = ({}) => {
 
   const handleSession = (e, session) => {
     console.log(session);
-    filterRooms(session);
+    // filterRooms(session);
     setId(session._id);
     setLecturers1(session.lecturers1);
     setLecturers2(session.lecturers2);
@@ -121,28 +122,28 @@ const AddConsecutiveSessionRoom = ({}) => {
     setDuration3(session.duration3);
   };
 
-  const filterRooms = (data) => {
-    setSr(
-      subjectRooms.filter((s) => s.subject == data.subject && s.tag == data.tag)
-    );
-    setLr(
-      lecturerRooms.filter(
-        (l) => l.lecturer == data.lecturers.map((lec) => lec)
-      )
-    );
-    setGr(groupRooms.filter((g) => g.group == data.group));
-    setTr(tagRooms.filter((t) => t.tagName == data.tag));
+  // const filterRooms = (data) => {
+  //   setSr(
+  //     subjectRooms.filter((s) => s.subject == data.subject && s.tag == data.tag)
+  //   );
+  //   setLr(
+  //     lecturerRooms.filter(
+  //       (l) => l.lecturer == data.lecturers.map((lec) => lec)
+  //     )
+  //   );
+  //   setGr(groupRooms.filter((g) => g.group == data.group));
+  //   setTr(tagRooms.filter((t) => t.tagName == data.tag));
 
-    setMr(
-      ((sr.lectureHalls == lr.lectureHalls) == gr.lectureHalls) ==
-        tr.lectureHalls
-    );
-    setMl(
-      ((sr.laboratories == lr.laboratories) == gr.laboratories) ==
-        tr.laboratories
-    );
-  };
-  console.log("SRq", tr);
+  //   setMr(
+  //     ((sr.lectureHalls == lr.lectureHalls) == gr.lectureHalls) ==
+  //       tr.lectureHalls
+  //   );
+  //   setMl(
+  //     ((sr.laboratories == lr.laboratories) == gr.laboratories) ==
+  //       tr.laboratories
+  //   );
+  // };
+  // console.log("SRq", tr);
   return (
     <>
       <Breadcrumb>
@@ -253,7 +254,7 @@ const AddConsecutiveSessionRoom = ({}) => {
             </Card.Body>
           </Card>
 
-          <>
+          {/* <>
             <>
               {sr.map((room) => (
                 <>
@@ -298,8 +299,8 @@ const AddConsecutiveSessionRoom = ({}) => {
                 </>
               ))}
             </>
-          </>
-          <>
+          </> */}
+          {/* <>
             {lr.map((room) => (
               <>
                 <Card className="mt-5 mb-3">
@@ -342,8 +343,8 @@ const AddConsecutiveSessionRoom = ({}) => {
                 </Card>
               </>
             ))}
-          </>
-          <>
+          </> */}
+          {/* <>
             {gr.map((room) => (
               <>
                 <Card className="mt-5 mb-3">
@@ -386,8 +387,8 @@ const AddConsecutiveSessionRoom = ({}) => {
                 </Card>
               </>
             ))}
-          </>
-          <>
+          </> */}
+          {/* <>
             {tr.map((room) => (
               <>
                 <Card className="mt-5 mb-3">
@@ -430,7 +431,7 @@ const AddConsecutiveSessionRoom = ({}) => {
                 </Card>
               </>
             ))}
-          </>
+          </> */}
           <Card className="mt-5 mb-3">
             <Card.Body>
               <h5>Current Lecture Halls</h5>
@@ -501,6 +502,32 @@ const AddConsecutiveSessionRoom = ({}) => {
                     key={index}
                     style={{ border: "solid black" }}
                   >
+                    <div>
+                      <Button
+                        variant="btn btn-outline-danger"
+                        size="sm"
+                        style={{
+                          float: "right",
+                          border: "none",
+                          color: "black",
+                        }}
+                        onClick={() => deleteConsecutiveSessionRoom(session)}
+                      >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-x"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                          />
+                        </svg>
+                      </Button>
+                    </div>
                     <Card.Body>
                       <h5> Consecutive Session {index + 1} </h5>
                       <Col column sm="12">

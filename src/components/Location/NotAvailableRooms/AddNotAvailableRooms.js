@@ -13,6 +13,7 @@ import {
 import { LogConsumer, LogContext } from "../../../context/context";
 import { DaysAndHoursContext } from "../../../context/DaysAndHoursProvider";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import Moment from "react-moment";
 
 const AddNotAvailableRooms = () => {
@@ -29,6 +30,10 @@ const AddNotAvailableRooms = () => {
   const [day, setDay] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
+  const [selectedDay, setSelectedDay] = useState([]);
+  const [sError, setSError] = useState(false);
+  const [eError, setEError] = useState(false);
+
   const onSubmit = (e) => {
     e.preventDefault();
     AddNotAvailableRooms({
@@ -42,6 +47,43 @@ const AddNotAvailableRooms = () => {
     setStart("");
     setEnd("");
   };
+
+  const handleDay = (e) => {
+    setDay(e.target.value);
+    filterSelectedDay(e.target.value);
+    setEError(false);
+    setSError(false);
+  };
+
+  const handleFrom = (e) => {
+    var inputTime = moment(e.target.value, "h:mma");
+    var beginningTime = moment(selectedDay.selected[0].startingHours, "h:mma");
+    var endingTime = moment(selectedDay.selected[0].endingHours, "h:mma");
+    if (inputTime.isBefore(beginningTime) || endingTime.isBefore(inputTime)) {
+      setSError(true);
+      setStart("");
+    } else {
+      setStart(e.target.value);
+    }
+  };
+
+  const handleTo = (e) => {
+    var inputTime = moment(e.target.value, "h:mma");
+    var beginningTime = moment(selectedDay.selected[0].startingHours, "h:mma");
+    var endingTime = moment(selectedDay.selected[0].endingHours, "h:mma");
+    if (endingTime.isBefore(inputTime) || inputTime.isBefore(beginningTime)) {
+      setEError(true);
+      setEnd("");
+    } else {
+      setEnd(e.target.value);
+    }
+  };
+
+  const filterSelectedDay = (day) => {
+    const selected = workingDays.filter((item) => item.day === day);
+    setSelectedDay({ selected });
+  };
+
   return (
     <>
       <Breadcrumb>
@@ -71,7 +113,8 @@ const AddNotAvailableRooms = () => {
                   <Form.Control
                     as="select"
                     value={day}
-                    onChange={(e) => setDay(e.target.value)}
+                    onChange={(e) => handleDay(e)}
+                    // onChange={(e) => setDay(e.target.value)}
                   >
                     <option value="none">Select Day</option>
                     {workingDays.map((day) => (
@@ -88,20 +131,51 @@ const AddNotAvailableRooms = () => {
                     type="time"
                     // name={item._id}
                     // key={i}
-                    onChange={(e) => setStart(e.target.value)}
+                    // onChange={(e) => setStart(e.target.value)}
                     value={start}
-                    // disabled={item.endingHours ? true : false}
+                    onChange={(e) => handleFrom(e)}
                   />
                 </Col>
+              </Row>
+              <Row>
+                <Col>
+                  {sError && (
+                    <Alert variant="info">
+                      {`${selectedDay.selected[0].day} Working Hours
+                              Starting From ${selectedDay.selected[0].startingHours} `}
+                      {moment(selectedDay.selected[0].startingHours, "h:mma") >
+                      moment(12, "h:mma")
+                        ? "PM"
+                        : "AM"}
+                    </Alert>
+                  )}
+                </Col>
+              </Row>
+              <Row>
                 <Col>
                   <Form.Control
                     type="time"
                     // name={item._id}
                     // key={i}
-                    onChange={(e) => setEnd(e.target.value)}
+                    // onChange={(e) => setEnd(e.target.value)}
                     value={end}
+                    onChange={(e) => handleTo(e)}
                     // disabled={item.endingHours ? true : false}
                   />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  {eError && (
+                    <Alert variant="info">
+                      {`${selectedDay.selected[0].day} Working Hours
+                              Ending From ${selectedDay.selected[0].endingHours} `}
+                      {moment(selectedDay.selected[0].endingHours, "h:mma") >
+                      moment(12, "h:mma")
+                        ? "PM"
+                        : "AM"}
+                    </Alert>
+                  )}
                 </Col>
               </Row>
               <Row className="my-3">
@@ -163,7 +237,7 @@ const AddNotAvailableRooms = () => {
                           d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                         />
                       </svg>
-                    </Button>
+                    </Button> 
                   </Link>
                 </td> */}
                 <td>

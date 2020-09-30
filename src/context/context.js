@@ -1334,6 +1334,57 @@ class LogProvider extends Component {
     }
   };
 
+  deleteConsecutiveSessionRoom = (s) => {
+    console.log("deleteConsecutiveSession", s);
+    const session = {
+      _id: s._id,
+      duration1: s.duration1,
+      duration2: s.duration2,
+      duration3: s.duration3,
+      group1: s.group1,
+      group2: s.group2,
+      group3: s.group3,
+      lecturers1: s.lecturers1,
+      lecturers2: s.lecturers2,
+      lecturers3: s.lecturers3,
+      room: "",
+      stdCount1: s.stdCount1,
+      stdCount2: s.stdCount2,
+      stdCount3: s.stdCount3,
+      subject1: s.subject1,
+      subject2: s.subject2,
+      subject3: s.subject3,
+      tag1: s.tag1,
+      tag2: s.tag2,
+      tag3: s.tag3,
+    };
+    console.log("deleteConsecutiveSession", session);
+
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          ipcRenderer.send("consecutiveSession:update", session);
+          this.showAlert("Delete Consecutive Session-Room");
+          Swal.fire({
+            timer: 2000,
+            timerProgressBar: true,
+            icon: "success",
+            title: "Deleted!",
+            text: "Consecutive Session-Room has been deleted",
+          }).then(function () {});
+        }
+      });
+    } catch (error) {}
+  };
+
   // Add Not Available Rooms
   AddNotAvailableRooms = (room) => {
     // console.log("Nroom", room);
@@ -1391,7 +1442,7 @@ class LogProvider extends Component {
   };
 
   render() {
-    console.log("singleGroupRoom", this.state.singleGroupRoom);
+    // console.log("singleGroupRoom", this.state.singleGroupRoom);
     return (
       <LogContext.Provider
         value={{
@@ -1459,6 +1510,7 @@ class LogProvider extends Component {
 
           AddSessionRooms: this.AddSessionRooms,
           AddConsecutiveSessionRoom: this.AddConsecutiveSessionRoom,
+          deleteConsecutiveSessionRoom: this.deleteConsecutiveSessionRoom,
 
           handleLecturerChange: this.handleLecturerChange,
           handleSubjectChange: this.handleSubjectChange,

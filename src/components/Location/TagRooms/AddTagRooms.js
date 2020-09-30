@@ -56,10 +56,6 @@ const AddTagRooms = ({}) => {
     setTagName(tag.tag);
   };
 
-  //   return (
-  // <LogConsumer>
-  //   {(value) => {
-  //     const { levels, alert, deleteLevel } = value;
   return (
     <>
       <Breadcrumb>
@@ -73,19 +69,25 @@ const AddTagRooms = ({}) => {
               <h5>Current Tags</h5>
               <Row className="my-3 px-4">
                 {sortedTags.map((tag) => (
-                  <Col column sm="3 p-2">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="inlineRadioOptions2"
-                      value={tag.tag}
-                      //   onChange={(e) => setLecturer(e.target.value)}
-                      onChange={(e) => handleTag(e, tag)}
-                    />
-                    <label class="form-check-label" for="gridCheck1">
-                      {tag.tag}
-                    </label>
-                  </Col>
+                  <>
+                    {tagRooms.filter((t) => t.tagName == tag.tag) == "" && (
+                      <>
+                        <Col column sm="3 p-2">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions2"
+                            value={tag.tag}
+                            //   onChange={(e) => setLecturer(e.target.value)}
+                            onChange={(e) => handleTag(e, tag)}
+                          />
+                          <label class="form-check-label" for="gridCheck1">
+                            {tag.tag}
+                          </label>
+                        </Col>
+                      </>
+                    )}
+                  </>
                 ))}
               </Row>
             </Card.Body>

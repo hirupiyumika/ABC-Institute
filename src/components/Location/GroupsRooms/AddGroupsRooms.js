@@ -103,32 +103,46 @@ const AddGroupsRooms = ({}) => {
                     {(type == "" ||
                       type == "none" ||
                       type == "Main Groups") && (
-                      <Col column sm="3 p-2">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions2"
-                          value={grp.mainGroupID}
-                          onChange={(e) => handleGroups(e, grp)}
-                        />
-                        <label class="form-check-label" for="gridCheck1">
-                          {grp.mainGroupID}
-                        </label>
-                      </Col>
+                      <>
+                        {groupRooms.filter((g) => g.group == grp.mainGroupID) ==
+                          "" && (
+                          <>
+                            <Col column sm="3 p-2">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions2"
+                                value={grp.mainGroupID}
+                                onChange={(e) => handleGroups(e, grp)}
+                              />
+                              <label class="form-check-label" for="gridCheck1">
+                                {grp.mainGroupID}
+                              </label>
+                            </Col>
+                          </>
+                        )}
+                      </>
                     )}
                     {(type == "" || type == "none" || type == "Sub-Groups") && (
-                      <Col column sm="3 p-2">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions2"
-                          value={grp.subGroupID}
-                          onChange={(e) => handleSubGroups(e, grp)}
-                        />
-                        <label class="form-check-label" for="gridCheck1">
-                          {grp.subGroupID}
-                        </label>
-                      </Col>
+                      <>
+                        {groupRooms.filter((g) => g.group == grp.subGroupID) ==
+                          "" && (
+                          <>
+                            <Col column sm="3 p-2">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions2"
+                                value={grp.subGroupID}
+                                onChange={(e) => handleSubGroups(e, grp)}
+                              />
+                              <label class="form-check-label" for="gridCheck1">
+                                {grp.subGroupID}
+                              </label>
+                            </Col>
+                          </>
+                        )}
+                      </>
                     )}
                   </>
                 ))}
