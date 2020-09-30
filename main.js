@@ -857,6 +857,16 @@ async function sendConsecutiveSessions() {
   }
 }
 
+// delete consecutive session
+ipcMain.on("consecutiveSession:delete", async (e, id) => {
+  try {
+    await ConsecutiveSession.findOneAndDelete({ _id: id });
+    sendConsecutiveSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // create parallel session
 ipcMain.on("parallelSession:add", async (e, parallelSession) => {
   try {
