@@ -1246,21 +1246,21 @@ class LogProvider extends Component {
 
   createPrimarySession = (session) => {
     console.log("psession", session);
-    // if (session.lecturers === "")
-    //   this.showAlert("please select Lecturer", "danger");
-    // else if (session.tag === "") this.showAlert("please select Tag", "danger");
-    // // else if (session.mainGroup === "" || session.subGroup === "")
-    // //   this.showAlert("please select Group", "danger");
-    // else if (session.subject === "")
-    //   this.showAlert("please select Subject", "danger");
-    // else if (session.stdCount === "")
-    //   this.showAlert("please enter Student Count", "danger");
-    // else if (session.duration === "")
-    //   this.showAlert("please enter Duration", "danger");
-    // else {
-    ipcRenderer.send("primary_Sessions:add", session);
-    this.showAlert("Primary Session Added");
-    // }
+    if (session.lecturers.length === 0)
+      this.showAlert("please select Lecturer", "danger");
+    else if (session.tag === "") this.showAlert("please select Tag", "danger");
+    else if (session.group === "")
+      this.showAlert("please select Group", "danger");
+    else if (session.subject === "")
+      this.showAlert("please select Subject", "danger");
+    else if (session.stdCount === "")
+      this.showAlert("please enter Student Count", "danger");
+    else if (session.duration === "")
+      this.showAlert("please enter Duration", "danger");
+    else {
+      ipcRenderer.send("primary_Sessions:add", session);
+      this.showAlert("Primary Session Added");
+    }
   };
 
   // populate Primary Session
