@@ -854,6 +854,42 @@ class StudentProvider extends Component {
     } catch (ex) {}
   }
 
+  // delete consecutive session
+  deleteConsecutiveSession = (_id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          const condition = navigator.onLine;
+          if (condition) {
+            ipcRenderer.send("consecutiveSession:delete", _id);
+            this.showAlert("consecutive session removed");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "consecutive session has been deleted",
+              showConfirmButton: true,
+              timer: 1500,
+            }).then(function () {});
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No internet connection!",
+            });
+          }
+        }
+      });
+    } catch (error) {}
+  };
+
   // add parallel session
   addParallelSession = (parallelSession) => {
     ipcRenderer.send("parallelSession:add", parallelSession);
@@ -2090,6 +2126,7 @@ class StudentProvider extends Component {
           handleSessionNotAvailableTimeChange: this
             .handleSessionNotAvailableTimeChange,
           addConsecutiveSession: this.addConsecutiveSession,
+          deleteConsecutiveSession: this.deleteConsecutiveSession,
           addParallelSession: this.addParallelSession,
           addNotOverlappingSession: this.addNotOverlappingSession,
         }}
