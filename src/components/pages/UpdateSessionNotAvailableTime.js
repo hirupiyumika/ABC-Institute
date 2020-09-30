@@ -4,26 +4,33 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { StudentContext } from "../../context/StudentContext";
-import AddSessionNotAvailableTimeForm from "../sessionNotAvailableTime/AddSessionNotAvailableTimeForm";
+import UpdateSessionNotAvailableTimeForm from "./../sessionNotAvailableTime/UpdateSessionNotAvailableTimeForm";
 import SessionNotAvailableTimeTable from "./../sessionNotAvailableTime/SessionNotAvailableTimeTable";
 
-class AddSessionNotAvailableTime extends Component {
+class UpdateSessionNotAvailableTime extends Component {
   static contextType = StudentContext;
 
   render() {
-    const { addSessionNotAvailableTime, show, variant, message } = this.context;
+    const {
+      updateSessionNotAvailableTime,
+      show,
+      variant,
+      message,
+      filteredSessionsNotAvailableTime,
+    } = this.context;
 
     return (
       <React.Fragment>
         <Breadcrumb>
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item active>
-            Add Session Not Available Time
+            Update Session Not Available Time
           </Breadcrumb.Item>
         </Breadcrumb>
         <Container>
-          <AddSessionNotAvailableTimeForm
-            addSessionNotAvailableTime={addSessionNotAvailableTime}
+          <UpdateSessionNotAvailableTimeForm
+            updateSessionNotAvailableTime={updateSessionNotAvailableTime}
+            filteredSessionsNotAvailableTime={filteredSessionsNotAvailableTime}
           />
           {show && <Alert variant={variant}>{message}</Alert>}
           <SessionNotAvailableTimeTable />
@@ -33,4 +40,4 @@ class AddSessionNotAvailableTime extends Component {
   }
 }
 
-export default AddSessionNotAvailableTime;
+export default UpdateSessionNotAvailableTime;

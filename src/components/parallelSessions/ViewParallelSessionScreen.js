@@ -2,17 +2,17 @@ import React, { useContext } from "react";
 import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
 import { StudentContext } from "../../context/StudentContext";
 
-const ViewConsecutiveSessionScreen = ({}) => {
-  const { consecutiveSessions } = useContext(StudentContext);
+const ViewParallelSessionScreen = ({}) => {
+  const { parallelSessions } = useContext(StudentContext);
   return (
     <>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>View Consecutive Sessions</Breadcrumb.Item>
+        <Breadcrumb.Item active>View Parallel Sessions</Breadcrumb.Item>
       </Breadcrumb>
       <Container>
         <Row className="my-3 px-4">
-          {consecutiveSessions.map((session, index) => (
+          {parallelSessions.map((session, index) => (
             <Col column sm="4 p-2">
               <Card className="mt-5 mb-3" style={{ border: "solid black" }}>
                 <div>
@@ -119,6 +119,58 @@ const ViewConsecutiveSessionScreen = ({}) => {
                       {session.duration3 === 0 ? "" : `(${session.duration3})`}
                     </label>
                   </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.lecturers4 + ""}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.tag4}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.group4}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.subject4}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.stdCount4 === 0 ? " " : session.stdCount4}
+                      {session.duration4 === 0 ? "" : `(${session.duration4})`}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.lecturers5 + ""}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.tag5}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.group5}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.subject5}
+                    </label>
+                  </Col>
+                  <Col column sm="12">
+                    <label className="form-check-label" for="gridCheck1">
+                      {session.stdCount5 === 0 ? " " : session.stdCount5}
+                      {session.duration5 === 0 ? "" : `(${session.duration5})`}
+                    </label>
+                  </Col>
                 </Card.Body>
               </Card>
             </Col>
@@ -129,4 +181,4 @@ const ViewConsecutiveSessionScreen = ({}) => {
   );
 };
 
-export default ViewConsecutiveSessionScreen;
+export default ViewParallelSessionScreen;

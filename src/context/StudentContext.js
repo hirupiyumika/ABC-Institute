@@ -28,9 +28,18 @@ class StudentProvider extends Component {
     variant: "success",
     search: "",
     lecturersNotAvailableTime: [],
+    sortedLecturersNotAvailableTime: [],
+    filteredLecturersNotAvailableTime: [],
     groupsNotAvailableTime: [],
+    sortedGroupsNotAvailableTime: [],
+    filteredGroupsNotAvailableTime: [],
     subGroupsNotAvailableTime: [],
+    sortedSubGroupsNotAvailableTime: [],
+    filteredSubGroupsNotAvailableTime: [],
     sessionsNotAvailableTime: [],
+    sortedSessionsNotAvailableTime: [],
+    sortedSessionsNotAvailableTimes: [],
+    filteredSessionsNotAvailableTime: [],
     consecutiveSessions: [],
     sortedConsecutiveSessions: [],
     parallelSessions: [],
@@ -39,6 +48,7 @@ class StudentProvider extends Component {
     sortedNotOverlappingSessions: [],
   };
 
+  /* sprint 01 */
   // filtering lecturer not available time
   filteringLecturerNotAvailableTime = (lecturerNotAvailableTime) => {
     const { lecturersNotAvailableTime } = this.state;
@@ -92,6 +102,152 @@ class StudentProvider extends Component {
       }
     }
   };
+
+  // populate lecturer not available time
+  populateLecturerNotAvailableTimes() {
+    try {
+      ipcRenderer.send("lecturerNotAvailableTime:load");
+      ipcRenderer.on(
+        "lecturerNotAvailableTime:get",
+        (e, lecturerNotAvailableTimes) => {
+          this.setState({
+            sortedLecturersNotAvailableTime: JSON.parse(
+              lecturerNotAvailableTimes
+            ),
+            lecturersNotAvailableTime: JSON.parse(lecturerNotAvailableTimes),
+          });
+        }
+      );
+    } catch (ex) {}
+  }
+
+  // delete lecturer not available time
+  deleteLecturerNotAvailableTimes = (_id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          const condition = navigator.onLine;
+          if (condition) {
+            ipcRenderer.send("lecturerNotAvailableTime:delete", _id);
+            this.showAlert("lecturer not available time removed");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "tag has been deleted",
+              showConfirmButton: true,
+              timer: 1500,
+            }).then(function () {});
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No internet connection!",
+            });
+          }
+        }
+      });
+    } catch (error) {}
+  };
+
+  // update lecturer not available time
+  updateLecturerNotAvailableTime = (lecturerNotAvailableTime) => {
+    if (
+      lecturerNotAvailableTime.lecturer === "" ||
+      lecturerNotAvailableTime.day === "" ||
+      lecturerNotAvailableTime.from === "" ||
+      lecturerNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringLecturerNotAvailableTime(lecturerNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send(
+          "lecturerNotAvailableTime:update",
+          lecturerNotAvailableTime
+        );
+        this.showAlert("lecturer not available time updated");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+
+  // filter lecturer not available time
+  filterLecturerNotAvailableTime = (_id) => {
+    const { lecturersNotAvailableTime } = this.state;
+
+    let tempLecturersNotAvailableTime = [...lecturersNotAvailableTime];
+
+    const selectedLecturersNotAvailableTime = tempLecturersNotAvailableTime.filter(
+      (item) => item._id === _id
+    );
+
+    this.setState({
+      filteredLecturersNotAvailableTime: selectedLecturersNotAvailableTime,
+    });
+  };
+
+  // handle lecturer not available time change
+  handleLecturerNotAvailableTimeChange = (event) => {
+    const name = event.target.name;
+
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState(
+      {
+        [name]: value,
+      },
+
+      this.sortLecturerNotAvailableTimeData
+    );
+  };
+
+  sortLecturerNotAvailableTimeData = () => {
+    const { lecturersNotAvailableTime, search } = this.state;
+    let tempLecturersNotAvailableTimes = [...lecturersNotAvailableTime];
+
+    if (search.length > 0) {
+      tempLecturersNotAvailableTimes = tempLecturersNotAvailableTimes.filter(
+        (item) => {
+          let tempSearch = search.toLowerCase();
+          let tempLecturerNotAvailableTime = item.lecturer
+            .toLowerCase()
+            .slice(0, search.length);
+          if (tempSearch === tempLecturerNotAvailableTime) {
+            return item;
+          }
+          return null;
+        }
+      );
+    }
+    this.setState({
+      sortedLecturersNotAvailableTime: tempLecturersNotAvailableTimes,
+    });
+  };
+
   // filtering group not available time
   filteringGroupNotAvailableTime = (groupNotAvailableTime) => {
     const { groupsNotAvailableTime } = this.state;
@@ -141,6 +297,146 @@ class StudentProvider extends Component {
         });
       }
     }
+  };
+
+  // populate group not available time
+  populateGroupNotAvailableTimes() {
+    try {
+      ipcRenderer.send("groupNotAvailableTime:load");
+      ipcRenderer.on(
+        "groupNotAvailableTime:get",
+        (e, groupNotAvailableTimes) => {
+          this.setState({
+            sortedGroupsNotAvailableTime: JSON.parse(groupNotAvailableTimes),
+            groupsNotAvailableTime: JSON.parse(groupNotAvailableTimes),
+          });
+        }
+      );
+    } catch (ex) {}
+  }
+
+  // delete group not available time
+  deleteGroupNotAvailableTimes = (_id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          const condition = navigator.onLine;
+          if (condition) {
+            ipcRenderer.send("groupNotAvailableTime:delete", _id);
+            this.showAlert("group not available time removed");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "group has been deleted",
+              showConfirmButton: true,
+              timer: 1500,
+            }).then(function () {});
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No internet connection!",
+            });
+          }
+        }
+      });
+    } catch (error) {}
+  };
+
+  // update group not available time
+  updateGroupNotAvailableTime = (groupNotAvailableTime) => {
+    if (
+      groupNotAvailableTime.group === "" ||
+      groupNotAvailableTime.day === "" ||
+      groupNotAvailableTime.from === "" ||
+      groupNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringGroupNotAvailableTime(groupNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send("groupNotAvailableTime:update", groupNotAvailableTime);
+        this.showAlert("group not available time updated");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+
+  // filter group not available time
+  filterGroupNotAvailableTime = (_id) => {
+    const { groupsNotAvailableTime } = this.state;
+
+    let tempGroupsNotAvailableTime = [...groupsNotAvailableTime];
+
+    const selectedGroupsNotAvailableTime = tempGroupsNotAvailableTime.filter(
+      (item) => item._id === _id
+    );
+
+    this.setState({
+      filteredGroupsNotAvailableTime: selectedGroupsNotAvailableTime,
+    });
+  };
+
+  // handle group not available time change
+  handleGroupNotAvailableTimeChange = (event) => {
+    const name = event.target.name;
+
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState(
+      {
+        [name]: value,
+      },
+
+      this.sortGroupNotAvailableTimeData
+    );
+  };
+
+  sortGroupNotAvailableTimeData = () => {
+    const { groupsNotAvailableTime, search } = this.state;
+    let tempGroupsNotAvailableTimes = [...groupsNotAvailableTime];
+
+    if (search.length > 0) {
+      tempGroupsNotAvailableTimes = tempGroupsNotAvailableTimes.filter(
+        (item) => {
+          let tempSearch = search.toLowerCase();
+          let tempGroupsNotAvailableTime = item.group
+            .toLowerCase()
+            .slice(0, search.length);
+          if (tempSearch === tempGroupsNotAvailableTime) {
+            return item;
+          }
+          return null;
+        }
+      );
+    }
+    this.setState({
+      sortedGroupsNotAvailableTime: tempGroupsNotAvailableTimes,
+    });
   };
 
   // filtering sub group not available time
@@ -197,6 +493,151 @@ class StudentProvider extends Component {
     }
   };
 
+  // populate sub group not available time
+  populateSubGroupNotAvailableTimes() {
+    try {
+      ipcRenderer.send("subGroupNotAvailableTime:load");
+      ipcRenderer.on(
+        "subGroupNotAvailableTime:get",
+        (e, subGroupNotAvailableTimes) => {
+          this.setState({
+            sortedSubGroupsNotAvailableTime: JSON.parse(
+              subGroupNotAvailableTimes
+            ),
+            subGroupsNotAvailableTime: JSON.parse(subGroupNotAvailableTimes),
+          });
+        }
+      );
+    } catch (ex) {}
+  }
+
+  // delete sub group not available time
+  deleteSubGroupNotAvailableTimes = (_id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          const condition = navigator.onLine;
+          if (condition) {
+            ipcRenderer.send("subGroupNotAvailableTime:delete", _id);
+            this.showAlert("sub group not available time removed");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "group has been deleted",
+              showConfirmButton: true,
+              timer: 1500,
+            }).then(function () {});
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No internet connection!",
+            });
+          }
+        }
+      });
+    } catch (error) {}
+  };
+
+  // update sub group not available time
+  updateSubGroupNotAvailableTime = (subGroupNotAvailableTime) => {
+    if (
+      subGroupNotAvailableTime.subGroup === "" ||
+      subGroupNotAvailableTime.day === "" ||
+      subGroupNotAvailableTime.from === "" ||
+      subGroupNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringSubGroupNotAvailableTime(subGroupNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send(
+          "subGroupNotAvailableTime:update",
+          subGroupNotAvailableTime
+        );
+        this.showAlert("sub group not available time updated");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+
+  // filter sub group not available time
+  filterSubGroupNotAvailableTime = (_id) => {
+    const { subGroupsNotAvailableTime } = this.state;
+
+    let tempSubGroupsNotAvailableTime = [...subGroupsNotAvailableTime];
+
+    const selectedSubGroupsNotAvailableTime = tempSubGroupsNotAvailableTime.filter(
+      (item) => item._id === _id
+    );
+
+    this.setState({
+      filteredSubGroupsNotAvailableTime: selectedSubGroupsNotAvailableTime,
+    });
+  };
+
+  // handle sub group not available time change
+  handleSubGroupNotAvailableTimeChange = (event) => {
+    const name = event.target.name;
+
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState(
+      {
+        [name]: value,
+      },
+
+      this.sortSubGroupNotAvailableTimeData
+    );
+  };
+
+  sortSubGroupNotAvailableTimeData = () => {
+    const { subGroupsNotAvailableTime, search } = this.state;
+    let tempSubGroupsNotAvailableTimes = [...subGroupsNotAvailableTime];
+
+    if (search.length > 0) {
+      tempSubGroupsNotAvailableTimes = tempSubGroupsNotAvailableTimes.filter(
+        (item) => {
+          let tempSearch = search.toLowerCase();
+          let tempSubGroupsNotAvailableTime = item.subGroup
+            .toLowerCase()
+            .slice(0, search.length);
+          if (tempSearch === tempSubGroupsNotAvailableTime) {
+            return item;
+          }
+          return null;
+        }
+      );
+    }
+    this.setState({
+      sortedSubGroupsNotAvailableTime: tempSubGroupsNotAvailableTimes,
+    });
+  };
+
   // filtering session not available time
   filteringSessionNotAvailableTime = (sessionNotAvailableTime) => {
     const { sessionsNotAvailableTime } = this.state;
@@ -246,6 +687,151 @@ class StudentProvider extends Component {
         });
       }
     }
+  };
+
+  // populate session not available time
+  populateSessionNotAvailableTimes() {
+    try {
+      ipcRenderer.send("sessionNotAvailableTime:load");
+      ipcRenderer.on(
+        "sessionNotAvailableTime:get",
+        (e, sessionNotAvailableTimes) => {
+          this.setState({
+            sortedSessionsNotAvailableTime: JSON.parse(
+              sessionNotAvailableTimes
+            ),
+            sessionsNotAvailableTime: JSON.parse(sessionNotAvailableTimes),
+          });
+        }
+      );
+    } catch (ex) {}
+  }
+
+  // delete session not available time
+  deleteSessionNotAvailableTimes = (_id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          const condition = navigator.onLine;
+          if (condition) {
+            ipcRenderer.send("sessionNotAvailableTime:delete", _id);
+            this.showAlert("session not available time removed");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "group has been deleted",
+              showConfirmButton: true,
+              timer: 1500,
+            }).then(function () {});
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No internet connection!",
+            });
+          }
+        }
+      });
+    } catch (error) {}
+  };
+
+  // update session not available time
+  updateSessionNotAvailableTime = (sessionNotAvailableTime) => {
+    if (
+      sessionNotAvailableTime.primarySession === "" ||
+      sessionNotAvailableTime.day === "" ||
+      sessionNotAvailableTime.from === "" ||
+      sessionNotAvailableTime.to === ""
+    ) {
+      this.showAlert("please enter all fields", "danger");
+      return false;
+    }
+
+    if (this.filteringSessionNotAvailableTime(sessionNotAvailableTime)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Already added data",
+      });
+    } else {
+      const condition = navigator.onLine;
+      if (condition) {
+        ipcRenderer.send(
+          "sessionNotAvailableTime:update",
+          sessionNotAvailableTime
+        );
+        this.showAlert("session not available time updated");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No internet connection!",
+        });
+      }
+    }
+  };
+
+  // filter session not available time
+  filterSessionNotAvailableTime = (_id) => {
+    const { sessionsNotAvailableTime } = this.state;
+
+    let tempSessionsNotAvailableTime = [...sessionsNotAvailableTime];
+
+    const selectedSessionsNotAvailableTime = tempSessionsNotAvailableTime.filter(
+      (item) => item._id === _id
+    );
+
+    this.setState({
+      filteredSessionsNotAvailableTime: selectedSessionsNotAvailableTime,
+    });
+  };
+
+  // handle session not available time change
+  handleSessionNotAvailableTimeChange = (event) => {
+    const name = event.target.name;
+
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState(
+      {
+        [name]: value,
+      },
+
+      this.sortSessionNotAvailableTimeData
+    );
+  };
+
+  sortSessionNotAvailableTimeData = () => {
+    const { sessionsNotAvailableTime, search } = this.state;
+    let tempSessionsNotAvailableTimes = [...sessionsNotAvailableTime];
+
+    if (search.length > 0) {
+      tempSessionsNotAvailableTimes = tempSessionsNotAvailableTimes.filter(
+        (item) => {
+          let tempSearch = search.toLowerCase();
+          let tempSessionsNotAvailableTime = item.day
+            .toLowerCase()
+            .slice(0, search.length);
+          if (tempSearch === tempSessionsNotAvailableTime) {
+            return item;
+          }
+          return null;
+        }
+      );
+    }
+    this.setState({
+      sortedSessionsNotAvailableTime: tempSessionsNotAvailableTimes,
+    });
   };
 
   // add consecutive session
@@ -308,6 +894,8 @@ class StudentProvider extends Component {
       );
     } catch (ex) {}
   }
+
+  /* sprint 01 */
 
   // update academic year and semester
   updateAcademicYearAndSemester = (academicYearAndSemester) => {
@@ -1388,6 +1976,7 @@ class StudentProvider extends Component {
     });
   };
 
+  // component did mount
   componentDidMount = () => {
     this.populateAcademicYearAndSemesters();
     this.populateProgrammes();
@@ -1398,6 +1987,10 @@ class StudentProvider extends Component {
     this.populateConsecutiveSession();
     this.populateParallelSession();
     this.populateNotOverlappingSession();
+    this.populateLecturerNotAvailableTimes();
+    this.populateGroupNotAvailableTimes();
+    this.populateSubGroupNotAvailableTimes();
+    this.populateSessionNotAvailableTimes();
     ipcRenderer.on("students:clear", () => {
       this.setState({ students: [], sortedStudents: [] });
       this.showAlert("students cleared");
@@ -1469,9 +2062,29 @@ class StudentProvider extends Component {
           handleTagChange: this.handleTagChange,
           handleStudentChange: this.handleStudentChange,
           addLecturerNotAvailableTime: this.addLecturerNotAvailableTime,
+          deleteLecturerNotAvailableTimes: this.deleteLecturerNotAvailableTimes,
+          updateLecturerNotAvailableTime: this.updateLecturerNotAvailableTime,
+          filterLecturerNotAvailableTime: this.filterLecturerNotAvailableTime,
+          handleLecturerNotAvailableTimeChange: this
+            .handleLecturerNotAvailableTimeChange,
           addGroupNotAvailableTime: this.addGroupNotAvailableTime,
+          deleteGroupNotAvailableTimes: this.deleteGroupNotAvailableTimes,
+          updateGroupNotAvailableTime: this.updateGroupNotAvailableTime,
+          filterGroupNotAvailableTime: this.filterGroupNotAvailableTime,
+          handleGroupNotAvailableTimeChange: this
+            .handleGroupNotAvailableTimeChange,
           addSubGroupNotAvailableTime: this.addSubGroupNotAvailableTime,
+          deleteSubGroupNotAvailableTimes: this.deleteSubGroupNotAvailableTimes,
+          updateSubGroupNotAvailableTime: this.updateSubGroupNotAvailableTime,
+          filterSubGroupNotAvailableTime: this.filterSubGroupNotAvailableTime,
+          handleSubGroupNotAvailableTimeChange: this
+            .handleSubGroupNotAvailableTimeChange,
           addSessionNotAvailableTime: this.addSessionNotAvailableTime,
+          deleteSessionNotAvailableTimes: this.deleteSessionNotAvailableTimes,
+          updateSessionNotAvailableTime: this.updateSessionNotAvailableTime,
+          filterSessionNotAvailableTime: this.filterSessionNotAvailableTime,
+          handleSessionNotAvailableTimeChange: this
+            .handleSessionNotAvailableTimeChange,
           addConsecutiveSession: this.addConsecutiveSession,
           addParallelSession: this.addParallelSession,
           addNotOverlappingSession: this.addNotOverlappingSession,

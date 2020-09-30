@@ -4,23 +4,32 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { StudentContext } from "../../context/StudentContext";
+import UpdateGroupNotAvailableTimeForm from "./../groupNotAvailableTime/UpdateGroupNotAvailableTimeForm";
 import GroupNotAvailableTimeTable from "./../groupNotAvailableTime/GroupNotAvailableTimeTable";
-import AddGroupNotAvailableTimeForm from "../groupNotAvailableTime/AddGroupNotAvailableTimeForm";
 
-class AddGroupNotAvailableTime extends Component {
+class UpdateGroupNotAvailableTime extends Component {
   static contextType = StudentContext;
 
   render() {
-    const { addGroupNotAvailableTime, show, variant, message } = this.context;
+    const {
+      updateGroupNotAvailableTime,
+      show,
+      variant,
+      message,
+      filteredGroupsNotAvailableTime,
+    } = this.context;
     return (
       <React.Fragment>
         <Breadcrumb>
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item active>Add Group Not Available Time</Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            Update Group Not Available Time
+          </Breadcrumb.Item>
         </Breadcrumb>
         <Container>
-          <AddGroupNotAvailableTimeForm
-            addGroupNotAvailableTime={addGroupNotAvailableTime}
+          <UpdateGroupNotAvailableTimeForm
+            updateGroupNotAvailableTime={updateGroupNotAvailableTime}
+            filteredGroupsNotAvailableTime={filteredGroupsNotAvailableTime}
           />
           {show && <Alert variant={variant}>{message}</Alert>}
           <GroupNotAvailableTimeTable />
@@ -30,4 +39,4 @@ class AddGroupNotAvailableTime extends Component {
   }
 }
 
-export default AddGroupNotAvailableTime;
+export default UpdateGroupNotAvailableTime;

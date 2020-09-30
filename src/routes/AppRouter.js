@@ -19,9 +19,30 @@ import AddTag from "./../components/pages/AddTag";
 import UpdateTag from "../components/pages/UpdateTag";
 import ViewTag from "./../components/pages/ViewTag";
 import AddLecturerNotAvailableTime from "./../components/pages/AddLecturerNotAvailableTime";
+import UpdateLecturerNotAvailableTime from "./../components/pages/UpdateLecturerNotAvailableTime";
+import ViewLecturerNotAvailableTime from "./../components/pages/ViewLecturerNotAvailableTime";
+import ViewGroupNotAvailableTime from "./../components/pages/ViewGroupNotAvailableTime";
+import ViewSubGroupNotAvailableTime from "./../components/pages/ViewSubGroupNotAvailableTime";
+import ViewSessionNotAvailableTime from "./../components/pages/ViewSessionNotAvailableTime";
 import AddSessionNotAvailableTime from "./../components/pages/AddSessionNotAvailableTime";
+import UpdateSessionNotAvailableTime from "./../components/pages/UpdateSessionNotAvailableTime";
 import AddGroupNotAvailableTime from "./../components/pages/AddGroupNotAvailableTime";
+import UpdateGroupNotAvailableTime from "./../components/pages/UpdateGroupNotAvailableTime";
 import AddSubGroupNotAvailableTime from "./../components/pages/AddSubGroupNotAvailableTime";
+import UpdateSubGroupNotAvailableTime from "./../components/pages/UpdateSubGroupNotAvailableTime";
+import ViewConsecutiveSession from "./../components/pages/ViewConsecutiveSession";
+import AddConsecutiveSession from "./../components/pages/AddConsecutiveSession";
+import AddParallelSession from "./../components/pages/AddParallelSession";
+import ViewParallelSession from "./../components/pages/ViewParallelSession";
+import AddNotOverlappingSession from "./../components/pages/AddNotOverlappingSession";
+import ViewNotOverlappingSession from "./../components/pages/ViewNotOverlappingSession";
+import ManagementOne from "./../components/pages/ManagementOne";
+import ManagementTwo from "./../components/pages/ManagementTwo";
+import ManagementThree from "./../components/pages/ManagementThree";
+import ManagementFour from "./../components/pages/ManagementFour";
+import ManagementFive from "./../components/pages/ManagementFive";
+import ManagementSix from "./../components/pages/ManagementSix";
+import ManagementSeven from "./../components/pages/ManagementSeven";
 import LecturerTable from "./../components/lecturers/LecturerTable";
 import EditLecturer from "./../components/lecturers/EditLecturer";
 import ViewLecturers from "./../components/lecturers/ViewLecturers";
@@ -49,10 +70,6 @@ import ViewRooms from "./../components/room/ViewRooms";
 import LecturersStatistics from "./../components/statistics/LecturersStatistics";
 import StudentsStatistics from "./../components/statistics/StudentsStatistics";
 import SubjectsStatistics from "./../components/statistics/SubjectsStatistics";
-import ManagementTwo from "./../components/pages/ManagementTwo";
-import ManagementOne from "./../components/pages/ManagementOne";
-import ManagementThree from "./../components/pages/ManagementThree";
-import ManagementFour from "./../components/pages/ManagementFour";
 import Home from "../components/pages/Home";
 import SHome from "../components/pages/SHome";
 import AddWorkingDays from "../components/pages/AddWorkingDays";
@@ -64,9 +81,6 @@ import UpdateWorkingHours from "../components/pages/UpdateWorkingHours";
 import AddTimeSlots from "../components/pages/AddTimeSlot";
 import CreatePrimarySession from "../components/primarySession/CreatePrimarySession";
 import ViewPrimarySession from "../components/primarySession/ViewPrimarySession";
-import AddConsecutiveSession from "./../components/pages/AddConsecutiveSession";
-import AddParallelSession from "./../components/pages/AddParallelSession";
-import AddNotOverlappingSession from "./../components/pages/AddNotOverlappingSession";
 import AddLecturerRooms from "../components/Location/LecturerRooms/AddLecturerRooms";
 import AddGroupsRooms from "../components/Location/GroupsRooms/AddGroupsRooms";
 import AddTagRooms from "../components/Location/TagRooms/AddTagRooms";
@@ -92,6 +106,9 @@ class AppRouter extends Component {
           <Route path="/managementTwo" component={ManagementTwo} />
           <Route path="/managementThree" component={ManagementThree} />
           <Route path="/managementFour" component={ManagementFour} />
+          <Route path="/managementFive" component={ManagementFive} />
+          <Route path="/managementSix" component={ManagementSix} />
+          <Route path="/managementSeven" component={ManagementSeven} />
           <Route path="/addStudent" component={AddStudent} />
           <Route path="/updateStudent" component={UpdateStudent} />
           <Route path="/viewStudent" component={ViewStudent} />
@@ -124,26 +141,68 @@ class AppRouter extends Component {
             component={AddLecturerNotAvailableTime}
           />
           <Route
+            path="/updateLecturerNotAvailableTime"
+            component={UpdateLecturerNotAvailableTime}
+          />
+          <Route
+            path="/viewLecturerNotAvailableTime"
+            component={ViewLecturerNotAvailableTime}
+          />
+          <Route
             path="/addGroupNotAvailableTime"
             component={AddGroupNotAvailableTime}
           />
           <Route
+            path="/updateGroupNotAvailableTime"
+            component={UpdateGroupNotAvailableTime}
+          />
+          <Route
+            path="/viewGroupNotAvailableTime"
+            component={ViewGroupNotAvailableTime}
+          />
+          <Route
             path="/addSubGroupNotAvailableTime"
             component={AddSubGroupNotAvailableTime}
+          />
+
+          <Route
+            path="/updateSubGroupNotAvailableTime"
+            component={UpdateSubGroupNotAvailableTime}
+          />
+          <Route
+            path="/viewSubGroupNotAvailableTime"
+            component={ViewSubGroupNotAvailableTime}
           />
           <Route
             path="/addSessionNotAvailableTime"
             component={AddSessionNotAvailableTime}
           />
           <Route
+            path="/updateSessionNotAvailableTime"
+            component={UpdateSessionNotAvailableTime}
+          />
+          <Route
+            path="/viewSessionNotAvailableTime"
+            component={ViewSessionNotAvailableTime}
+          />
+          <Route
             path="/addConsecutiveSession"
             component={AddConsecutiveSession}
           />
           <Route
+            path="/viewConsecutiveSession"
+            component={ViewConsecutiveSession}
+          />
+          <Route path="/addParallelSession" component={AddParallelSession} />
+          <Route path="/viewParallelSession" component={ViewParallelSession} />
+          <Route
             path="/addNotOverlappingSession"
             component={AddNotOverlappingSession}
           />
-          <Route path="/addParallelSession" component={AddParallelSession} />
+          <Route
+            path="/viewNotOverlappingSession"
+            component={ViewNotOverlappingSession}
+          />
           <Route path="/lecturer" component={LecturerTable} />
           <Route path="/editLecturer" component={EditLecturer} />
           <Route path="/viewLecturers" component={ViewLecturers} />
