@@ -15,7 +15,8 @@ const ViewSessionRooms = ({}) => {
         <Row className="my-3 px-4">
           {sortedPrimarySessions.map((session, index) => (
             <>
-              {session.room !== "" && (
+              {(session.lectureHalls.length !== 0 ||
+                session.laboratories.length !== 0) && (
                 <Col column sm="4 p-2">
                   <Card
                     className="mt-5 mb-3"
@@ -23,7 +24,7 @@ const ViewSessionRooms = ({}) => {
                     style={{ border: "solid black" }}
                   >
                     <Card.Body>
-                      <h5>Session {index + 1} </h5>
+                      <h5> Session {index + 1} </h5>
                       <Col column sm="12">
                         <label className="form-check-label">
                           {session.lecturers + ""}
@@ -51,7 +52,12 @@ const ViewSessionRooms = ({}) => {
                       </Col>
                       <Col column sm="12">
                         <label className="form-check-label">
-                          {session.room}
+                          {session.lectureHalls + ""}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.laboratories + ""}
                         </label>
                       </Col>
                     </Card.Body>

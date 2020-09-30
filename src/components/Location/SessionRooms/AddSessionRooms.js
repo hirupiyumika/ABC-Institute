@@ -124,8 +124,8 @@ const AddSessionRooms = ({}) => {
               <Row className="my-3 px-4">
                 {primarySessions.map((session, index) => (
                   <>
-                    {(session.lectureHalls == "" ||
-                      session.laboratories == "") && (
+                    {(session.lectureHalls.length == 0 ||
+                      session.laboratories.length == 0) && (
                       // <>
                       //   {!session.status && (
                       <Col column sm="4" key={index}>
