@@ -27,7 +27,6 @@ const CreatePrimarySession = ({}) => {
   const [code, setCode] = useState("");
   const [stdCount, setStdCount] = useState("");
   const [duration, setDuration] = useState("");
-  const [room, setRoom] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +38,6 @@ const CreatePrimarySession = ({}) => {
       code,
       stdCount,
       duration,
-      room,
     });
     setLecturers("");
     setTag("");
@@ -48,7 +46,6 @@ const CreatePrimarySession = ({}) => {
     setCode("");
     setStdCount("");
     setDuration("");
-    setRoom("");
   };
 
   const handleLecturers = (e) => {
@@ -236,7 +233,8 @@ const CreatePrimarySession = ({}) => {
                   <Row className="my-3 px-4">
                     {primarySessions.map((session, index) => (
                       <>
-                        {session.room == "" && (
+                        {(session.lectureHalls == "" ||
+                          session.laboratories == "") && (
                           <Col column sm="4 p-2">
                             <Card
                               className="mt-5 mb-3"

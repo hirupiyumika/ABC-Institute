@@ -32,7 +32,8 @@ const AddSessionRooms = ({}) => {
   const [subject, setSubject] = useState("");
   const [code, setCode] = useState("");
   const [duration, setDuration] = useState("");
-  const [room, setRoom] = useState("");
+  const [lectureHalls, setLectureHalls] = useState("");
+  const [laboratories, setLaboratories] = useState("");
   const [sr, setSr] = useState([]);
   const [lr, setLr] = useState([]);
   const [gr, setGr] = useState([]);
@@ -51,7 +52,8 @@ const AddSessionRooms = ({}) => {
       subject,
       code,
       duration,
-      room,
+      lectureHalls,
+      laboratories,
     });
     setLecturers("");
     setId("");
@@ -61,7 +63,8 @@ const AddSessionRooms = ({}) => {
     setSubject("");
     setCode("");
     setDuration("");
-    setRoom("");
+    setLectureHalls("");
+    setLaboratories("");
   };
 
   const handleSession = (e, session) => {
@@ -75,6 +78,14 @@ const AddSessionRooms = ({}) => {
     setSubject(session.subject);
     setCode(session.code);
     setDuration(session.duration);
+  };
+
+  const handleLectureHalls = (e) => {
+    setLectureHalls([...lectureHalls, e.target.value]);
+  };
+
+  const handleLaboratories = (e) => {
+    setLaboratories([...laboratories, e.target.value]);
   };
 
   const filterRooms = (data) => {
@@ -113,7 +124,8 @@ const AddSessionRooms = ({}) => {
               <Row className="my-3 px-4">
                 {primarySessions.map((session, index) => (
                   <>
-                    {session.status == false && session.room == "" && (
+                    {(session.lectureHalls == "" ||
+                      session.laboratories == "") && (
                       // <>
                       //   {!session.status && (
                       <Col column sm="4" key={index}>
@@ -181,11 +193,10 @@ const AddSessionRooms = ({}) => {
                           {room.lectureHalls.map((hall) => (
                             <Col column sm="3 p-2" key={hall}>
                               <input
-                                className="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions2"
+                                class="form-check-input"
+                                type="checkbox"
                                 value={hall}
-                                onChange={(e) => setRoom(e.target.value)}
+                                onChange={(e) => handleLectureHalls(e)}
                               />
                               <label className="form-check-label">{hall}</label>
                             </Col>
@@ -202,11 +213,10 @@ const AddSessionRooms = ({}) => {
                           {room.laboratories.map((lab) => (
                             <Col column sm="3 p-2" key={lab}>
                               <input
-                                className="form-check-input"
-                                type="radio"
-                                name="inlineRadioOptions2"
+                                class="form-check-input"
+                                type="checkbox"
                                 value={lab}
-                                onChange={(e) => setRoom(e.target.value)}
+                                onChange={(e) => handleLaboratories(e)}
                               />
                               <label className="form-check-label">{lab}</label>
                             </Col>
@@ -230,11 +240,10 @@ const AddSessionRooms = ({}) => {
                         {room.lectureHalls.map((hall) => (
                           <Col column sm="3 p-2" key={hall}>
                             <input
-                              className="form-check-input"
-                              type="radio"
-                              name="inlineRadioOptions2"
+                              class="form-check-input"
+                              type="checkbox"
                               value={hall}
-                              onChange={(e) => setRoom(e.target.value)}
+                              onChange={(e) => handleLectureHalls(e)}
                             />
                             <label className="form-check-label">{hall}</label>
                           </Col>
@@ -251,11 +260,10 @@ const AddSessionRooms = ({}) => {
                         {room.laboratories.map((lab) => (
                           <Col column sm="3 p-2" key={lab}>
                             <input
-                              className="form-check-input"
-                              type="radio"
-                              name="inlineRadioOptions2"
+                              class="form-check-input"
+                              type="checkbox"
                               value={lab}
-                              onChange={(e) => setRoom(e.target.value)}
+                              onChange={(e) => handleLaboratories(e)}
                             />
                             <label className="form-check-label">{lab}</label>
                           </Col>
@@ -278,11 +286,10 @@ const AddSessionRooms = ({}) => {
                         {room.lectureHalls.map((hall) => (
                           <Col column sm="3 p-2" key={hall}>
                             <input
-                              className="form-check-input"
-                              type="radio"
-                              name="inlineRadioOptions2"
+                              class="form-check-input"
+                              type="checkbox"
                               value={hall}
-                              onChange={(e) => setRoom(e.target.value)}
+                              onChange={(e) => handleLectureHalls(e)}
                             />
                             <label className="form-check-label">{hall}</label>
                           </Col>
@@ -299,11 +306,10 @@ const AddSessionRooms = ({}) => {
                         {room.laboratories.map((lab) => (
                           <Col column sm="3 p-2" key={lab}>
                             <input
-                              className="form-check-input"
-                              type="radio"
-                              name="inlineRadioOptions2"
+                              class="form-check-input"
+                              type="checkbox"
                               value={lab}
-                              onChange={(e) => setRoom(e.target.value)}
+                              onChange={(e) => handleLaboratories(e)}
                             />
                             <label className="form-check-label">{lab}</label>
                           </Col>
@@ -326,11 +332,10 @@ const AddSessionRooms = ({}) => {
                         {room.lectureHalls.map((hall) => (
                           <Col column sm="3 p-2" key={hall}>
                             <input
-                              className="form-check-input"
-                              type="radio"
-                              name="inlineRadioOptions2"
+                              class="form-check-input"
+                              type="checkbox"
                               value={hall}
-                              onChange={(e) => setRoom(e.target.value)}
+                              onChange={(e) => handleLectureHalls(e)}
                             />
                             <label className="form-check-label">{hall}</label>
                           </Col>
@@ -347,11 +352,10 @@ const AddSessionRooms = ({}) => {
                         {room.laboratories.map((lab) => (
                           <Col column sm="3 p-2" key={lab}>
                             <input
-                              className="form-check-input"
-                              type="radio"
-                              name="inlineRadioOptions2"
+                              class="form-check-input"
+                              type="checkbox"
                               value={lab}
-                              onChange={(e) => setRoom(e.target.value)}
+                              onChange={(e) => handleLaboratories(e)}
                             />
                             <label className="form-check-label">{lab}</label>
                           </Col>
@@ -372,11 +376,10 @@ const AddSessionRooms = ({}) => {
                     {room.roomType == "Lecture Hall" && (
                       <Col column sm="3 p-2" key={room}>
                         <input
-                          className="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions2"
+                          class="form-check-input"
+                          type="checkbox"
                           value={room.roomName}
-                          onChange={(e) => setRoom(e.target.value)}
+                          onChange={(e) => handleLectureHalls(e)}
                         />
                         <label className="form-check-label">
                           {room.roomName}
@@ -397,11 +400,10 @@ const AddSessionRooms = ({}) => {
                     {room.roomType == "Laboratory" && (
                       <Col column sm="3 p-2" key={room}>
                         <input
-                          className="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions2"
+                          class="form-check-input"
+                          type="checkbox"
                           value={room.roomName}
-                          onChange={(e) => setRoom(e.target.value)}
+                          onChange={(e) => handleLaboratories(e)}
                         />
                         <label className="form-check-label">
                           {room.roomName}
@@ -426,7 +428,8 @@ const AddSessionRooms = ({}) => {
         <Row className="my-3 px-4">
           {sortedPrimarySessions.map((session, index) => (
             <>
-              {session.room !== "" && (
+              {(session.lectureHalls.length !== 0 ||
+                session.laboratories.length !== 0) && (
                 <Col column sm="4 p-2">
                   <Card
                     className="mt-5 mb-3"
@@ -462,7 +465,12 @@ const AddSessionRooms = ({}) => {
                       </Col>
                       <Col column sm="12">
                         <label className="form-check-label">
-                          {session.room}
+                          {session.lectureHalls + ""}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label">
+                          {session.laboratories + ""}
                         </label>
                       </Col>
                     </Card.Body>

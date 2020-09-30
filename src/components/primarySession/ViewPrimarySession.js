@@ -15,7 +15,7 @@ const ViewPrimarySession = ({}) => {
         <Row className="my-3 px-4">
           {primarySessions.map((session, index) => (
             <>
-              {session.room == "" && (
+              {(session.lectureHalls == "" || session.laboratories == "") && (
                 <Col column sm="4 p-2">
                   <Card className="mt-5 mb-3" style={{ border: "solid black" }}>
                     <div>

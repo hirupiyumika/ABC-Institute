@@ -40,10 +40,8 @@ const PrimarySessionsSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
-  room: {
-    type: String,
-    trim: true,
-  },
+  lectureHalls: [{ type: String, trim: true }],
+  laboratories: [{ type: String, trim: true }],
   status: {
     type: Boolean,
     default: false,

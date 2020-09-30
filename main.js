@@ -1563,7 +1563,7 @@ ipcMain.on("primary_Sessions:delete", async (e, id) => {
 
 //update primary_Session
 ipcMain.on("primary_Sessions:update", async (e, session) => {
-  // console.log("AddSessionRooms", session);
+  console.log("AddSessionRooms", session);
 
   try {
     await PrimarySessions.findByIdAndUpdate(session.id, {
@@ -1574,7 +1574,8 @@ ipcMain.on("primary_Sessions:update", async (e, session) => {
       code: session.code,
       stdCount: session.stdCount,
       duration: session.duration,
-      room: session.room,
+      lectureHalls: session.lectureHalls,
+      laboratories: session.laboratories,
     });
     sendPrimarySessions();
   } catch (error) {
