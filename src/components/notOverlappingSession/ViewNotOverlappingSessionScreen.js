@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
 import { StudentContext } from "../../context/StudentContext";
+import DeleteCrossButton from "./../common/DeleteCrossButton";
 
 const ViewNotOverlappingSessionScreen = ({}) => {
   const { notOverlappingSessions } = useContext(StudentContext);
