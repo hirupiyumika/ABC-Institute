@@ -11,7 +11,6 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
   const { addConsecutiveSession } = useContext(StudentContext);
   const [sessions, setSessions] = useState([]);
   const [number, setNumber] = useState("");
-  const [room, setRoom] = useState("");
   const [error, setError] = useState(false);
 
   var indexes = [];
@@ -21,46 +20,10 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const lecturers1 = sessions[0].lecturers;
-    const lecturers2 = sessions[1].lecturers;
-    const duration1 = sessions[0].duration;
-    const duration2 = sessions[1].duration;
-    const stdCount1 = sessions[0].stdCount;
-    const stdCount2 = sessions[1].stdCount;
-    const group1 = sessions[0].group;
-    const group2 = sessions[1].group;
-    const subject1 = sessions[0].subject;
-    const subject2 = sessions[1].subject;
-    const tag1 = sessions[0].tag;
-    const tag2 = sessions[1].tag;
-    const tag3 = sessions.length === 2 ? " " : sessions[2].tag;
-    const lecturers3 = sessions.length === 2 ? " " : sessions[2].lecturers;
-    const duration3 = sessions.length === 2 ? " " : sessions[2].duration;
-    const stdCount3 = sessions.length === 2 ? " " : sessions[2].stdCount;
-    const group3 = sessions.length === 2 ? " " : sessions[2].group;
-    const subject3 = sessions.length === 2 ? " " : sessions[2].subject;
 
     addConsecutiveSession({
-      lecturers1,
-      duration1,
-      subject1,
-      group1,
-      stdCount1,
-      tag1,
-      lecturers2,
-      duration2,
-      subject2,
-      group2,
-      stdCount2,
-      tag2,
-      lecturers3,
-      duration3,
-      subject3,
-      group3,
-      group3,
-      stdCount3,
-      tag3,
-      room,
+      number,
+      sessions,
     });
   };
 
@@ -70,7 +33,7 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
     const selected = primarySessions.filter((item) => item._id === value);
 
     if (sessions.length === 0) {
-      setSessions([...sessions, selected[0]]);
+      setSessions([selected[0]]);
     } else if (selected[0].group !== sessions[0].group) {
       setError(true);
     } else {
@@ -90,7 +53,7 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
                   min="0"
                   max="3"
                   value={number}
-                  placeholder="No of sessions"
+                  placeholder="Select No of Sessions"
                   onChange={(e) => setNumber(e.target.value)}
                 />
               </Col>
@@ -119,7 +82,7 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
               );
             })}
             {error && (
-              <Alert variant="info">Student groups are not matching</Alert>
+              <Alert variant="info">student groups are not matching</Alert>
             )}
             <Row className="my-3">
               <Col>

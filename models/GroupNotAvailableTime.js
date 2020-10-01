@@ -31,6 +31,6 @@ const GroupNotAvailableTimeSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model(
-  "Group Not Available Time Schema",
+  "Group Not Available Time",
   GroupNotAvailableTimeSchema
 );

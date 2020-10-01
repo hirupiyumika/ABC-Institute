@@ -31,6 +31,6 @@ const SessionNotAvailableTimeSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model(
-  "Session Not Available Time Schema",
+  "Session Not Available Time",
   SessionNotAvailableTimeSchema
 );

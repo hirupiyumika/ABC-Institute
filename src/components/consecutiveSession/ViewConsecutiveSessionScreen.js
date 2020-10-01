@@ -7,8 +7,9 @@ const ViewConsecutiveSessionScreen = ({}) => {
   const { consecutiveSessions, deleteConsecutiveSession } = useContext(
     StudentContext
   );
+  console.log("Nithya", consecutiveSessions);
   return (
-    <>
+    <React.Fragment>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item active>View Consecutive Sessions</Breadcrumb.Item>
@@ -32,91 +33,44 @@ const ViewConsecutiveSessionScreen = ({}) => {
                     <DeleteCrossButton />
                   </Button>
                 </div>
-                <Card.Body>
+                <Card.Body key={index}>
                   <h5>Consecutive Session {index + 1} </h5>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.lecturers1 + ""}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.tag1}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.group1}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.subject1}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.stdCount1} ({session.duration1})
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.lecturers2 + ""}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.tag2}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.group2}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.subject2}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.stdCount2} ({session.duration2})
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.lecturers3 + ""}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.tag3}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.group3}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.subject3}
-                    </label>
-                  </Col>
-                  <Col column sm="12">
-                    <label className="form-check-label" for="gridCheck1">
-                      {session.stdCount3 === 0 ? " " : session.stdCount3}
-                      {session.duration3 === 0 ? "" : `(${session.duration3})`}
-                    </label>
-                  </Col>
+                  {session.sessions.map((item, index) => (
+                    <div>
+                      <Col column sm="12">
+                        <label className="form-check-label" for="gridCheck1">
+                          {item.lecturers + ""}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label" for="gridCheck1">
+                          {item.tag}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label" for="gridCheck1">
+                          {item.group}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label" for="gridCheck1">
+                          {item.subject}
+                        </label>
+                      </Col>
+                      <Col column sm="12">
+                        <label className="form-check-label" for="gridCheck1">
+                          {item.stdCount} ({item.duration})
+                        </label>
+                      </Col>
+                    </div>
+                  ))}
                 </Card.Body>
               </Card>
             </Col>
           ))}
         </Row>
       </Container>
-    </>
+    </React.Fragment>
   );
 };
 
