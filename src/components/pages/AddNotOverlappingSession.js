@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import { LogContext } from "./../../context/context";
 import { StudentContext } from "./../../context/StudentContext";
 import AddAddNotOverlappingSessionForm from "./../notOverlappingSession/AddNotOverlappingSessionForm";
+import ViewNotOverlappingSessionScreen from "./../notOverlappingSession/ViewNotOverlappingSessionScreen";
 
 const AddNotOverlappingSession = () => {
   const { primarySessions } = useContext(LogContext);
@@ -19,6 +20,7 @@ const AddNotOverlappingSession = () => {
         <AddAddNotOverlappingSessionForm primarySessions={primarySessions} />
         {show && <Alert variant={variant}>{message}</Alert>}
       </Container>
+      <ViewNotOverlappingSessionScreen />
     </React.Fragment>
   );
 };
