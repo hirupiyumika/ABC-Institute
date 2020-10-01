@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Swal from "sweetalert2";
 import { StudentContext } from "./../../context/StudentContext";
 
 const AddConsecutiveSessionForm = ({ primarySessions }) => {
@@ -13,7 +14,7 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
   const [number, setNumber] = useState("");
   const [room, setRoom] = useState("");
   const [error, setError] = useState(false);
-
+  const [addedError, setAddedError] = useState(false);
   var indexes = [];
   for (var i = 1; i <= number; i++) {
     indexes.push(i);
@@ -22,20 +23,45 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    addConsecutiveSession({
-      number,
-      sessions,
-      room,
-    });
+    if (error === true || addedError === true) {
+      if (error) {
+        Swal.fire({
+          icon: "info",
+          title: "groups are not matching",
+          showConfirmButton: true,
+        });
+      } else {
+        Swal.fire({
+          icon: "info",
+          title: "same session selected",
+          showConfirmButton: true,
+        });
+      }
+    } else {
+      addConsecutiveSession({
+        number,
+        sessions,
+      });
+      Swal.fire({
+        icon: "success",
+        title: "consecutive session added successfully",
+        showConfirmButton: true,
+        timer: 1500,
+      });
+      
   };
 
   const handleSessionChange = (e) => {
+    setAddedError(false);
     setError(false);
     const value = e.target.value;
     const selected = primarySessions.filter((item) => item._id === value);
+    const added = sessions.filter((item) => item._id === value);
 
     if (sessions.length === 0) {
       setSessions([selected[0]]);
+    } else if (added.length !== 0) {
+      setAddedError(true);
     } else if (selected[0].group !== sessions[0].group) {
       setError(true);
     } else {
@@ -85,6 +111,9 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
             })}
             {error && (
               <Alert variant="info">student groups are not matching</Alert>
+            )}
+            {addedError && (
+              <Alert variant="info">session already selected</Alert>
             )}
             <Row className="my-3">
               <Col>

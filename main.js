@@ -388,7 +388,6 @@ async function sendStudents() {
 ipcMain.on(
   "academicYearAndSemesters:update",
   async (e, academicYearAndSemester) => {
-    // console.log(academicYearAndSemester);
     try {
       await AcademicYearAndSemester.findByIdAndUpdate(
         academicYearAndSemester._id,
@@ -906,6 +905,15 @@ async function sendParallelSessions() {
   }
 }
 
+// delete parallel session
+ipcMain.on("parallelSession:delete", async (e, id) => {
+  try {
+    await ParallelSession.findOneAndDelete({ _id: id });
+    sendParallelSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
 // create not overlapping session
 ipcMain.on("notOverlappingSession:add", async (e, notOverlappingSession) => {
   try {
@@ -916,7 +924,17 @@ ipcMain.on("notOverlappingSession:add", async (e, notOverlappingSession) => {
   }
 });
 
-// get parallel session
+// delete not overlapping session
+ipcMain.on("notOverlappingSession:delete", async (e, id) => {
+  try {
+    await NotOverlappingSession.findOneAndDelete({ _id: id });
+    sendNotOverlappingSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get not overlapping session
 ipcMain.on("notOverlappingSession:load", sendNotOverlappingSessions);
 async function sendNotOverlappingSessions() {
   try {

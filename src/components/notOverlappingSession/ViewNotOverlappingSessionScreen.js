@@ -4,7 +4,9 @@ import { StudentContext } from "../../context/StudentContext";
 import DeleteCrossButton from "./../common/DeleteCrossButton";
 
 const ViewNotOverlappingSessionScreen = ({}) => {
-  const { notOverlappingSessions } = useContext(StudentContext);
+  const { notOverlappingSessions, deleteNotOverlappingSession } = useContext(
+    StudentContext
+  );
   return (
     <React.Fragment>
       <Breadcrumb>
@@ -25,7 +27,7 @@ const ViewNotOverlappingSessionScreen = ({}) => {
                       border: "none",
                       color: "black",
                     }}
-                    onClick={() => deleteConsecutiveSession(session._id)}
+                    onClick={() => deleteNotOverlappingSession(session._id)}
                   >
                     <DeleteCrossButton />
                   </Button>

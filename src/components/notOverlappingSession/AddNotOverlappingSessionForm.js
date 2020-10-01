@@ -5,13 +5,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Swal from "sweetalert2";
 import { StudentContext } from "./../../context/StudentContext";
 
 const AddNotOverlappingSessionForm = ({ primarySessions }) => {
   const { addNotOverlappingSession } = useContext(StudentContext);
   const [sessions, setSessions] = useState([]);
   const [number, setNumber] = useState("");
-  const [error, setError] = useState(false);
+  const [addedError, setAddedError] = useState(false);
 
   var indexes = [];
   for (var i = 1; i <= number; i++) {
@@ -21,21 +22,36 @@ const AddNotOverlappingSessionForm = ({ primarySessions }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    addNotOverlappingSession({
-      number,
-      sessions,
-    });
+    if (addedError === true) {
+      Swal.fire({
+        icon: "info",
+        title: "same session selected",
+        showConfirmButton: true,
+      });
+    } else {
+      addNotOverlappingSession({
+        number,
+        sessions,
+      });
+      Swal.fire({
+        icon: "success",
+        title: "not overlapping session added successfully",
+        showConfirmButton: true,
+        timer: 1500,
+      });
+    }
   };
 
   const handleSessionChange = (e) => {
-    setError(false);
+    setAddedError(false);
     const value = e.target.value;
     const selected = primarySessions.filter((item) => item._id === value);
+    const added = sessions.filter((item) => item._id === value);
 
     if (sessions.length === 0) {
       setSessions([selected[0]]);
-    } else if (selected[0].group !== sessions[0].group) {
-      setError(true);
+    } else if (added.length !== 0) {
+      setAddedError(true);
     } else {
       setSessions([...sessions, selected[0]]);
     }
@@ -81,8 +97,8 @@ const AddNotOverlappingSessionForm = ({ primarySessions }) => {
                 </Row>
               );
             })}
-            {error && (
-              <Alert variant="info">Student groups are not matching</Alert>
+            {addedError && (
+              <Alert variant="info">session already selected</Alert>
             )}
             <Row className="my-3">
               <Col>
