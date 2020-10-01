@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
 import { StudentContext } from "../../context/StudentContext";
+import DeleteCrossButton from "./../common/DeleteCrossButton";
 
 const ViewParallelSessionScreen = ({}) => {
   const { parallelSessions } = useContext(StudentContext);
@@ -30,7 +31,7 @@ const ViewParallelSessionScreen = ({}) => {
                   </Button>
                 </div>
                 <Card.Body key={index}>
-                  <h5>Consecutive Session {index + 1} </h5>
+                  <h5>Parallel Session {index + 1} </h5>
                   {session.sessions.map((item, index) => (
                     <div>
                       <Col column sm="12">
