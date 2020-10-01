@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import { LogContext } from "./../../context/context";
 import { StudentContext } from "./../../context/StudentContext";
 import AddParallelSessionForm from "./../parallelSessions/AddParallelSessionForm";
+import ViewParallelSessionScreen from "./../parallelSessions/ViewParallelSessionScreen";
 
 const AddParallelSession = () => {
   const { primarySessions } = useContext(LogContext);
@@ -18,6 +19,7 @@ const AddParallelSession = () => {
       <Container>
         <AddParallelSessionForm primarySessions={primarySessions} />
         {show && <Alert variant={variant}>{message}</Alert>}
+        <ViewParallelSessionScreen />
       </Container>
     </React.Fragment>
   );

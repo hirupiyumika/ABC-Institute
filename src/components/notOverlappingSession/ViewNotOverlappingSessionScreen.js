@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
+import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { StudentContext } from "../../context/StudentContext";
 import DeleteCrossButton from "./../common/DeleteCrossButton";
 
@@ -9,10 +9,6 @@ const ViewNotOverlappingSessionScreen = ({}) => {
   );
   return (
     <React.Fragment>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>View Not Overlapping Sessions</Breadcrumb.Item>
-      </Breadcrumb>
       <Container>
         <Row className="my-3 px-4">
           {notOverlappingSessions.map((session, index) => (
