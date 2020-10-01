@@ -49,7 +49,7 @@ class Statistics extends Component {
                   backgroundColor: [
                     "rgba(255, 191, 0,0.6)",
                     "rgba(0, 191, 255,0.6)",
-                    "rgba(75, 192, 192, 0.6)",
+                    "rgba(191, 0, 255,0.6)",
                   ],
                 },
               ],
