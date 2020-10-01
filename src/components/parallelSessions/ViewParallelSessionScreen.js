@@ -4,7 +4,9 @@ import { StudentContext } from "../../context/StudentContext";
 import DeleteCrossButton from "./../common/DeleteCrossButton";
 
 const ViewParallelSessionScreen = ({}) => {
-  const { parallelSessions } = useContext(StudentContext);
+  const { parallelSessions, deleteParallelSession } = useContext(
+    StudentContext
+  );
   return (
     <React.Fragment>
       <Breadcrumb>
@@ -25,7 +27,7 @@ const ViewParallelSessionScreen = ({}) => {
                       border: "none",
                       color: "black",
                     }}
-                    onClick={() => deleteConsecutiveSession(session._id)}
+                    onClick={() => deleteParallelSession(session._id)}
                   >
                     <DeleteCrossButton />
                   </Button>
