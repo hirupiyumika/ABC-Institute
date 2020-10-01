@@ -461,6 +461,12 @@ class LogProvider extends Component {
   // add lecturer
 
   addLecturer = (lecturer) => {
+    var empId;
+    if (lecturer.eid !== "") {
+      empId = this.state.lecturers.filter((l) => l.eid == lecturer.eid);
+    }
+    if (empId !== "")
+      this.showAlert("please select different employee ID", "danger");
     if (lecturer.name === "")
       this.showAlert("please enter Lecturer Name", "danger");
     else if (lecturer.eid === "")
@@ -475,7 +481,7 @@ class LogProvider extends Component {
       this.showAlert("please select Building", "danger");
     else if (lecturer.level === "")
       this.showAlert("please select Level", "danger");
-    else {
+    else if (empId == "") {
       ipcRenderer.send("lecturers:add", lecturer);
       this.showAlert("Lecturer Added");
     }
@@ -1175,16 +1181,6 @@ class LogProvider extends Component {
     var singleGroupRoom = this.state.groupRooms.filter((gr) => gr._id === id);
     this.setState({ singleGroupRoom });
   };
-
-  // //update Groups-Rooms
-  // updateBuilding = (gr) => {
-  //   if (gr.building === "" || building.building === "") {
-  //     this.showAlert("please enter Building Name", "danger");
-  //     return false;
-  //   }
-  //   ipcRenderer.send("buildings:update", building);
-  //   this.showAlert("Building Updated");
-  // };
 
   // Add Subject-Rooms
   AddSubjectRooms = (Sroom) => {
