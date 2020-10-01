@@ -1387,7 +1387,7 @@ class LogProvider extends Component {
       sessions: s.sessions,
       room: "",
     };
-    console.log("deleteConsecutiveSession", session);
+    // console.log("deleteConsecutiveSession", session);
 
     try {
       Swal.fire({
@@ -1471,7 +1471,7 @@ class LogProvider extends Component {
   };
 
   render() {
-    console.log("singleGroupRoom", this.state.singleGroupRoom);
+    // console.log("singleGroupRoom", this.state.singleGroupRoom);
     return (
       <LogContext.Provider
         value={{
