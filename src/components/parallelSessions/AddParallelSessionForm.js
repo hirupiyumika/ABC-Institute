@@ -6,12 +6,20 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { StudentContext } from "./../../context/StudentContext";
+import { DaysAndHoursContext } from "./../../context/DaysAndHoursProvider";
 
 const AddParallelSessionForm = ({ primarySessions }) => {
-  const { addParallelSession } = useContext(StudentContext);
+  const { addParallelSession, timeSlots } = useContext(StudentContext);
+  const { workingDays } = useContext(DaysAndHoursContext);
+  const [day, setDay] = useState("");
+  const [time, setTime] = useState("");
+  const [times, setTimes] = useState([]);
   const [sessions, setSessions] = useState([]);
   const [number, setNumber] = useState("");
+  const [duration, setDuration] = useState("");
   const [error, setError] = useState(false);
+
+  console.log(timeSlots);
 
   var indexes = [];
   for (var i = 1; i <= number; i++) {
@@ -20,69 +28,28 @@ const AddParallelSessionForm = ({ primarySessions }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const lecturers1 = sessions[0].lecturers;
-    const lecturers2 = sessions[1].lecturers;
-    const duration1 = sessions[0].duration;
-    const duration2 = sessions[1].duration;
-    const stdCount1 = sessions[0].stdCount;
-    const stdCount2 = sessions[1].stdCount;
-    const group2 = sessions[1].group;
-    const group1 = sessions[0].group;
-    const subject1 = sessions[0].subject;
-    const subject2 = sessions[1].subject;
-    const tag1 = sessions[0].tag;
-    const tag2 = sessions[1].tag;
-    const tag3 = sessions.length === 2 ? " " : sessions[2].tag;
-    const lecturers3 = sessions.length === 2 ? " " : sessions[2].lecturers;
-    const duration3 = sessions.length === 2 ? " " : sessions[2].duration;
-    const stdCount3 = sessions.length === 2 ? " " : sessions[2].stdCount;
-    const group3 = sessions.length === 2 ? " " : sessions[2].group;
-    const subject3 = sessions.length === 2 ? " " : sessions[2].subject;
-    const tag4 = sessions.length === 2 ? " " : sessions[3].tag;
-    const lecturers4 = sessions.length === 2 ? " " : sessions[3].lecturers;
-    const duration4 = sessions.length === 2 ? " " : sessions[3].duration;
-    const stdCount4 = sessions.length === 2 ? " " : sessions[3].stdCount;
-    const group4 = sessions.length === 2 ? " " : sessions[3].group;
-    const subject4 = sessions.length === 2 ? " " : sessions[3].subject;
-    const tag5 = sessions.length === 2 ? " " : sessions[4].tag;
-    const lecturers5 = sessions.length === 2 ? " " : sessions[4].lecturers;
-    const duration5 = sessions.length === 2 ? " " : sessions[4].duration;
-    const stdCount5 = sessions.length === 2 ? " " : sessions[4].stdCount;
-    const group5 = sessions.length === 2 ? " " : sessions[4].group;
-    const subject5 = sessions.length === 2 ? " " : sessions[4].subject;
 
     addParallelSession({
-      lecturers1,
-      duration1,
-      subject1,
-      group1,
-      stdCount1,
-      tag1,
-      lecturers2,
-      duration2,
-      subject2,
-      group2,
-      stdCount2,
-      tag2,
-      lecturers3,
-      duration3,
-      subject3,
-      group3,
-      stdCount3,
-      tag3,
-      lecturers4,
-      duration4,
-      subject4,
-      group4,
-      stdCount4,
-      tag4,
-      lecturers5,
-      duration5,
-      subject5,
-      group5,
-      stdCount5,
-      tag5,
+      day,
+      time,
+      duration,
+      number,
+      sessions,
     });
+    console.log(times);
+  };
+
+  const handleDay = (e) => {
+    setDay(e.target.value);
+    filterSelectedDay(e.target.value);
+  };
+
+  const filterSelectedDay = (day) => {
+    const filtered = timeSlots[0].daysAndSlots.filter(
+      (item) => item.day === day
+    );
+    console.log(filtered.length);
+    setTimes(filtered);
   };
 
   const handleSessionChange = (e) => {
@@ -91,7 +58,7 @@ const AddParallelSessionForm = ({ primarySessions }) => {
     const selected = primarySessions.filter((item) => item._id === value);
 
     if (sessions.length === 0) {
-      setSessions([...sessions, selected[0]]);
+      setSessions([selected[0]]);
     } else if (selected[0].group !== sessions[0].group) {
       setError(true);
     } else {
@@ -142,6 +109,50 @@ const AddParallelSessionForm = ({ primarySessions }) => {
             {error && (
               <Alert variant="info">Student groups are not matching</Alert>
             )}
+            <Row className="my-3">
+              <Col>
+                <Form.Control
+                  as="select"
+                  value={day}
+                  onChange={(e) => handleDay(e)}
+                >
+                  <option value="0">Select Day</option>
+                  {workingDays.map((workingDay) => (
+                    <option key={workingDay._id} value={workingDay.day}>
+                      {workingDay.day}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Control
+                  as="select"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                >
+                  <option value="0">Select Starting Time</option>
+                  {times.map((item) => (
+                    <option key={item._id} value={item.time}>
+                      {item.time}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Col>
+            </Row>
+            <Row className="my-3">
+              <Col>
+                <Form.Control
+                  placeholder="Duration(Hours)"
+                  type="number"
+                  min="0"
+                  max="5"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                />
+              </Col>
+            </Row>
             <Row className="my-3">
               <Col>
                 <Button type="submit" variant="secondary" block>

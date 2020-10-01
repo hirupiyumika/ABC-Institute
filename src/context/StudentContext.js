@@ -46,6 +46,7 @@ class StudentProvider extends Component {
     sortedParallelSessions: [],
     notOverlappingSessions: [],
     sortedNotOverlappingSessions: [],
+    timeSlots: [],
   };
 
   /* sprint 01 */
@@ -834,6 +835,18 @@ class StudentProvider extends Component {
     });
   };
 
+  // populate time slots
+  populateTimeSlots() {
+    try {
+      ipcRenderer.send("timeSlots:load");
+      ipcRenderer.on("timeSlots:get", (e, timeSlots) => {
+        this.setState({
+          timeSlots: JSON.parse(timeSlots),
+          sortedTimeSlots: JSON.parse(timeSlots),
+        });
+      });
+    } catch (ex) {}
+  }
   // add consecutive session
   addConsecutiveSession = (consecutiveSession) => {
     console.log("consecutiveSession", consecutiveSession);
@@ -892,6 +905,7 @@ class StudentProvider extends Component {
 
   // add parallel session
   addParallelSession = (parallelSession) => {
+    console.log(parallelSession);
     ipcRenderer.send("parallelSession:add", parallelSession);
     this.showAlert("parallel session added");
   };
@@ -2027,6 +2041,7 @@ class StudentProvider extends Component {
     this.populateGroupNotAvailableTimes();
     this.populateSubGroupNotAvailableTimes();
     this.populateSessionNotAvailableTimes();
+    this.populateTimeSlots();
     ipcRenderer.on("students:clear", () => {
       this.setState({ students: [], sortedStudents: [] });
       this.showAlert("students cleared");

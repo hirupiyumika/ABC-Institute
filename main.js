@@ -831,6 +831,19 @@ ipcMain.on(
   }
 );
 
+// get time slots
+ipcMain.on("timeSlots:load", sendTimeSlots);
+async function sendTimeSlots() {
+  try {
+    const timeSlots = await TimeSlotSchema.find().sort({
+      createdDate: 1,
+    });
+    mainWindow.webContents.send("timeSlots:get", JSON.stringify(timeSlots));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // create consecutive session
 ipcMain.on("consecutiveSession:add", async (e, consecutiveSession) => {
   try {

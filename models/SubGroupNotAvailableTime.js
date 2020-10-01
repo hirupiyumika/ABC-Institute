@@ -31,6 +31,6 @@ const SubGroupNotAvailableTimeSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model(
-  "Sub Group Not Available Time Schema",
+  "Sub Group Not Available Time",
   SubGroupNotAvailableTimeSchema
 );

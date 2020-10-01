@@ -31,6 +31,6 @@ const LecturerNotAvailableTimeSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model(
-  "Lecturer Not Available Time Schema",
+  "Lecturer Not Available Time",
   LecturerNotAvailableTimeSchema
 );
