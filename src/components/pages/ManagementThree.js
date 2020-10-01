@@ -108,7 +108,18 @@ class ManagementThree extends Component {
                 </Button>
               </Link>
             </Col>
-            <Col className="mt-5"></Col>
+            <Col className="mt-5">
+              <Link
+                to="/statistics"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Statistics
+                </Button>
+              </Link>
+            </Col>
           </Row>
           <Row>
             <Col className="mt-5">

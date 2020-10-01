@@ -246,7 +246,7 @@ const AddGroupsRooms = ({}) => {
                     <Moment format="h:mm:ss a">{new Date(grp.created)}</Moment>
                   </td>
                   {/* <td>
-                    <Link to="/editLecturer">
+                    <Link to="/editGroupsRooms">
                       <Button
                         variant="primary"
                         size="sm"

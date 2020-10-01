@@ -109,7 +109,7 @@ const AddSessionRooms = ({}) => {
         tr.laboratories
     );
   };
-  console.log("SRq", tr);
+  // console.log("SRq", tr);
   return (
     <>
       <Breadcrumb>

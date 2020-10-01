@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
 import { LogContext } from "../../context/context";
 import { Link } from "react-router-dom";
+import SearchBox from "../../components/common/SearchBox";
 
 const ViewPrimarySession = ({}) => {
-  const { primarySessions, deleteSession, alert } = useContext(LogContext);
+  const {
+    sortedPrimarySessions,
+    deleteSession,
+    search,
+    handleSearch,
+    alert,
+  } = useContext(LogContext);
+
   return (
     <>
       <Breadcrumb>
@@ -12,8 +20,13 @@ const ViewPrimarySession = ({}) => {
         <Breadcrumb.Item active>View Primary Sessions</Breadcrumb.Item>
       </Breadcrumb>
       <Container>
+        <SearchBox
+          handleChange={handleSearch}
+          search={search}
+          placeholder="Search"
+        />
         <Row className="my-3 px-4">
-          {primarySessions.map((session, index) => (
+          {sortedPrimarySessions.map((session, index) => (
             <>
               {(session.lectureHalls == "" || session.laboratories == "") && (
                 <Col column sm="4 p-2">

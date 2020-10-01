@@ -95,6 +95,7 @@ import AddSessionRooms from "../components/Location/SessionRooms/AddSessionRooms
 import ViewSessionRooms from "../components/Location/SessionRooms/ViewSessionRooms";
 import AddConsecutiveSessionRoom from "../components/Location/ConscutiveSessionRoom/AddConsecutiveSessionRoom";
 import ViewConsecutiveSessionRoom from "../components/Location/ConscutiveSessionRoom/ViewConsecutiveSessionRoom";
+import Statistics from "../components/statistics/Statistics";
 
 class AppRouter extends Component {
   render() {
@@ -231,6 +232,7 @@ class AppRouter extends Component {
           <Route path="/room" component={RoomTable} />
           <Route path="/editRoom" component={EditRoom} />
           <Route path="/viewRooms" component={ViewRooms} />
+          <Route path="/statistics" component={Statistics} />
           <Route path="/lecturersStatistics" component={LecturersStatistics} />
           <Route path="/studentsStatistics" component={StudentsStatistics} />
           <Route path="/subjectsStatistics" component={SubjectsStatistics} />

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const Schema = mongoose.Schema;
+
 const RoomsSchema = new mongoose.Schema({
   roomName: {
     type: String,
@@ -17,9 +19,8 @@ const RoomsSchema = new mongoose.Schema({
     required: [true, "Building is required"],
   },
   buildingId: {
-    type: String,
-    trim: true,
-    required: [true, "Building ID is required"],
+    type: Schema.Types.ObjectId,
+    ref: "Buildings",
   },
   capacity: {
     type: Number,

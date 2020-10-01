@@ -28,12 +28,8 @@ const ViewConsecutiveSessionRoom = ({}) => {
           {sortedConsecutiveSessions.map((session, index) => (
             <>
               {session.room !== "" && (
-                <Col column sm="4 p-2">
-                  <Card
-                    className="mt-5 mb-3"
-                    key={index}
-                    style={{ border: "solid black" }}
-                  >
+                <Col column sm="4" key={session._id}>
+                  <Card className="mt-5 mb-3" style={{ border: "solid black" }}>
                     <div>
                       <Button
                         variant="btn btn-outline-danger"
@@ -60,79 +56,54 @@ const ViewConsecutiveSessionRoom = ({}) => {
                         </svg>
                       </Button>
                     </div>
-                    <Card.Body>
-                      <h5> Consecutive Session {index + 1} </h5>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.lecturers1 + ""}
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.tag1}
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.subject1}
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.stdCount1} ({session.duration1})
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.lecturers2 + ""}
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.tag2}
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.subject2}
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.stdCount2} ({session.duration2})
-                        </label>
-                      </Col>
-                      {session.tag3 !== "" && (
-                        <>
+                    <Card.Body key={index}>
+                      <h5>Consecutive Session {index + 1} </h5>
+                      {session.sessions.map((item, index) => (
+                        <div>
                           <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.lecturers3 + ""}
+                            <label
+                              className="form-check-label"
+                              for="gridCheck1"
+                            >
+                              {item.lecturers + ""}
                             </label>
                           </Col>
                           <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.tag3}
+                            <label
+                              className="form-check-label"
+                              for="gridCheck1"
+                            >
+                              {item.tag}
                             </label>
                           </Col>
                           <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.subject3}
+                            <label
+                              className="form-check-label"
+                              for="gridCheck1"
+                            >
+                              {item.group}
                             </label>
                           </Col>
                           <Col column sm="12">
-                            <label className="form-check-label">
-                              {session.stdCount3} ({session.duration3})
+                            <label
+                              className="form-check-label"
+                              for="gridCheck1"
+                            >
+                              {item.subject}
                             </label>
                           </Col>
-                        </>
-                      )}
+                          <Col column sm="12">
+                            <label
+                              className="form-check-label"
+                              for="gridCheck1"
+                            >
+                              {item.stdCount} ({item.duration})
+                            </label>
+                          </Col>
+                        </div>
+                      ))}
                       <Col column sm="12">
-                        <label className="form-check-label">
-                          {session.group1}
-                        </label>
-                      </Col>
-                      <Col column sm="12">
-                        <label className="form-check-label">
+                        <label className="form-check-label" for="gridCheck1">
                           {session.room}
                         </label>
                       </Col>
