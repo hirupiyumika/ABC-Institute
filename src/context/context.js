@@ -44,6 +44,55 @@ class LogProvider extends Component {
     },
   };
 
+  //search primary session
+  handleSearch = (event) => {
+    const name = event.target.name;
+
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState(
+      {
+        [name]: value,
+      },
+
+      this.sortSessionData
+    );
+  };
+
+  sortSessionData = () => {
+    const { primarySessions, search } = this.state;
+    let tempSessions = [...primarySessions];
+
+    if (search.length > 0) {
+      tempSessions = tempSessions.filter((item) => {
+        console.log("item", item);
+        let tempLecturer;
+        let tempSearch = search.toLowerCase();
+        item.lecturers.map((lec) => {
+          tempLecturer = lec.toLowerCase().slice(0, search.length);
+        });
+        let tempTag = item.tag.toLowerCase().slice(0, search.length);
+        let tempGroup = item.group.toLowerCase().slice(0, search.length);
+        let tempSubject = item.subject.toLowerCase().slice(0, search.length);
+        if (tempSearch === tempLecturer) {
+          return item;
+        } else if (tempSearch === tempTag) {
+          return item;
+        } else if (tempSearch === tempGroup) {
+          return item;
+        } else if (tempSearch === tempSubject) {
+          return item;
+        }
+        return null;
+      });
+    }
+    this.setState({
+      sortedPrimarySessions: tempSessions,
+    });
+  };
+
   // handle lecturer change
   handleLecturerChange = (event) => {
     const name = event.target.name;
@@ -412,6 +461,12 @@ class LogProvider extends Component {
   // add lecturer
 
   addLecturer = (lecturer) => {
+    var empId;
+    if (lecturer.eid !== "") {
+      empId = this.state.lecturers.filter((l) => l.eid == lecturer.eid);
+    }
+    if (empId !== "")
+      this.showAlert("please select different employee ID", "danger");
     if (lecturer.name === "")
       this.showAlert("please enter Lecturer Name", "danger");
     else if (lecturer.eid === "")
@@ -426,7 +481,7 @@ class LogProvider extends Component {
       this.showAlert("please select Building", "danger");
     else if (lecturer.level === "")
       this.showAlert("please select Level", "danger");
-    else {
+    else if (empId == "") {
       ipcRenderer.send("lecturers:add", lecturer);
       this.showAlert("Lecturer Added");
     }
@@ -1127,16 +1182,6 @@ class LogProvider extends Component {
     this.setState({ singleGroupRoom });
   };
 
-  // //update Groups-Rooms
-  // updateBuilding = (gr) => {
-  //   if (gr.building === "" || building.building === "") {
-  //     this.showAlert("please enter Building Name", "danger");
-  //     return false;
-  //   }
-  //   ipcRenderer.send("buildings:update", building);
-  //   this.showAlert("Building Updated");
-  // };
-
   // Add Subject-Rooms
   AddSubjectRooms = (Sroom) => {
     // console.log("Sroom", Sroom);
@@ -1325,7 +1370,7 @@ class LogProvider extends Component {
 
   //Add ConsecutiveSession Room
   AddConsecutiveSessionRoom = (session) => {
-    // console.log("AddConsecutiveSessionRoom", session);
+    console.log("AddConsecutiveSessionRoom", session);
     // this.deletePrimarySession(session.id);
     if (session.room === "") this.showAlert("please select Room", "danger");
     else {
@@ -1338,25 +1383,9 @@ class LogProvider extends Component {
     console.log("deleteConsecutiveSession", s);
     const session = {
       _id: s._id,
-      duration1: s.duration1,
-      duration2: s.duration2,
-      duration3: s.duration3,
-      group1: s.group1,
-      group2: s.group2,
-      group3: s.group3,
-      lecturers1: s.lecturers1,
-      lecturers2: s.lecturers2,
-      lecturers3: s.lecturers3,
+      number: s.number,
+      sessions: s.sessions,
       room: "",
-      stdCount1: s.stdCount1,
-      stdCount2: s.stdCount2,
-      stdCount3: s.stdCount3,
-      subject1: s.subject1,
-      subject2: s.subject2,
-      subject3: s.subject3,
-      tag1: s.tag1,
-      tag2: s.tag2,
-      tag3: s.tag3,
     };
     console.log("deleteConsecutiveSession", session);
 
@@ -1442,7 +1471,7 @@ class LogProvider extends Component {
   };
 
   render() {
-    // console.log("singleGroupRoom", this.state.singleGroupRoom);
+    console.log("singleGroupRoom", this.state.singleGroupRoom);
     return (
       <LogContext.Provider
         value={{
@@ -1520,6 +1549,7 @@ class LogProvider extends Component {
           handleLevelChange: this.handleLevelChange,
           handleBuildingChange: this.handleBuildingChange,
           handleRoomChange: this.handleRoomChange,
+          handleSearch: this.handleSearch,
         }}
       >
         {this.props.children}

@@ -12,12 +12,15 @@ import {
 import { LogConsumer, LogContext } from "../../context/context";
 import { StudentConsumer } from "../../context/StudentContext";
 import { Link } from "react-router-dom";
+import SearchBox from "../../components/common/SearchBox";
 
 const CreatePrimarySession = ({}) => {
   const {
     createPrimarySession,
     alert,
-    primarySessions,
+    sortedPrimarySessions,
+    search,
+    handleSearch,
     deleteSession,
   } = useContext(LogContext);
   const [lecturers, setLecturers] = useState([]);
@@ -231,7 +234,12 @@ const CreatePrimarySession = ({}) => {
                     <Alert variant={alert.variant}>{alert.message}</Alert>
                   )}
                   <Row className="my-3 px-4">
-                    {primarySessions.map((session, index) => (
+                    <SearchBox
+                      handleChange={handleSearch}
+                      search={search}
+                      placeholder="Search"
+                    />
+                    {sortedPrimarySessions.map((session, index) => (
                       <>
                         {(session.lectureHalls == "" ||
                           session.laboratories == "") && (

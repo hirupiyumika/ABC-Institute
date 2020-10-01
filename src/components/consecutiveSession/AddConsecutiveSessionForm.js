@@ -12,6 +12,7 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
   const { addConsecutiveSession } = useContext(StudentContext);
   const [sessions, setSessions] = useState([]);
   const [number, setNumber] = useState("");
+  const [room, setRoom] = useState("");
   const [error, setError] = useState(false);
   const [addedError, setAddedError] = useState(false);
   var indexes = [];
@@ -47,7 +48,7 @@ const AddConsecutiveSessionForm = ({ primarySessions }) => {
         showConfirmButton: true,
         timer: 1500,
       });
-    }
+      
   };
 
   const handleSessionChange = (e) => {
