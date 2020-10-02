@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const TimeSlotSchema = new mongoose.Schema({
-  number: {
+  slot: {
     type: String,
     index: { unique: true },
   },

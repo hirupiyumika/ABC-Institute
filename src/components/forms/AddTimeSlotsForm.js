@@ -21,11 +21,12 @@ const AddTimeSlotForm = ({ AddTimeSlot, updateTimeSlot }) => {
     if (_id == null) {
       AddTimeSlot({
         slot,
+        daysAndSlots,
       });
     } else {
-      updateTimeSlot({
-        _id,
+      AddTimeSlot({
         slot,
+        daysAndSlots,
       });
     }
   };

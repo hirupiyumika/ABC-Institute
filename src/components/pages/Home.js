@@ -140,6 +140,20 @@ class Home extends Component {
               </Link>
             </Col>
           </Row>
+          <Row>
+            <Col className="mt-5">
+              <Link
+                to="/generatetimetable"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Generate Timetables
+                </Button>
+              </Link>
+            </Col>
+          </Row>
         </Container>
       </React.Fragment>
     );
