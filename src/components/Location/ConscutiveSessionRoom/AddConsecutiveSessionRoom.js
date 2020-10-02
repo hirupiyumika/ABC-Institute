@@ -36,7 +36,6 @@ const AddConsecutiveSessionRoom = ({}) => {
   // const [mr, setMr] = useState([]);
   // const [ml, setMl] = useState([]);
 
-  console.log("sortedConsecutiveSessions", sortedConsecutiveSessions);
   const onSubmit = (e) => {
     e.preventDefault();
     AddConsecutiveSessionRoom({
@@ -52,7 +51,6 @@ const AddConsecutiveSessionRoom = ({}) => {
   };
 
   const handleSession = (e, session) => {
-    console.log(session);
     // filterRooms(session);
     setId(session._id);
     setNumber(session.number);
@@ -80,7 +78,6 @@ const AddConsecutiveSessionRoom = ({}) => {
   //       tr.laboratories
   //   );
   // };
-  // console.log("SRq", tr);
   return (
     <>
       <Breadcrumb>

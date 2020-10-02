@@ -67,7 +67,6 @@ class LogProvider extends Component {
 
     if (search.length > 0) {
       tempSessions = tempSessions.filter((item) => {
-        console.log("item", item);
         let tempLecturer;
         let tempSearch = search.toLowerCase();
         item.lecturers.map((lec) => {
@@ -392,7 +391,6 @@ class LogProvider extends Component {
   };
 
   componentDidMount = () => {
-    // this.populateLogs();
     this.populateLecturers();
     this.populateSubjects();
 
@@ -449,7 +447,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Lecturer has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -488,7 +486,6 @@ class LogProvider extends Component {
   };
 
   singleLecturer = (id) => {
-    console.log("ER", id);
     var lecturer = this.state.lecturers.filter((lec) => lec._id === id);
     this.setState({ lecturer });
   };
@@ -524,15 +521,12 @@ class LogProvider extends Component {
           lecturers: JSON.parse(lecturers),
           sortedLecturers: JSON.parse(lecturers),
         });
-        // console.log(this.state.logs);
       });
     } catch (ex) {}
   };
 
   // delete subject
   deleteSubject = (code) => {
-    // delete tag
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -549,7 +543,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Subject has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -605,15 +599,12 @@ class LogProvider extends Component {
           subjects: JSON.parse(subjects),
           sortedSubjects: JSON.parse(subjects),
         });
-        // console.log(this.state.logs);
       });
     } catch (ex) {}
   };
 
   // delete faculty
   deleteFaculty = (id) => {
-    // delete tag
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -630,7 +621,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Faculty has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -646,7 +637,6 @@ class LogProvider extends Component {
       this.showAlert("please enter Faculty Name", "danger");
       return false;
     }
-    // console.log("FAC", faculty);
     ipcRenderer.send("faculties:add", faculty);
     this.showAlert("Faculty Added");
   };
@@ -662,7 +652,6 @@ class LogProvider extends Component {
       this.showAlert("please enter Faculty Name", "danger");
       return false;
     }
-
     ipcRenderer.send("faculties:update", faculty);
     this.showAlert("Faculty Updated");
   };
@@ -682,8 +671,6 @@ class LogProvider extends Component {
 
   // delete department
   deleteDepartment = (id) => {
-    // delete tag
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -700,7 +687,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Department has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -716,7 +703,6 @@ class LogProvider extends Component {
       this.showAlert("please enter Department Name", "danger");
       return false;
     }
-    // console.log("FAC", department);
     ipcRenderer.send("departments:add", department);
     this.showAlert("Department Added");
   };
@@ -734,7 +720,6 @@ class LogProvider extends Component {
       this.showAlert("please enter Department Name", "danger");
       return false;
     }
-
     ipcRenderer.send("departments:update", department);
     this.showAlert("Department Updated");
   };
@@ -754,8 +739,6 @@ class LogProvider extends Component {
 
   // delete center
   deleteCenter = (id) => {
-    // delete tag
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -772,7 +755,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Center has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -788,7 +771,6 @@ class LogProvider extends Component {
       this.showAlert("please enter Center Name", "danger");
       return false;
     }
-    // console.log("center", center);
     ipcRenderer.send("centers:add", center);
     this.showAlert("Center Added");
   };
@@ -824,8 +806,6 @@ class LogProvider extends Component {
 
   // delete center
   deleteLevel = (id) => {
-    // delete tag
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -842,7 +822,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Level has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -853,8 +833,6 @@ class LogProvider extends Component {
 
   // delete level
   deleteLevel = (id) => {
-    // delete tag
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -871,7 +849,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "levels has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -899,7 +877,6 @@ class LogProvider extends Component {
 
   //update level
   updateLevel = (level) => {
-    console.log("uplevel", level);
     if (level.category === "")
       this.showAlert("please enter Category Name", "danger");
     else if (level.level === "") this.showAlert("please enter Level", "danger");
@@ -925,9 +902,12 @@ class LogProvider extends Component {
   // yash context
 
   // delete building
-  deleteBuilding = (id) => {
-    // delete tag
-
+  deleteBuilding = (building) => {
+    this.state.rooms.map((room) => {
+      if (room.building == building.building) {
+        this.deleteLinkedRoom(room._id);
+      }
+    });
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -939,12 +919,12 @@ class LogProvider extends Component {
         confirmButtonText: "Delete",
       }).then((result) => {
         if (result.value) {
-          ipcRenderer.send("buildings:delete", id);
+          ipcRenderer.send("buildings:delete", building._id);
           this.showAlert("Building Removed");
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Building has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -960,7 +940,6 @@ class LogProvider extends Component {
       this.showAlert("please enter Building Name", "danger");
       return false;
     }
-    // console.log("BUILDING", building);
     ipcRenderer.send("buildings:add", building);
     this.showAlert("Building Added");
   };
@@ -995,8 +974,6 @@ class LogProvider extends Component {
 
   // delete room
   deleteRoom = (id) => {
-    // delete tag
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -1013,7 +990,7 @@ class LogProvider extends Component {
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Room has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -1022,10 +999,14 @@ class LogProvider extends Component {
     } catch (error) {}
   };
 
+  // delete Linked Room
+  deleteLinkedRoom = (id) => {
+    ipcRenderer.send("rooms:delete", id);
+  };
+
   // add room
 
   addRoom = (room) => {
-    console.log("room", room);
     if (room.roomName === "")
       this.showAlert("please enter Room Name", "danger");
     else if (room.roomType === "")
@@ -1076,7 +1057,6 @@ class LogProvider extends Component {
 
   //  Add Lecturer-Rooms
   AddLecturerRooms = (Lroom) => {
-    // console.log("Lroom", Lroom);
     if (Lroom.lecturer === "")
       this.showAlert("please select Lecturer", "danger");
     else if (Lroom.laboratories === "" && Lroom.lectureHalls === "")
@@ -1113,11 +1093,11 @@ class LogProvider extends Component {
       }).then((result) => {
         if (result.value) {
           ipcRenderer.send("lecturer_Rooms:delete", id);
-          this.showAlert("Room Removed");
+          this.showAlert("Lecturer-Room Removed");
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Lecturer-Room has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -1128,7 +1108,6 @@ class LogProvider extends Component {
 
   // Add Groups-Rooms
   AddGroupsRooms = (Groom) => {
-    // console.log("Groom", Groom);
     if (Groom.group === "") this.showAlert("please select Group", "danger");
     else if (Groom.laboratories === "" && Groom.lectureHalls === "")
       this.showAlert("please select Room", "danger");
@@ -1136,7 +1115,6 @@ class LogProvider extends Component {
       ipcRenderer.send("group_Rooms:add", Groom);
       this.showAlert("Group-Rooms Added");
     }
-    // }
   };
 
   // delete Group Room
@@ -1153,11 +1131,11 @@ class LogProvider extends Component {
       }).then((result) => {
         if (result.value) {
           ipcRenderer.send("group_Rooms:delete", id);
-          this.showAlert("Room Removed");
+          this.showAlert(" Group-Room Removed");
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Group-Room has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -1184,7 +1162,6 @@ class LogProvider extends Component {
 
   // Add Subject-Rooms
   AddSubjectRooms = (Sroom) => {
-    // console.log("Sroom", Sroom);
     if (Sroom.subject === "") this.showAlert("please select Subject", "danger");
     else if (Sroom.tag === "") this.showAlert("please select Tag", "danger");
     else if (Sroom.laboratories === "" && Sroom.lectureHalls === "")
@@ -1210,11 +1187,11 @@ class LogProvider extends Component {
       }).then((result) => {
         if (result.value) {
           ipcRenderer.send("subject_Rooms:delete", id);
-          this.showAlert("Room Removed");
+          this.showAlert("Subject-Room Removed");
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Subject-Room has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -1237,7 +1214,6 @@ class LogProvider extends Component {
 
   // Add Tag-Rooms
   AddTagRooms = (Troom) => {
-    // console.log("Troom", Troom);
     if (Troom.tagName === "") this.showAlert("please select Tag", "danger");
     else if (Troom.laboratories === "" && Troom.lectureHalls == "")
       this.showAlert("please select Room", "danger");
@@ -1274,11 +1250,11 @@ class LogProvider extends Component {
       }).then((result) => {
         if (result.value) {
           ipcRenderer.send("tag_Rooms:delete", id);
-          this.showAlert("Room Removed");
+          this.showAlert("Tag-Room Removed");
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Tag-Room has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -1290,7 +1266,6 @@ class LogProvider extends Component {
   //create Primary Session
 
   createPrimarySession = (session) => {
-    console.log("psession", session);
     if (session.lecturers.length === 0)
       this.showAlert("please select Lecturer", "danger");
     else if (session.tag === "") this.showAlert("please select Tag", "danger");
@@ -1323,7 +1298,6 @@ class LogProvider extends Component {
 
   // delete Session
   deleteSession = (id) => {
-    console.log("id", id);
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -1342,7 +1316,7 @@ class LogProvider extends Component {
             timerProgressBar: true,
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Session has been deleted",
           }).then(function () {});
         }
       });
@@ -1359,8 +1333,6 @@ class LogProvider extends Component {
 
   //Add Session Rooms
   AddSessionRooms = (session) => {
-    console.log("AddSessionRooms", session);
-    // this.deletePrimarySession(session.id);
     if (session.room === "") this.showAlert("please select Room", "danger");
     else {
       ipcRenderer.send("primary_Sessions:update", session);
@@ -1370,8 +1342,6 @@ class LogProvider extends Component {
 
   //Add ConsecutiveSession Room
   AddConsecutiveSessionRoom = (session) => {
-    console.log("AddConsecutiveSessionRoom", session);
-    // this.deletePrimarySession(session.id);
     if (session.room === "") this.showAlert("please select Room", "danger");
     else {
       ipcRenderer.send("consecutiveSession:update", session);
@@ -1380,14 +1350,12 @@ class LogProvider extends Component {
   };
 
   deleteConsecutiveSessionRoom = (s) => {
-    console.log("deleteConsecutiveSession", s);
     const session = {
       _id: s._id,
       number: s.number,
       sessions: s.sessions,
       room: "",
     };
-    // console.log("deleteConsecutiveSession", session);
 
     try {
       Swal.fire({
@@ -1416,7 +1384,6 @@ class LogProvider extends Component {
 
   // Add Not Available Rooms
   AddNotAvailableRooms = (room) => {
-    // console.log("Nroom", room);
     if (room.room === "") this.showAlert("please select Room", "danger");
     else if (room.day === "") this.showAlert("please select Day", "danger");
     else if (room.start === "")
@@ -1437,7 +1404,6 @@ class LogProvider extends Component {
       ipcRenderer.on("no_Rooms:get", (e, no_Rooms) => {
         this.setState({
           notAvailableRooms: JSON.parse(no_Rooms),
-          // sortedNotAvailableRooms: JSON.parse(no_Rooms),
         });
       });
     } catch (ex) {}
@@ -1457,11 +1423,11 @@ class LogProvider extends Component {
       }).then((result) => {
         if (result.value) {
           ipcRenderer.send("no_Rooms:delete", id);
-          this.showAlert("Room Removed");
+          this.showAlert("Not Available Room Removed");
           Swal.fire({
             icon: "success",
             title: "Deleted!",
-            text: "tag has been deleted",
+            text: "Not Available Room has been deleted",
             showConfirmButton: true,
             timer: 1500,
           }).then(function () {});
@@ -1471,7 +1437,6 @@ class LogProvider extends Component {
   };
 
   render() {
-    // console.log("singleGroupRoom", this.state.singleGroupRoom);
     return (
       <LogContext.Provider
         value={{
@@ -1517,6 +1482,7 @@ class LogProvider extends Component {
           deleteRoom: this.deleteRoom,
           singleRoom: this.singleRoom,
           updateRoom: this.updateRoom,
+          deleteLinkedRoom: this.deleteLinkedRoom,
 
           AddLecturerRooms: this.AddLecturerRooms,
           deleteLecturerRoom: this.deleteLecturerRoom,

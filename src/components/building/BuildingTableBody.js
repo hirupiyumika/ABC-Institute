@@ -5,7 +5,7 @@ import Moment from "react-moment";
 import { LogConsumer } from "../../context/context";
 
 const BuildingTableBody = ({
-  buil: { _id, building, created },
+  buil,
 
   deleteBuilding,
 }) => {
@@ -15,13 +15,13 @@ const BuildingTableBody = ({
         const { singleBuilding } = value;
         return (
           <tr>
-            <td>{building}</td>
+            <td>{buil.building}</td>
 
             <td>
-              <Moment format="DD/MM/YYYY">{new Date(created)}</Moment>
+              <Moment format="DD/MM/YYYY">{new Date(buil.created)}</Moment>
             </td>
             <td>
-              <Moment format="h:mm:ss a">{new Date(created)}</Moment>
+              <Moment format="h:mm:ss a">{new Date(buil.created)}</Moment>
             </td>
             <td></td>
             <td></td>
@@ -30,7 +30,7 @@ const BuildingTableBody = ({
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => singleBuilding(_id)}
+                  onClick={() => singleBuilding(buil._id)}
                 >
                   <svg
                     width="1em"
@@ -53,7 +53,7 @@ const BuildingTableBody = ({
               <Button
                 variant="danger"
                 size="sm"
-                onClick={() => deleteBuilding(_id)}
+                onClick={() => deleteBuilding(buil)}
               >
                 <svg
                   width="1em"

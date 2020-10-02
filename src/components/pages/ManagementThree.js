@@ -69,7 +69,7 @@ class ManagementThree extends Component {
               </Link>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col className="mt-5">
               <Link
                 to="/lecturersStatistics"
@@ -94,20 +94,8 @@ class ManagementThree extends Component {
                 </Button>
               </Link>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
-            <Col className="mt-5">
-              <Link
-                to="/subjectsStatistics"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <Button variant="secondary" block>
-                  Subject Statistics
-                </Button>
-              </Link>
-            </Col>
             <Col className="mt-5">
               <Link
                 to="/statistics"
@@ -119,6 +107,18 @@ class ManagementThree extends Component {
                   Statistics
                 </Button>
               </Link>
+            </Col>
+            <Col className="mt-5">
+              {/* <Link
+                to="/subjectsStatistics"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
+                <Button variant="secondary" block>
+                  Subject Statistics
+                </Button>
+              </Link> */}
             </Col>
           </Row>
           <Row>

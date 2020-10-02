@@ -124,7 +124,8 @@ const CreatePrimarySession = ({}) => {
                       <Card.Body>
                         <h5>
                           {tag == "" && "Current Groups / Current Sub-Groups"}
-                          {tag == "Lab" && "Current Sub-Groups"}
+                          {(tag == "Lab" || tag == "Practical") &&
+                            "Current Sub-Groups"}
                           {(tag == "Lecture" || tag == "Tutorial") &&
                             "Current Groups"}
                         </h5>
@@ -133,7 +134,9 @@ const CreatePrimarySession = ({}) => {
 
                           {value2.sortedStudents.map((std) => (
                             <>
-                              {(tag === "" || tag === "Lab") && (
+                              {(tag === "" ||
+                                tag === "Lab" ||
+                                tag === "Practical") && (
                                 <Col column sm="3 p-2">
                                   <input
                                     class="form-check-input"
