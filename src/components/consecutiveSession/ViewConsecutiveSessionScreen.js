@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Container, Breadcrumb, Card, Row, Col, Button } from "react-bootstrap";
+import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import DeleteCrossButton from "./../common/DeleteCrossButton";
 import { StudentContext } from "../../context/StudentContext";
 
@@ -7,13 +7,8 @@ const ViewConsecutiveSessionScreen = ({}) => {
   const { consecutiveSessions, deleteConsecutiveSession } = useContext(
     StudentContext
   );
-  console.log("Nithya", consecutiveSessions);
   return (
     <React.Fragment>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>View Consecutive Sessions</Breadcrumb.Item>
-      </Breadcrumb>
       <Container>
         <Row className="my-3 px-4">
           {consecutiveSessions.map((session, index) => (
@@ -73,5 +68,4 @@ const ViewConsecutiveSessionScreen = ({}) => {
     </React.Fragment>
   );
 };
-
 export default ViewConsecutiveSessionScreen;

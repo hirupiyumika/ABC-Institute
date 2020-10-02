@@ -388,7 +388,6 @@ async function sendStudents() {
 ipcMain.on(
   "academicYearAndSemesters:update",
   async (e, academicYearAndSemester) => {
-    // console.log(academicYearAndSemester);
     try {
       await AcademicYearAndSemester.findByIdAndUpdate(
         academicYearAndSemester._id,
@@ -906,6 +905,15 @@ async function sendParallelSessions() {
   }
 }
 
+// delete parallel session
+ipcMain.on("parallelSession:delete", async (e, id) => {
+  try {
+    await ParallelSession.findOneAndDelete({ _id: id });
+    sendParallelSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
 // create not overlapping session
 ipcMain.on("notOverlappingSession:add", async (e, notOverlappingSession) => {
   try {
@@ -916,7 +924,17 @@ ipcMain.on("notOverlappingSession:add", async (e, notOverlappingSession) => {
   }
 });
 
-// get parallel session
+// delete not overlapping session
+ipcMain.on("notOverlappingSession:delete", async (e, id) => {
+  try {
+    await NotOverlappingSession.findOneAndDelete({ _id: id });
+    sendNotOverlappingSessions();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get not overlapping session
 ipcMain.on("notOverlappingSession:load", sendNotOverlappingSessions);
 async function sendNotOverlappingSessions() {
   try {
@@ -1598,28 +1616,12 @@ ipcMain.on("primary_Sessions:update", async (e, session) => {
 
 //create consecutive_session
 ipcMain.on("consecutiveSession:update", async (e, session) => {
-  console.log("consecutiveSession", session);
+  // console.log("consecutiveSession", session);
 
   try {
     await ConsecutiveSession.findByIdAndUpdate(session._id, {
-      lecturers1: session.lecturers1,
-      lecturers2: session.lecturers2,
-      lecturers3: session.lecturers3,
-      tag1: session.tag1,
-      tag2: session.tag2,
-      tag3: session.tag3,
-      group1: session.group1,
-      group2: session.group2,
-      group3: session.group3,
-      subject1: session.subject1,
-      subject2: session.subject2,
-      subject3: session.subject3,
-      stdCount1: session.stdCount1,
-      stdCount2: session.stdCount2,
-      stdCount3: session.stdCount3,
-      duration1: session.duration1,
-      duration2: session.duration2,
-      duration3: session.duration3,
+      number: session.number,
+      sessions: session.sessions,
       room: session.room,
     });
     sendConsecutiveSessions();

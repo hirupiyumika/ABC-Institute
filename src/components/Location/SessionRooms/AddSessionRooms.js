@@ -68,7 +68,6 @@ const AddSessionRooms = ({}) => {
   };
 
   const handleSession = (e, session) => {
-    console.log(session);
     filterRooms(session);
     setLecturers(session.lecturers);
     setId(session._id);
@@ -109,7 +108,6 @@ const AddSessionRooms = ({}) => {
         tr.laboratories
     );
   };
-  console.log("SRq", tr);
   return (
     <>
       <Breadcrumb>

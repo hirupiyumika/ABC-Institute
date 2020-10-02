@@ -12,12 +12,15 @@ import {
 import { LogConsumer, LogContext } from "../../context/context";
 import { StudentConsumer } from "../../context/StudentContext";
 import { Link } from "react-router-dom";
+import SearchBox from "../../components/common/SearchBox";
 
 const CreatePrimarySession = ({}) => {
   const {
     createPrimarySession,
     alert,
-    primarySessions,
+    sortedPrimarySessions,
+    search,
+    handleSearch,
     deleteSession,
   } = useContext(LogContext);
   const [lecturers, setLecturers] = useState([]);
@@ -121,7 +124,8 @@ const CreatePrimarySession = ({}) => {
                       <Card.Body>
                         <h5>
                           {tag == "" && "Current Groups / Current Sub-Groups"}
-                          {tag == "Lab" && "Current Sub-Groups"}
+                          {(tag == "Lab" || tag == "Practical") &&
+                            "Current Sub-Groups"}
                           {(tag == "Lecture" || tag == "Tutorial") &&
                             "Current Groups"}
                         </h5>
@@ -130,7 +134,9 @@ const CreatePrimarySession = ({}) => {
 
                           {value2.sortedStudents.map((std) => (
                             <>
-                              {(tag === "" || tag === "Lab") && (
+                              {(tag === "" ||
+                                tag === "Lab" ||
+                                tag === "Practical") && (
                                 <Col column sm="3 p-2">
                                   <input
                                     class="form-check-input"
@@ -231,7 +237,12 @@ const CreatePrimarySession = ({}) => {
                     <Alert variant={alert.variant}>{alert.message}</Alert>
                   )}
                   <Row className="my-3 px-4">
-                    {primarySessions.map((session, index) => (
+                    <SearchBox
+                      handleChange={handleSearch}
+                      search={search}
+                      placeholder="Search"
+                    />
+                    {sortedPrimarySessions.map((session, index) => (
                       <>
                         {(session.lectureHalls == "" ||
                           session.laboratories == "") && (

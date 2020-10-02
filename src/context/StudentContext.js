@@ -142,7 +142,7 @@ class StudentProvider extends Component {
             Swal.fire({
               icon: "success",
               title: "Deleted!",
-              text: "tag has been deleted",
+              text: "lecturer not available time has been deleted",
               showConfirmButton: true,
               timer: 1500,
             }).then(function () {});
@@ -336,7 +336,7 @@ class StudentProvider extends Component {
             Swal.fire({
               icon: "success",
               title: "Deleted!",
-              text: "group has been deleted",
+              text: "group not available time has been deleted",
               showConfirmButton: true,
               timer: 1500,
             }).then(function () {});
@@ -532,7 +532,7 @@ class StudentProvider extends Component {
             Swal.fire({
               icon: "success",
               title: "Deleted!",
-              text: "group has been deleted",
+              text: "sub group not available time has been deleted",
               showConfirmButton: true,
               timer: 1500,
             }).then(function () {});
@@ -728,7 +728,7 @@ class StudentProvider extends Component {
             Swal.fire({
               icon: "success",
               title: "Deleted!",
-              text: "group has been deleted",
+              text: "session not available time has been deleted",
               showConfirmButton: true,
               timer: 1500,
             }).then(function () {});
@@ -849,7 +849,6 @@ class StudentProvider extends Component {
   }
   // add consecutive session
   addConsecutiveSession = (consecutiveSession) => {
-    console.log("consecutiveSession", consecutiveSession);
     ipcRenderer.send("consecutiveSession:add", consecutiveSession);
     this.showAlert("consecutive session added");
   };
@@ -923,6 +922,41 @@ class StudentProvider extends Component {
     } catch (ex) {}
   }
 
+  // delete parallel session
+  deleteParallelSession = (_id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          const condition = navigator.onLine;
+          if (condition) {
+            ipcRenderer.send("parallelSession:delete", _id);
+            this.showAlert("parallel session removed");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "parallel session has been deleted",
+              showConfirmButton: true,
+              timer: 1500,
+            }).then(function () {});
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No internet connection!",
+            });
+          }
+        }
+      });
+    } catch (error) {}
+  };
   // add not overlapping session
   addNotOverlappingSession = (notOverlappingSession) => {
     ipcRenderer.send("notOverlappingSession:add", notOverlappingSession);
@@ -944,6 +978,42 @@ class StudentProvider extends Component {
       );
     } catch (ex) {}
   }
+
+  // delete not overlapping session
+  deleteNotOverlappingSession = (_id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.value) {
+          const condition = navigator.onLine;
+          if (condition) {
+            ipcRenderer.send("notOverlappingSession:delete", _id);
+            this.showAlert("not overlapping session session removed");
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "not overlapping session has been deleted",
+              showConfirmButton: true,
+              timer: 1500,
+            }).then(function () {});
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No internet connection!",
+            });
+          }
+        }
+      });
+    } catch (error) {}
+  };
 
   /* sprint 01 */
 
@@ -2139,7 +2209,9 @@ class StudentProvider extends Component {
           addConsecutiveSession: this.addConsecutiveSession,
           deleteConsecutiveSession: this.deleteConsecutiveSession,
           addParallelSession: this.addParallelSession,
+          deleteParallelSession: this.deleteParallelSession,
           addNotOverlappingSession: this.addNotOverlappingSession,
+          deleteNotOverlappingSession: this.deleteNotOverlappingSession,
         }}
       >
         {this.props.children}

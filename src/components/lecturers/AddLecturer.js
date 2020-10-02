@@ -27,7 +27,6 @@ const AddLecturer = ({}) => {
   // const [rooms, setRooms] = useState([]);
 
   const onSubmit = (e) => {
-    console.log("submit");
     e.preventDefault();
     addLecturer({
       name,
