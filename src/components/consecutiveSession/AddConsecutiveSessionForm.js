@@ -5,8 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-import Swal from "sweetalert2";
 import { StudentContext } from "./../../context/StudentContext";
+import Swal from "sweetalert2";
 
 const AddConsecutiveSessionForm = ({ primarySessions }) => {
   const { addConsecutiveSession } = useContext(StudentContext);
