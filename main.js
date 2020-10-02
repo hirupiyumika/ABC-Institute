@@ -1507,7 +1507,7 @@ ipcMain.on("workingHours:update", async (e, workingDays) => {
 //Add Time Slot to the DataBase
 ipcMain.on("AddTimeSlot:add", async (e, AddTimeSlot) => {
   try {
-    // console.log(AddTimeSlot);
+    await TimeSlotSchema.deleteMany({});
     await TimeSlotSchema.create(AddTimeSlot);
   } catch (error) {
     console.log(error);

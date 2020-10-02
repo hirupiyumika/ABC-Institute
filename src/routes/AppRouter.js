@@ -95,6 +95,7 @@ import AddSessionRooms from "../components/Location/SessionRooms/AddSessionRooms
 import ViewSessionRooms from "../components/Location/SessionRooms/ViewSessionRooms";
 import AddConsecutiveSessionRoom from "../components/Location/ConscutiveSessionRoom/AddConsecutiveSessionRoom";
 import ViewConsecutiveSessionRoom from "../components/Location/ConscutiveSessionRoom/ViewConsecutiveSessionRoom";
+import GenerateTimeTable from "../components/pages/GenerateTimetable";
 
 class AppRouter extends Component {
   render() {
@@ -265,6 +266,7 @@ class AppRouter extends Component {
           <Route path="/viewWorkingHours" component={ViewWorkingHours} />
           <Route path="/updateWorkingHours" component={UpdateWorkingHours} />
           <Route path="/addTimeSlots" component={AddTimeSlots} />
+          <Route path="/generatetimetable" component={GenerateTimeTable} />
         </Switch>
       </React.Fragment>
     );
