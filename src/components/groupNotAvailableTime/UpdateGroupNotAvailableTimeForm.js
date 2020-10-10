@@ -84,7 +84,7 @@ const UpdateGroupNotAvailableTimeForm = ({
       {(value1) => (
         <DaysAndHoursConsumer>
           {(value2) => {
-            value1.groups, value2.workingDays;
+            value1.students, value2.workingDays;
             return (
               <React.Fragment>
                 <Card className="mt-5 mb-3">
@@ -98,9 +98,9 @@ const UpdateGroupNotAvailableTimeForm = ({
                             onChange={(e) => setGroup(e.target.value)}
                           >
                             <option value="0">Select Group</option>
-                            {value1.groups.map((group) => (
-                              <option key={group._id} value={group.group}>
-                                {group.group}
+                            {value1.students.map((group) => (
+                              <option key={group._id} value={group.mainGroupID}>
+                                {group.mainGroupID}
                               </option>
                             ))}
                           </Form.Control>

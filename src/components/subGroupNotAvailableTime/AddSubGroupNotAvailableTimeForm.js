@@ -79,7 +79,7 @@ const AddSubGroupNotAvailableTimeForm = ({ addSubGroupNotAvailableTime }) => {
       {(value1) => (
         <DaysAndHoursConsumer>
           {(value2) => {
-            value1.subGroups, value2.workingDays;
+            value1.students, value2.workingDays;
             return (
               <React.Fragment>
                 <Card className="mt-5 mb-3">
@@ -93,9 +93,9 @@ const AddSubGroupNotAvailableTimeForm = ({ addSubGroupNotAvailableTime }) => {
                             onChange={(e) => setSubGroup(e.target.value)}
                           >
                             <option value="0">Select Sub Group</option>
-                            {value1.subGroups.map((group) => (
-                              <option key={group._id} value={group.subGroup}>
-                                {group.subGroup}
+                            {value1.students.map((group) => (
+                              <option key={group._id} value={group.subGroupID}>
+                                {group.subGroupID}
                               </option>
                             ))}
                           </Form.Control>
