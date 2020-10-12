@@ -45,7 +45,7 @@ class LogProvider extends Component {
     },
   };
 
-  //search primary session
+  //search primary sessions
   handleSearch = (event) => {
     const name = event.target.name;
 
