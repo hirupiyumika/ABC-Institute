@@ -63,6 +63,7 @@ class LogProvider extends Component {
   };
 
   sortSessionData = () => {
+    console.log("sessions");
     const { primarySessions, search } = this.state;
     let tempSessions = [...primarySessions];
 
