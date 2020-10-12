@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ipcRenderer } from "electron";
 import Swal from "sweetalert2";
 
+// Log context
 const LogContext = React.createContext();
 class LogProvider extends Component {
   state = {
